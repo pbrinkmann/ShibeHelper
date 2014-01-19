@@ -1,54 +1,176 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4451" systemVersion="13A461" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3676"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier First View Controller - First-->
+        <!--Wallet View Controller - Wallet-->
         <scene sceneID="W3I-pn-N6e">
             <objects>
-                <viewController title="First" id="CZ4-MO-1fc" customClass="DCMFirstViewController" sceneMemberID="viewController">
+                <viewController title="Wallet" id="CZ4-MO-1fc" customClass="DCMWalletViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3eu-KB-KCl"/>
+                        <viewControllerLayoutGuide type="bottom" id="DyB-hm-tCB"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2VE-Yg-loa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="First View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Zhg-ve-WU7">
-                                <rect key="frame" x="20" y="158" width="280" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTD-1O-f8L">
+                                <rect key="frame" x="20" y="93" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tZ3-Hv-Q7E">
-                                <rect key="frame" x="20" y="240" width="280" height="88"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="no address set" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o3J-O1-PFd">
+                                <rect key="frame" x="20" y="122" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="88" id="rDj-Sg-2Zj"/>
+                                    <constraint firstAttribute="height" constant="30" id="O0I-Ag-NZ7"/>
                                 </constraints>
-                                <string key="text">Loaded by the first view controller — an instance of DCMFirstViewController — specified in the app delegate.</string>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
-                            </textView>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03a-0y-Wsq">
+                                <rect key="frame" x="20" y="206" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 DOGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GE0-A1-1aD">
+                                <rect key="frame" x="20" y="235" width="280" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lyP-ze-xSt">
+                                <rect key="frame" x="20" y="298" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="refresh">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="refreshBalance:" destination="Qh2-T1-AhA" eventType="touchUpInside" id="vHI-dJ-cQk"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="last updated never" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9AJ-uh-z6B">
+                                <rect key="frame" x="20" y="261" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="QTv-dK-WFb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="doge.png" translatesAutoresizingMaskIntoConstraints="NO" id="O71-MT-qh9">
+                                <rect key="frame" x="40" y="364" width="240" height="144"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="144" id="0x8-G6-s9R"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="tZ3-Hv-Q7E" secondAttribute="trailing" constant="20" symbolic="YES" id="94m-GQ-azi"/>
-                            <constraint firstItem="tZ3-Hv-Q7E" firstAttribute="top" secondItem="Zhg-ve-WU7" secondAttribute="bottom" constant="40" id="G3o-MK-III"/>
-                            <constraint firstItem="Zhg-ve-WU7" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leading" constant="20" symbolic="YES" id="JQj-gp-vk2"/>
-                            <constraint firstAttribute="trailing" secondItem="Zhg-ve-WU7" secondAttribute="trailing" constant="20" symbolic="YES" id="eHs-J5-0HT"/>
-                            <constraint firstItem="tZ3-Hv-Q7E" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leading" constant="20" symbolic="YES" id="lKy-m9-LcB"/>
-                            <constraint firstAttribute="centerY" secondItem="tZ3-Hv-Q7E" secondAttribute="centerY" id="xLM-BA-nZb"/>
+                            <constraint firstItem="lyP-ze-xSt" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leading" constant="20" symbolic="YES" id="3Mz-HZ-fan"/>
+                            <constraint firstItem="lyP-ze-xSt" firstAttribute="top" secondItem="9AJ-uh-z6B" secondAttribute="bottom" constant="-5" id="7LT-my-jaj"/>
+                            <constraint firstItem="o3J-O1-PFd" firstAttribute="top" secondItem="yTD-1O-f8L" secondAttribute="bottom" constant="8" symbolic="YES" id="E0O-xR-bfF"/>
+                            <constraint firstItem="lyP-ze-xSt" firstAttribute="trailing" secondItem="9AJ-uh-z6B" secondAttribute="trailing" id="EEd-MT-DRm"/>
+                            <constraint firstAttribute="trailing" secondItem="lyP-ze-xSt" secondAttribute="trailing" constant="20" symbolic="YES" id="Ef6-LH-azZ"/>
+                            <constraint firstItem="GE0-A1-1aD" firstAttribute="trailing" secondItem="03a-0y-Wsq" secondAttribute="trailing" id="LGi-Gd-ysv"/>
+                            <constraint firstItem="9AJ-uh-z6B" firstAttribute="trailing" secondItem="GE0-A1-1aD" secondAttribute="trailing" id="Np3-CD-Rdx"/>
+                            <constraint firstItem="o3J-O1-PFd" firstAttribute="leading" secondItem="yTD-1O-f8L" secondAttribute="leading" id="TNr-mX-jT5"/>
+                            <constraint firstItem="DyB-hm-tCB" firstAttribute="top" secondItem="O71-MT-qh9" secondAttribute="bottom" constant="11" id="anN-qV-bV7"/>
+                            <constraint firstItem="9AJ-uh-z6B" firstAttribute="top" secondItem="GE0-A1-1aD" secondAttribute="bottom" constant="8" id="ayW-tm-gHD"/>
+                            <constraint firstItem="o3J-O1-PFd" firstAttribute="trailing" secondItem="03a-0y-Wsq" secondAttribute="trailing" id="jIm-Ku-0mK"/>
+                            <constraint firstItem="O71-MT-qh9" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leading" constant="40" id="kwl-g4-DQg"/>
+                            <constraint firstItem="o3J-O1-PFd" firstAttribute="leading" secondItem="03a-0y-Wsq" secondAttribute="leading" id="mgJ-v6-ACs"/>
+                            <constraint firstItem="O71-MT-qh9" firstAttribute="centerX" secondItem="lyP-ze-xSt" secondAttribute="centerX" id="nXL-yQ-3ca"/>
+                            <constraint firstItem="GE0-A1-1aD" firstAttribute="leading" secondItem="03a-0y-Wsq" secondAttribute="leading" id="qor-jh-oBe"/>
+                            <constraint firstItem="o3J-O1-PFd" firstAttribute="trailing" secondItem="yTD-1O-f8L" secondAttribute="trailing" id="r0d-Jh-dgJ"/>
+                            <constraint firstItem="GE0-A1-1aD" firstAttribute="top" secondItem="03a-0y-Wsq" secondAttribute="bottom" constant="8" symbolic="YES" id="sm9-hQ-E1P"/>
+                            <constraint firstItem="03a-0y-Wsq" firstAttribute="top" secondItem="o3J-O1-PFd" secondAttribute="bottom" constant="54" id="v6d-sF-JCc"/>
+                            <constraint firstItem="lyP-ze-xSt" firstAttribute="leading" secondItem="9AJ-uh-z6B" secondAttribute="leading" id="x1l-Zg-aC3"/>
+                            <constraint firstItem="9AJ-uh-z6B" firstAttribute="leading" secondItem="GE0-A1-1aD" secondAttribute="leading" id="xgr-bV-tpj"/>
+                            <constraint firstItem="yTD-1O-f8L" firstAttribute="top" secondItem="3eu-KB-KCl" secondAttribute="bottom" constant="29" id="zAY-aH-lbV"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="u1e-5L-l1D"/>
+                    <navigationItem key="navigationItem" title="Wallet Balance" id="XiU-pa-ebP">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="CoR-i8-XRa">
+                            <connections>
+                                <segue destination="Ul0-n0-rhD" kind="modal" id="r7M-Hh-Nuv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="balance" destination="GE0-A1-1aD" id="SFL-G0-Ij4"/>
+                        <outlet property="lastWalletUpdate" destination="9AJ-uh-z6B" id="cia-Md-XMa"/>
+                        <outlet property="walletAddressTextfield" destination="o3J-O1-PFd" id="LwU-T9-3qq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="-138"/>
+            <point key="canvasLocation" x="1179" y="-138"/>
         </scene>
-        <!--class Prefix:identifier Second View Controller - Second-->
+        <!--Edit Wallet Address View Controller - Edit Wallet Address-->
+        <scene sceneID="6N2-PV-Pfi">
+            <objects>
+                <viewController id="dKz-tl-rkw" customClass="DCMEditWalletAddressViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y5U-AU-K1z"/>
+                        <viewControllerLayoutGuide type="bottom" id="u8s-Qd-S4o"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="edp-Nc-LXT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="please enter your wallet address here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RFh-tN-Iyg">
+                                <rect key="frame" x="20" y="269" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="RFh-tN-Iyg" secondAttribute="trailing" constant="20" symbolic="YES" id="0gk-lt-GkD"/>
+                            <constraint firstItem="RFh-tN-Iyg" firstAttribute="top" secondItem="y5U-AU-K1z" secondAttribute="bottom" constant="205" id="3cY-dj-oD3"/>
+                            <constraint firstItem="u8s-Qd-S4o" firstAttribute="top" secondItem="RFh-tN-Iyg" secondAttribute="bottom" constant="269" id="JKc-6p-brw"/>
+                            <constraint firstItem="RFh-tN-Iyg" firstAttribute="leading" secondItem="edp-Nc-LXT" secondAttribute="leading" constant="20" symbolic="YES" id="X89-JF-3MS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Wallet Address" id="PBZ-Cd-R4s">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="WER-vd-iNX">
+                            <connections>
+                                <segue destination="7T1-rC-Ptv" kind="unwind" unwindAction="unwindToWalletBalance:" id="QGn-xv-rRn"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="rjf-R6-tYB">
+                            <connections>
+                                <segue destination="7T1-rC-Ptv" kind="unwind" unwindAction="unwindToWalletBalance:" id="91N-tt-aJh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cancelButton" destination="WER-vd-iNX" id="VJM-55-fLA"/>
+                        <outlet property="doneButton" destination="rjf-R6-tYB" id="Ptd-Z0-Moc"/>
+                        <outlet property="walletAddressTextField" destination="RFh-tN-Iyg" id="YVg-EY-IpZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EOP-Jf-Xv0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="7T1-rC-Ptv" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2152" y="-138"/>
+        </scene>
+        <!--Mining Pool View Controller - Mining Pool-->
         <scene sceneID="ot8-2e-RuS">
             <objects>
-                <viewController title="Second" id="QUy-BD-bpt" customClass="DCMSecondViewController" sceneMemberID="viewController">
+                <viewController title="Mining Pool" id="QUy-BD-bpt" customClass="DCMMiningPoolViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dkf-vl-62I"/>
+                        <viewControllerLayoutGuide type="bottom" id="zbf-ZQ-0XG"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gMD-aP-Fq6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -60,12 +182,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DcM-Fx-MKR">
-                                <rect key="frame" x="20" y="240" width="280" height="88"/>
+                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" editable="NO" text="Loaded by the second view controller — an instance of DCMSecondViewController — specified in the app delegate." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DcM-Fx-MKR">
+                                <rect key="frame" x="20" y="240" width="280" height="127"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="88" id="9fN-Zf-E0i"/>
+                                    <constraint firstAttribute="height" constant="127" id="9fN-Zf-E0i"/>
                                 </constraints>
-                                <string key="text">Loaded by the second view controller — an instance of DCMSecondViewController — specified in the app delegate.</string>
                                 <fontDescription key="fontDescription" type="system" size="system"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textView>
@@ -77,14 +198,14 @@
                             <constraint firstItem="DcM-Fx-MKR" firstAttribute="top" secondItem="29h-N2-YGT" secondAttribute="bottom" constant="40" id="Gb1-a9-eY8"/>
                             <constraint firstAttribute="trailing" secondItem="DcM-Fx-MKR" secondAttribute="trailing" constant="20" symbolic="YES" id="XTh-ji-q0k"/>
                             <constraint firstItem="DcM-Fx-MKR" firstAttribute="leading" secondItem="gMD-aP-Fq6" secondAttribute="leading" constant="20" symbolic="YES" id="l9f-S9-V20"/>
-                            <constraint firstAttribute="centerY" secondItem="DcM-Fx-MKR" secondAttribute="centerY" id="lHZ-e8-ii2"/>
+                            <constraint firstAttribute="centerY" secondItem="DcM-Fx-MKR" secondAttribute="centerY" constant="-19.5" id="lHZ-e8-ii2"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="Z7h-1E-pvt"/>
+                    <tabBarItem key="tabBarItem" title="Mining Pool" image="mining icon.png" id="Z7h-1E-pvt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="498"/>
+            <point key="canvasLocation" x="1179" y="498"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vex-rW-GRa">
@@ -97,18 +218,56 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="CZ4-MO-1fc" kind="relationship" relationship="viewControllers" id="SUk-Ux-ee1"/>
+                        <segue destination="YQp-fx-XrO" kind="relationship" relationship="viewControllers" id="SUk-Ux-ee1"/>
                         <segue destination="QUy-BD-bpt" kind="relationship" relationship="viewControllers" id="M8t-EP-wfW"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="180"/>
+            <point key="canvasLocation" x="166" y="176"/>
+        </scene>
+        <!--Navigation Controller - Wallet-->
+        <scene sceneID="2PD-Kc-igJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YQp-fx-XrO" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Wallet" image="wallet and coins.png" id="u1e-5L-l1D"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ypX-di-kck">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CZ4-MO-1fc" kind="relationship" relationship="rootViewController" id="jpm-3I-Sf1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gCO-Ex-NZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="653" y="-138"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8YV-be-FzD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ul0-n0-rhD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GSe-UJ-cDA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dKz-tl-rkw" kind="relationship" relationship="rootViewController" id="0BS-bj-cXN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hhv-XD-chH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1626" y="-138"/>
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="16" height="16"/>
-        <image name="second" width="16" height="16"/>
+        <image name="doge.png" width="600" height="600"/>
+        <image name="mining icon.png" width="30" height="30"/>
+        <image name="wallet and coins.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

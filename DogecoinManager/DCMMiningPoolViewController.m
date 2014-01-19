@@ -1,18 +1,18 @@
 //
-//  DCMFirstViewController.m
+//  DCMSecondViewController.m
 //  DogecoinManager
 //
 //  Created by Paul Brinkmann on 1/9/14.
 //  Copyright (c) 2014 Paul Brinkmann. All rights reserved.
 //
 
-#import "DCMFirstViewController.h"
+#import "DCMMiningPoolViewController.h"
 
-@interface DCMFirstViewController ()
+@interface DCMMiningPoolViewController ()
 
 @end
 
-@implementation DCMFirstViewController
+@implementation DCMMiningPoolViewController
 
 - (void)viewDidLoad
 {

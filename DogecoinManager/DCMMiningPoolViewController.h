@@ -1,5 +1,5 @@
 //
-//  DCMFirstViewController.h
+//  DCMSecondViewController.h
 //  DogecoinManager
 //
 //  Created by Paul Brinkmann on 1/9/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DCMFirstViewController : UIViewController
+@interface DCMMiningPoolViewController : UIViewController
 
 @end

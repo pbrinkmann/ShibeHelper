@@ -14,14 +14,21 @@
 		041470FE187FBB8200007425 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 041470FD187FBB8200007425 /* main.m */; };
 		04147102187FBB8200007425 /* DCMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04147101187FBB8200007425 /* DCMAppDelegate.m */; };
 		04147105187FBB8200007425 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04147103187FBB8200007425 /* Main.storyboard */; };
-		04147108187FBB8200007425 /* DCMFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04147107187FBB8200007425 /* DCMFirstViewController.m */; };
-		0414710B187FBB8200007425 /* DCMSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0414710A187FBB8200007425 /* DCMSecondViewController.m */; };
+		04147108187FBB8200007425 /* DCMWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04147107187FBB8200007425 /* DCMWalletViewController.m */; };
+		0414710B187FBB8200007425 /* DCMMiningPoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0414710A187FBB8200007425 /* DCMMiningPoolViewController.m */; };
 		0414710D187FBB8200007425 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0414710C187FBB8200007425 /* Images.xcassets */; };
 		04147114187FBB8200007425 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04147113187FBB8200007425 /* XCTest.framework */; };
 		04147115187FBB8200007425 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041470F1187FBB8200007425 /* Foundation.framework */; };
 		04147116187FBB8200007425 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041470F5187FBB8200007425 /* UIKit.framework */; };
 		0414711E187FBB8200007425 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0414711C187FBB8200007425 /* InfoPlist.strings */; };
 		04147120187FBB8200007425 /* DogecoinManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0414711F187FBB8200007425 /* DogecoinManagerTests.m */; };
+		0414712B18889AF900007425 /* DCMEditWalletAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0414712A18889AF900007425 /* DCMEditWalletAddressViewController.m */; };
+		0414712E1888DEDD00007425 /* DCMWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0414712D1888DEDD00007425 /* DCMWallet.m */; };
+		041471301889337200007425 /* doge.png in Resources */ = {isa = PBXBuildFile; fileRef = 0414712F1889337200007425 /* doge.png */; };
+		041471361889381400007425 /* doge 640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 041471351889381300007425 /* doge 640x1136.png */; };
+		04147138188938BD00007425 /* doge 120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 04147137188938BD00007425 /* doge 120x120.png */; };
+		0414713B188B5CA900007425 /* mining icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 04147139188B5CA900007425 /* mining icon.png */; };
+		0414713C188B5CA900007425 /* wallet and coins.png in Resources */ = {isa = PBXBuildFile; fileRef = 0414713A188B5CA900007425 /* wallet and coins.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,16 +53,25 @@
 		04147100187FBB8200007425 /* DCMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCMAppDelegate.h; sourceTree = "<group>"; };
 		04147101187FBB8200007425 /* DCMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCMAppDelegate.m; sourceTree = "<group>"; };
 		04147104187FBB8200007425 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		04147106187FBB8200007425 /* DCMFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCMFirstViewController.h; sourceTree = "<group>"; };
-		04147107187FBB8200007425 /* DCMFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCMFirstViewController.m; sourceTree = "<group>"; };
-		04147109187FBB8200007425 /* DCMSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCMSecondViewController.h; sourceTree = "<group>"; };
-		0414710A187FBB8200007425 /* DCMSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCMSecondViewController.m; sourceTree = "<group>"; };
+		04147106187FBB8200007425 /* DCMWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCMWalletViewController.h; sourceTree = "<group>"; };
+		04147107187FBB8200007425 /* DCMWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCMWalletViewController.m; sourceTree = "<group>"; };
+		04147109187FBB8200007425 /* DCMMiningPoolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCMMiningPoolViewController.h; sourceTree = "<group>"; };
+		0414710A187FBB8200007425 /* DCMMiningPoolViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCMMiningPoolViewController.m; sourceTree = "<group>"; };
 		0414710C187FBB8200007425 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		04147112187FBB8200007425 /* DogecoinManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DogecoinManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04147113187FBB8200007425 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0414711B187FBB8200007425 /* DogecoinManagerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DogecoinManagerTests-Info.plist"; sourceTree = "<group>"; };
 		0414711D187FBB8200007425 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0414711F187FBB8200007425 /* DogecoinManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DogecoinManagerTests.m; sourceTree = "<group>"; };
+		0414712918889AF900007425 /* DCMEditWalletAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMEditWalletAddressViewController.h; sourceTree = "<group>"; };
+		0414712A18889AF900007425 /* DCMEditWalletAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMEditWalletAddressViewController.m; sourceTree = "<group>"; };
+		0414712C1888DEDD00007425 /* DCMWallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMWallet.h; sourceTree = "<group>"; };
+		0414712D1888DEDD00007425 /* DCMWallet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMWallet.m; sourceTree = "<group>"; };
+		0414712F1889337200007425 /* doge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doge.png; sourceTree = "<group>"; };
+		041471351889381300007425 /* doge 640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "doge 640x1136.png"; sourceTree = "<group>"; };
+		04147137188938BD00007425 /* doge 120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "doge 120x120.png"; sourceTree = "<group>"; };
+		04147139188B5CA900007425 /* mining icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mining icon.png"; sourceTree = "<group>"; };
+		0414713A188B5CA900007425 /* wallet and coins.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wallet and coins.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,13 +131,17 @@
 		041470F7187FBB8200007425 /* DogecoinManager */ = {
 			isa = PBXGroup;
 			children = (
+				0414712C1888DEDD00007425 /* DCMWallet.h */,
+				0414712D1888DEDD00007425 /* DCMWallet.m */,
 				04147100187FBB8200007425 /* DCMAppDelegate.h */,
 				04147101187FBB8200007425 /* DCMAppDelegate.m */,
 				04147103187FBB8200007425 /* Main.storyboard */,
-				04147106187FBB8200007425 /* DCMFirstViewController.h */,
-				04147107187FBB8200007425 /* DCMFirstViewController.m */,
-				04147109187FBB8200007425 /* DCMSecondViewController.h */,
-				0414710A187FBB8200007425 /* DCMSecondViewController.m */,
+				0414712918889AF900007425 /* DCMEditWalletAddressViewController.h */,
+				0414712A18889AF900007425 /* DCMEditWalletAddressViewController.m */,
+				04147106187FBB8200007425 /* DCMWalletViewController.h */,
+				04147107187FBB8200007425 /* DCMWalletViewController.m */,
+				04147109187FBB8200007425 /* DCMMiningPoolViewController.h */,
+				0414710A187FBB8200007425 /* DCMMiningPoolViewController.m */,
 				0414710C187FBB8200007425 /* Images.xcassets */,
 				041470F8187FBB8200007425 /* Supporting Files */,
 			);
@@ -131,6 +151,11 @@
 		041470F8187FBB8200007425 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				04147139188B5CA900007425 /* mining icon.png */,
+				0414713A188B5CA900007425 /* wallet and coins.png */,
+				0414712F1889337200007425 /* doge.png */,
+				04147137188938BD00007425 /* doge 120x120.png */,
+				041471351889381300007425 /* doge 640x1136.png */,
 				041470F9187FBB8200007425 /* DogecoinManager-Info.plist */,
 				041470FA187FBB8200007425 /* InfoPlist.strings */,
 				041470FD187FBB8200007425 /* main.m */,
@@ -205,6 +230,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Paul Brinkmann";
 				TargetAttributes = {
+					041470ED187FBB8200007425 = {
+						DevelopmentTeam = 8KAM9CU65V;
+					};
 					04147111187FBB8200007425 = {
 						TestTargetID = 041470ED187FBB8200007425;
 					};
@@ -234,9 +262,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04147138188938BD00007425 /* doge 120x120.png in Resources */,
 				0414710D187FBB8200007425 /* Images.xcassets in Resources */,
+				0414713B188B5CA900007425 /* mining icon.png in Resources */,
+				041471361889381400007425 /* doge 640x1136.png in Resources */,
 				041470FC187FBB8200007425 /* InfoPlist.strings in Resources */,
+				041471301889337200007425 /* doge.png in Resources */,
 				04147105187FBB8200007425 /* Main.storyboard in Resources */,
+				0414713C188B5CA900007425 /* wallet and coins.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,9 +289,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				041470FE187FBB8200007425 /* main.m in Sources */,
+				0414712E1888DEDD00007425 /* DCMWallet.m in Sources */,
 				04147102187FBB8200007425 /* DCMAppDelegate.m in Sources */,
-				04147108187FBB8200007425 /* DCMFirstViewController.m in Sources */,
-				0414710B187FBB8200007425 /* DCMSecondViewController.m in Sources */,
+				0414712B18889AF900007425 /* DCMEditWalletAddressViewController.m in Sources */,
+				04147108187FBB8200007425 /* DCMWalletViewController.m in Sources */,
+				0414710B187FBB8200007425 /* DCMMiningPoolViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,10 +420,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DogecoinManager/DogecoinManager-Prefix.pch";
 				INFOPLIST_FILE = "DogecoinManager/DogecoinManager-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -398,10 +436,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DogecoinManager/DogecoinManager-Prefix.pch";
 				INFOPLIST_FILE = "DogecoinManager/DogecoinManager-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

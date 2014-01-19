@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
+
+
 @end
 
 @implementation DCMEditWalletAddressViewController
@@ -31,7 +33,29 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    
+    if (self.walletAddress != nil) {
+        self.walletAddressTextField.text = self.walletAddress;
+    }
+    
 }
+
+-(void)updateDefaultWalletAddress:(NSString*) defaultWalletAddress
+{
+    
+    if( defaultWalletAddress != nil) {
+        NSLog(@"updating with %@", defaultWalletAddress);
+
+        self.walletAddress=defaultWalletAddress;
+
+    }
+}
+
+//-(void)setWalletAddress:(NSString *)walletAddress
+//{
+//    self.walletAddress = walletAddress;
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -48,6 +72,7 @@
         self.walletAddress = self.walletAddressTextField.text;
     }
 }
+
 
 
 @end

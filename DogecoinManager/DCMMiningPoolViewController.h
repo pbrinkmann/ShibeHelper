@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DCMMiningPool.h"
 
 @interface DCMMiningPoolViewController : UIViewController
+
+@property DCMMiningPool* miningPool;
 
 @end

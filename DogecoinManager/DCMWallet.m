@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/NSURLRequest.h>
+#import <Foundation/NSUserDefaults.h>
 
 #import "DCMWallet.h"
 
@@ -16,21 +17,69 @@
 {
     self = [super init];
     if(self) {
-        self.address = @"DLFXSX5e258mjURmEB7hZDVL5W5bCTerui";
+ //       self.address = @"DLFXSX5e258mjURmEB7hZDVL5W5bCTerui";
+        [self loadDataFromUserDefaults];
     }
     
+ 
     return self;
+}
+
+
+- (void)loadDataFromUserDefaults
+{
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"address"])
+    {
+        
+        self.address = [[NSUserDefaults standardUserDefaults]
+                        objectForKey:@"address"];
+        
+        self.balance = [[NSUserDefaults standardUserDefaults]
+                        objectForKey:@"balance"];
+
+        
+        self.lastUpdate = [[NSUserDefaults standardUserDefaults]
+                           objectForKey:@"lastUpdate"];
+    }
+    else {
+        NSLog(@"no defaults found, setting balance to 0");
+        self.balance = [NSNumber numberWithInt:0];
+    }
+    
+}
+
+- (void)saveDataToUserDefaults
+{
+    [[NSUserDefaults standardUserDefaults]
+     setObject:self.address forKey:@"address"];
+    
+    [[NSUserDefaults standardUserDefaults]
+      setObject:self.balance forKey:@"balance"];
+    
+    [[NSUserDefaults standardUserDefaults]
+     setObject:self.lastUpdate forKey:@"lastUpdate"];
+    
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(void)updateBalance
 {
+    if(self.address == nil) {
+        NSLog(@"No address found, wallet skipping update");
+        return;
+    }
+    
     NSString* serverAddress = [NSString stringWithFormat: @"http://dogechain.info/chain/Dogecoin/q/addressbalance/%@", self.address];
     
     NSString* str = [NSString stringWithContentsOfURL:[NSURL URLWithString:serverAddress]];
-    NSLog(@"%@", str);
+    NSLog(@"feteched wallet balance of %@", str);
     
     self.balance = [NSNumber numberWithInt:[str intValue]];
     self.lastUpdate = [NSDate date];
+    
+    
+    [self saveDataToUserDefaults];
 }
 
 @end

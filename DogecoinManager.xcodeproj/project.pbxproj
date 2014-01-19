@@ -29,6 +29,8 @@
 		04147138188938BD00007425 /* doge 120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 04147137188938BD00007425 /* doge 120x120.png */; };
 		0414713B188B5CA900007425 /* mining icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 04147139188B5CA900007425 /* mining icon.png */; };
 		0414713C188B5CA900007425 /* wallet and coins.png in Resources */ = {isa = PBXBuildFile; fileRef = 0414713A188B5CA900007425 /* wallet and coins.png */; };
+		04147140188B9F3D00007425 /* DCMMiningPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0414713F188B9F3D00007425 /* DCMMiningPool.m */; };
+		04147143188BDA8B00007425 /* DCMEditMiningPoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04147142188BDA8B00007425 /* DCMEditMiningPoolViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,10 @@
 		04147137188938BD00007425 /* doge 120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "doge 120x120.png"; sourceTree = "<group>"; };
 		04147139188B5CA900007425 /* mining icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mining icon.png"; sourceTree = "<group>"; };
 		0414713A188B5CA900007425 /* wallet and coins.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wallet and coins.png"; sourceTree = "<group>"; };
+		0414713E188B9F3D00007425 /* DCMMiningPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMMiningPool.h; sourceTree = "<group>"; };
+		0414713F188B9F3D00007425 /* DCMMiningPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMMiningPool.m; sourceTree = "<group>"; };
+		04147141188BDA8B00007425 /* DCMEditMiningPoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMEditMiningPoolViewController.h; sourceTree = "<group>"; };
+		04147142188BDA8B00007425 /* DCMEditMiningPoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMEditMiningPoolViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,17 +137,14 @@
 		041470F7187FBB8200007425 /* DogecoinManager */ = {
 			isa = PBXGroup;
 			children = (
+				0414713D188B655200007425 /* View Controllers */,
+				0414713E188B9F3D00007425 /* DCMMiningPool.h */,
+				0414713F188B9F3D00007425 /* DCMMiningPool.m */,
 				0414712C1888DEDD00007425 /* DCMWallet.h */,
 				0414712D1888DEDD00007425 /* DCMWallet.m */,
 				04147100187FBB8200007425 /* DCMAppDelegate.h */,
 				04147101187FBB8200007425 /* DCMAppDelegate.m */,
 				04147103187FBB8200007425 /* Main.storyboard */,
-				0414712918889AF900007425 /* DCMEditWalletAddressViewController.h */,
-				0414712A18889AF900007425 /* DCMEditWalletAddressViewController.m */,
-				04147106187FBB8200007425 /* DCMWalletViewController.h */,
-				04147107187FBB8200007425 /* DCMWalletViewController.m */,
-				04147109187FBB8200007425 /* DCMMiningPoolViewController.h */,
-				0414710A187FBB8200007425 /* DCMMiningPoolViewController.m */,
 				0414710C187FBB8200007425 /* Images.xcassets */,
 				041470F8187FBB8200007425 /* Supporting Files */,
 			);
@@ -180,6 +183,21 @@
 				0414711C187FBB8200007425 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0414713D188B655200007425 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0414712918889AF900007425 /* DCMEditWalletAddressViewController.h */,
+				0414712A18889AF900007425 /* DCMEditWalletAddressViewController.m */,
+				04147106187FBB8200007425 /* DCMWalletViewController.h */,
+				04147107187FBB8200007425 /* DCMWalletViewController.m */,
+				04147109187FBB8200007425 /* DCMMiningPoolViewController.h */,
+				0414710A187FBB8200007425 /* DCMMiningPoolViewController.m */,
+				04147141188BDA8B00007425 /* DCMEditMiningPoolViewController.h */,
+				04147142188BDA8B00007425 /* DCMEditMiningPoolViewController.m */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,7 +307,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				041470FE187FBB8200007425 /* main.m in Sources */,
+				04147140188B9F3D00007425 /* DCMMiningPool.m in Sources */,
 				0414712E1888DEDD00007425 /* DCMWallet.m in Sources */,
+				04147143188BDA8B00007425 /* DCMEditMiningPoolViewController.m in Sources */,
 				04147102187FBB8200007425 /* DCMAppDelegate.m in Sources */,
 				0414712B18889AF900007425 /* DCMEditWalletAddressViewController.m in Sources */,
 				04147108187FBB8200007425 /* DCMWalletViewController.m in Sources */,

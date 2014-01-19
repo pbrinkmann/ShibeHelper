@@ -12,6 +12,7 @@
 
 @interface DCMWalletViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lastWalletUpdate;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editWalletAddressButton;
 
 @end
 
@@ -23,7 +24,11 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     self.wallet = [[DCMWallet alloc] init];
-    self.walletAddressTextfield.text = self.wallet.address;
+    
+    if (self.wallet.address != nil) {
+        self.walletAddressTextfield.text = self.wallet.address;
+    }
+    
     [self updateWalletBalance];
     
     aTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
@@ -61,13 +66,22 @@
 
 -(void)updateWalletBalance {
     [self.wallet updateBalance];
+    
+    
     self.balance.text = [NSString stringWithFormat:@"%@ DOGE", self.wallet.balance];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if(sender != self.editWalletAddressButton ) return;
+    
+    DCMEditWalletAddressViewController *destination = (DCMEditWalletAddressViewController*)[[segue destinationViewController] visibleViewController];
+    [destination updateDefaultWalletAddress:self.wallet.address];
 }
 
 
 -(IBAction)refreshBalance:(id)sender
 {
-    NSLog(@"refresh balance clicked");
     [self updateWalletBalance];
 }
 

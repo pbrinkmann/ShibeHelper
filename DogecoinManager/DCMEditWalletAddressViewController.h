@@ -12,4 +12,6 @@
 
 @property NSString* walletAddress;
 
+-(void)updateDefaultWalletAddress:(NSString*) defaultWalletAddress;
+
 @end

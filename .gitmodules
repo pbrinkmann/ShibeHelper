@@ -1,0 +1,3 @@
+[submodule "DogecoinManager/thirdparty/CDZQRScanningViewController"]
+	path = DogecoinManager/thirdparty/CDZQRScanningViewController
+	url = https://github.com/cdzombak/CDZQRScanningViewController.git

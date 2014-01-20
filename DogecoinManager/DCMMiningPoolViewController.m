@@ -10,6 +10,8 @@
 
 @interface DCMMiningPoolViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *miningPoolNameLabel;
+
 @end
 
 @implementation DCMMiningPoolViewController

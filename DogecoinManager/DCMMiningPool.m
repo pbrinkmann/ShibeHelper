@@ -21,8 +21,6 @@
     self = [super init];
     if(self) {
 
-        NSLog(@"TODO: load saved mining pool URL/APIkey");
-        
         [self loadDataFromUserDefaults];
     }
     
@@ -31,31 +29,24 @@
 
 - (void)loadDataFromUserDefaults
 {
-    // TODO: namespace these default keys
-
-    // TODO: namespace these default keys
-
-    // TODO: namespace these default keys
-
-    // TODO: namespace these default keys
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"apiURL"])
     {
         
         self.apiURL = [[NSUserDefaults standardUserDefaults]
-                        objectForKey:@"apiURL"];
+                        objectForKey:@"miningpool.apiURL"];
         
         self.apiKey = [[NSUserDefaults standardUserDefaults]
-                        objectForKey:@"apiKey"];
+                        objectForKey:@"miningpool.apiKey"];
     }
 }
 
 - (void)saveDataToUserDefaults
 {
     [[NSUserDefaults standardUserDefaults]
-     setObject:self.apiURL forKey:@"apiURL"];
+     setObject:self.apiURL forKey:@"miningpool.apiURL"];
     
     [[NSUserDefaults standardUserDefaults]
-     setObject:self.apiKey forKey:@"apiKey"];
+     setObject:self.apiKey forKey:@"miningpool.apiKey"];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -64,29 +55,50 @@
 {
     if( self.apiURL == nil || self.apiKey == nil) { NSLog(@"DCMMiningPool skipping initial load of mining pool"); return; }
     
-    NSString* apiMethod = @"getuserstatus";
-    NSURL *url = [NSURL URLWithString:
-                                      [NSString stringWithFormat:@"%@&action=%@&api_key=%@",
-                                            self.apiURL,
-                                            apiMethod,
-                                            self.apiKey
-                                      ]
-                 ];
     
-    NSData *rawdata = [NSData dataWithContentsOfURL:url];
+    [self doUserStatusAPICall];
+    [self doUserBalanceAPICall];
+    [self doPoolStatusAPICall];
     
-    if( rawdata == nil) {
-        NSLog(@"could not fetch data from pool API");
+    
+    // TODO: this should actually happen when apiKey and apiURL get set
+    [self saveDataToUserDefaults ];
+}
+
+/*  ok, since this is what multipool.us looksl like:
+{
+    "currency": {
+ 
+        "doge": {
+            "confirmed_rewards": "351.4674396",
+            "hashrate": "1167",
+            "estimated_rewards": "28.7412",
+            "payout_history": "10963.4614339",
+            "pool_hashrate": 16485314,
+            "round_shares": "704",
+            "block_shares": "671132783"
+        },
+    },
+    "workers": {
+        "doge": {
+            "paulb.1": {
+                "hashrate": "1167"
+            }
+        },    
+    }
+}
+*/
+
+-(void)doUserStatusAPICall
+{
+    NSMutableDictionary *dict = [self callPoolAPIMethod:@"getuserstatus"];
+    
+    if( dict == nil) {
+        NSLog(@"API call failed, cancelling getuserstatus update");
         return;
     }
-    
-    NSError *error;
-    
-    NSMutableDictionary  * dict = [NSJSONSerialization JSONObjectWithData:rawdata options: NSJSONReadingMutableContainers error: &error];
-    
-    NSLog(@"dict: %@",dict);
-    NSLog(@"error: %@", error);
-    
+
+
     /*
      {
          "getuserstatus": {
@@ -107,47 +119,31 @@
     
     NSMutableDictionary *status = [dict objectForKey:@"getuserstatus"];
     
-    NSMutableDictionary *data = [status objectForKey:@"data"];
+    NSMutableDictionary *data   = [status objectForKey:@"data"];
     NSMutableDictionary *shares = [data objectForKey:@"shares"];
    
-    NSString *hashRate = (NSString*)[data objectForKey:@"hashrate"];
-    NSString *validShares = (NSString*)[shares objectForKey:@"valid"];
+    NSString *hashRate      = (NSString*)[data objectForKey:@"hashrate"];
+    NSString *validShares   = (NSString*)[shares objectForKey:@"valid"];
     NSString *invalidShares = (NSString*)[shares objectForKey:@"invalid"];
 
     
     NSLog(@"hashRate: %@", hashRate);
     
-    self.hashrateKHPS = [NSNumber numberWithInt:[hashRate intValue]];
-    self.validSharesThisRound = [NSNumber numberWithInt:[validShares intValue]];
-    self.invalidSharesThisRound = [NSNumber numberWithInt:[invalidShares intValue]];
+    self.hashrate           = [hashRate intValue];
+    self.validSharesThisRound   = [validShares intValue];
+    self.invalidSharesThisRound = [invalidShares intValue];
 
-    
-    //////// GET USER BALANCE ////////
-    
+}
 
+
+-(void)doUserBalanceAPICall
+{
+    NSMutableDictionary *dict = [self callPoolAPIMethod:@"getuserbalance"];
     
-    apiMethod = @"getuserbalance";
-    url = [NSURL URLWithString:
-                  [NSString stringWithFormat:@"%@&action=%@&api_key=%@",
-                   self.apiURL,
-                   apiMethod,
-                   self.apiKey
-                   ]
-                  ];
-    
-    rawdata = [NSData dataWithContentsOfURL:url];
-    
-    if( rawdata == nil) {
-        NSLog(@"could not fetch data from pool API");
+    if( dict == nil) {
+        NSLog(@"API call failed, cancelling getuserbalance update");
         return;
     }
-    
-
-    
-    dict = [NSJSONSerialization JSONObjectWithData:rawdata options: NSJSONReadingMutableContainers error: &error];
-    
-    NSLog(@"dict: %@",dict);
-    NSLog(@"error: %@", error);
     
     /*
      {
@@ -165,22 +161,26 @@
     
     NSMutableDictionary *balance = [dict objectForKey:@"getuserbalance"];
     
-    data = [balance objectForKey:@"data"];
+    NSMutableDictionary *data = [balance objectForKey:@"data"];
     
-    NSString *confirmed = (NSString*)[data objectForKey:@"confirmed"];
+    NSString *confirmed  = (NSString*)[data objectForKey:@"confirmed"];
     NSString *unconfrmed = (NSString*)[data objectForKey:@"unconfirmed"];
     
     
-   
-    self.confirmedBalance = [NSNumber numberWithInt:[confirmed intValue]];
-    self.unconfirmedBalance = [NSNumber numberWithInt:[unconfrmed intValue]];
+    self.confirmedBalance   = [confirmed floatValue];
+    self.unconfirmedBalance = [unconfrmed floatValue];
     
-    
-    // TODO: this should actually happen when apiKey and apiURL get set
-    [self saveDataToUserDefaults ];
+
 }
 
-
+-(void)doPoolStatusAPICall
+{
+    NSMutableDictionary *dict = [self callPoolAPIMethod:@"getpoolstatus"];
+    
+    if( dict == nil) {
+        NSLog(@"API call failed, cancelling getpoolstatus update");
+        return;
+    }
 /*
  {
      "getpoolstatus": {
@@ -203,5 +203,56 @@
      }
  }
  */
+    
+    NSMutableDictionary *status = [dict objectForKey:@"getpoolstatus"];
+    
+    NSMutableDictionary *data = [status objectForKey:@"data"];
+    
+    NSString *poolName                  = (NSString*)[data objectForKey:@"pool_name"];
+    NSString *poolHashrate              = (NSString*)[data objectForKey:@"hashrate"];
+    NSString *estimatedSecondsPerBlock  = (NSString*)[data objectForKey:@"esttime"];
+    NSString *secondsSinceLastBlock     = (NSString*)[data objectForKey:@"timesincelast"];
+
+    
+    
+    self.poolName                 = poolName;
+    self.poolHashrate             = [poolHashrate intValue];
+    self.estimatedSecondsPerBlock = [estimatedSecondsPerBlock intValue];
+    self.secondsSinceLastBlock    = [secondsSinceLastBlock intValue];
+}
+
+
+
+-(NSMutableDictionary*) callPoolAPIMethod: (NSString*)apiMethod {
+    
+    NSLog(@"Calling api method: %@", apiMethod);
+    
+    NSURL *url = [NSURL URLWithString:
+                  [NSString stringWithFormat:@"%@&action=%@&api_key=%@",
+                   self.apiURL,
+                   apiMethod,
+                   self.apiKey
+                   ]
+                  ];
+    
+    NSData *rawdata = [NSData dataWithContentsOfURL:url];
+    
+    if( rawdata == nil) {
+        NSLog(@"could not fetch data from pool API");
+        return nil;
+    }
+    
+    NSError *error;
+    NSMutableDictionary  * dict = [NSJSONSerialization JSONObjectWithData:rawdata options: NSJSONReadingMutableContainers error: &error];
+    
+    if(error != nil) {
+        NSLog(@"error: %@", error);
+        return nil;
+    }
+    
+    NSLog(@"dict: %@",dict);
+    
+    return dict;
+}
 
 @end

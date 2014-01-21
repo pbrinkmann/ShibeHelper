@@ -32,14 +32,14 @@
     {
         
         self.address = [[NSUserDefaults standardUserDefaults]
-                        objectForKey:@"address"];
+                        objectForKey:@"wallet.address"];
         
         self.balance = [[NSUserDefaults standardUserDefaults]
-                        objectForKey:@"balance"];
+                        objectForKey:@"wallet.balance"];
 
         
         self.lastUpdate = [[NSUserDefaults standardUserDefaults]
-                           objectForKey:@"lastUpdate"];
+                           objectForKey:@"wallet.lastUpdate"];
     }
     else {
         NSLog(@"no defaults found, setting balance to 0");
@@ -51,13 +51,13 @@
 - (void)saveDataToUserDefaults
 {
     [[NSUserDefaults standardUserDefaults]
-     setObject:self.address forKey:@"address"];
+     setObject:self.address forKey:@"wallet.address"];
     
     [[NSUserDefaults standardUserDefaults]
-      setObject:self.balance forKey:@"balance"];
+      setObject:self.balance forKey:@"wallet.balance"];
     
     [[NSUserDefaults standardUserDefaults]
-     setObject:self.lastUpdate forKey:@"lastUpdate"];
+     setObject:self.lastUpdate forKey:@"wallet.lastUpdate"];
     
     
     [[NSUserDefaults standardUserDefaults] synchronize];

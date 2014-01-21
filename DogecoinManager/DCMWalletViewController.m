@@ -67,8 +67,13 @@
 -(void)updateWalletBalance {
     [self.wallet updateBalance];
     
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    [numberFormatter setCurrencySymbol:@"Ɖ"];
     
-    self.balance.text = [NSString stringWithFormat:@"%@Ɖ", self.wallet.balance];
+    NSString *balance = [numberFormatter stringFromNumber:self.wallet.balance];
+
+    self.balance.text = balance;
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

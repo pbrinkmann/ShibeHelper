@@ -14,25 +14,23 @@
 @property NSString *apiKey;
 
 // getuserbalance
-@property NSNumber *confirmedBalance;
-@property NSNumber *unconfirmedBalance;
+@property float confirmedBalance;
+@property float unconfirmedBalance;
 
-// gettimesincelastblock
-@property NSNumber *secondsSinceLastBlock;
-
-// getestimatedtime
-@property NSNumber *estimatedSecondsPerBlock;
+// getpoolstatus
+@property int secondsSinceLastBlock;
+@property int estimatedSecondsPerBlock;
 
 // getuserstatus
-@property NSNumber *hashrateKHPS;
-@property NSNumber *validSharesThisRound;
-@property NSNumber *invalidSharesThisRound;
+@property int hashrate; // KHPS
+@property int validSharesThisRound;
+@property int invalidSharesThisRound;
 
 // public
 @property NSString *poolName;
-@property NSNumber *poolHashrateKHPS;
-@property NSNumber *poolWorkers;
-@property NSNumber *poolSharesThisRound;
+@property int poolHashrate; // KHPS
+@property int poolWorkers;
+@property int poolSharesThisRound;
 // @property NSNumber *dogecoinNetworkHashrateKHPS;
 
 -(void)updatePoolInfo;

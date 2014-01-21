@@ -11,12 +11,15 @@
 
 @interface DCMMiningPoolViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *miningPoolNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *poolNameLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *hashrateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *validSharesLabel;
-@property (weak, nonatomic) IBOutlet UILabel *invalidSharesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *confirmedBalanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *unconfirmedBalanceLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *poolHashrateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *secondsSinceLastBlockLabel;
 
 @end
 
@@ -28,6 +31,8 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     self.miningPool = [[DCMMiningPool alloc] init];
+    
+    [self updateMiningPoolInfo];
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,14 +70,65 @@
 {
     [self.miningPool updatePoolInfo];
     
-    self.hashrateLabel.text = [NSString stringWithFormat:@"%@ KHPS", self.miningPool.hashrateKHPS];
-    self.validSharesLabel.text = [NSString stringWithFormat:@"%@ valid shares", self.miningPool.validSharesThisRound];
-    self.invalidSharesLabel.text = [NSString stringWithFormat:@"%@ invalid shares", self.miningPool.invalidSharesThisRound];
+    // Do some calculations first
     
-    self.confirmedBalanceLabel.text = [NSString stringWithFormat:@"%@Ɖ confirmed", self.miningPool.confirmedBalance];
-    self.unconfirmedBalanceLabel.text = [NSString stringWithFormat:@"%@Ɖ unconfirmed", self.miningPool.unconfirmedBalance];
+    float invalidPercent   = 100.f * self.miningPool.invalidSharesThisRound / (self.miningPool.validSharesThisRound + self.miningPool.invalidSharesThisRound);
+    float blockTimePercent = 100.f * self.miningPool.secondsSinceLastBlock / self.miningPool.estimatedSecondsPerBlock;
 
+    // And pretty up our numbers
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    [numberFormatter setCurrencySymbol:@"Ɖ"];
+    
+    NSString *confirmedBalance   = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:self.miningPool.confirmedBalance]];
+    NSString *unconfirmedBalance = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:self.miningPool.unconfirmedBalance]];
+    
+    [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    
+    NSString *hashrate     = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:self.miningPool.hashrate]];
+    NSString *poolHashrate = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:self.miningPool.poolHashrate]];
 
+    NSString *timeSinceLastBlock = [self getFormatedDateStringForSeconds: self.miningPool.secondsSinceLastBlock];
+    
+    
+    self.hashrateLabel.text                     = [NSString stringWithFormat:@"%@ kh/s", hashrate];
+    self.validSharesLabel.text                  = [NSString stringWithFormat:@"%d/%d (%%%.1f) valid/invalid shares",
+                                                                               self.miningPool.validSharesThisRound,
+                                                                               self.miningPool.invalidSharesThisRound,
+                                                                               invalidPercent
+                                                   ];
+        
+  
+    self.confirmedBalanceLabel.text             = [NSString stringWithFormat:@"%@ confirmed", confirmedBalance];
+    self.unconfirmedBalanceLabel.text           = [NSString stringWithFormat:@"%@ unconfirmed", unconfirmedBalance];
+    
+    self.poolNameLabel.text                     = self.miningPool.poolName;
+    self.poolHashrateLabel.text                 = [NSString stringWithFormat:@"%@ kh/s", poolHashrate];
+
+    self.secondsSinceLastBlockLabel.text        = [NSString stringWithFormat:@"%@ (%%%.1f) since last block",
+                                                                                timeSinceLastBlock,
+                                                                                blockTimePercent
+                                                  ];
+
+}
+
+-(NSString*)getFormatedDateStringForSeconds:(int)seconds_
+{
+    int seconds = seconds_ % 60;
+    int minutes = (seconds / 60) % 60;
+    int hours   = (seconds / 3600) % 60;
+    
+    if( hours > 0 ) {
+        return [NSString stringWithFormat:@"%ih %im %is", hours, minutes, seconds];
+    }
+    else if (minutes > 0 ) {
+        return [NSString stringWithFormat:@"%im %is", minutes, seconds];
+
+    }
+    else {
+         return [NSString stringWithFormat:@"%is", seconds];
+    }
 }
 
 @end

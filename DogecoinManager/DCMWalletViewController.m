@@ -1,5 +1,5 @@
 //
-//  DCMFirstViewController.m
+//  DCMWalletViewController
 //  DogecoinManager
 //
 //  Created by Paul Brinkmann on 1/9/14.
@@ -68,7 +68,7 @@
     [self.wallet updateBalance];
     
     
-    self.balance.text = [NSString stringWithFormat:@"%@ DOGE", self.wallet.balance];
+    self.balance.text = [NSString stringWithFormat:@"%@Ɖ", self.wallet.balance];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

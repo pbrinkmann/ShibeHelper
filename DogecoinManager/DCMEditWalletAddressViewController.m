@@ -8,6 +8,8 @@
 
 #import "DCMEditWalletAddressViewController.h"
 
+#import "CDZQRScanningViewController.h"
+
 @interface DCMEditWalletAddressViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *walletAddressTextField;
@@ -71,6 +73,11 @@
         NSLog(@"setting wallet address");
         self.walletAddress = self.walletAddressTextField.text;
     }
+}
+
+-(IBAction)startScan:(id)sender
+{
+    [CDZQRScanningViewController scanIntoTextField:self.walletAddressTextField fromViewController:self];
 }
 
 

@@ -20,88 +20,188 @@
 {
     self = [super init];
     if(self) {
-        //       self.address = @"DLFXSX5e258mjURmEB7hZDVL5W5bCTerui";
- 
-        self.poolURL = @"http://teamdoge.com/";
-        self.apiKey  = @"042942b4863c05351976f0e779dc15a076e70a12a1d75371a3c512c0c33872d7";
+
+        NSLog(@"TODO: load saved mining pool URL/APIkey");
         
-        [self updatePoolInfo];
-        
+        [self loadDataFromUserDefaults];
     }
     
     return self;
 }
 
+- (void)loadDataFromUserDefaults
+{
+    // TODO: namespace these default keys
+
+    // TODO: namespace these default keys
+
+    // TODO: namespace these default keys
+
+    // TODO: namespace these default keys
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"apiURL"])
+    {
+        
+        self.apiURL = [[NSUserDefaults standardUserDefaults]
+                        objectForKey:@"apiURL"];
+        
+        self.apiKey = [[NSUserDefaults standardUserDefaults]
+                        objectForKey:@"apiKey"];
+    }
+}
+
+- (void)saveDataToUserDefaults
+{
+    [[NSUserDefaults standardUserDefaults]
+     setObject:self.apiURL forKey:@"apiURL"];
+    
+    [[NSUserDefaults standardUserDefaults]
+     setObject:self.apiKey forKey:@"apiKey"];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 -(void)updatePoolInfo
 {
-    NSString* apiMethod = @"getestimatedtime";
+    if( self.apiURL == nil || self.apiKey == nil) { NSLog(@"DCMMiningPool skipping initial load of mining pool"); return; }
+    
+    NSString* apiMethod = @"getuserstatus";
     NSURL *url = [NSURL URLWithString:
-                                      [NSString stringWithFormat:@"%@?page=api&action=%@&api_key=%@",
-                                            self.poolURL,
+                                      [NSString stringWithFormat:@"%@&action=%@&api_key=%@",
+                                            self.apiURL,
                                             apiMethod,
                                             self.apiKey
                                       ]
                  ];
     
-    NSData *data = [NSData dataWithContentsOfURL:url];
+    NSData *rawdata = [NSData dataWithContentsOfURL:url];
     
-    if( data == nil) {
+    if( rawdata == nil) {
         NSLog(@"could not fetch data from pool API");
         return;
     }
     
     NSError *error;
     
-    NSMutableDictionary  * dict = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
+    NSMutableDictionary  * dict = [NSJSONSerialization JSONObjectWithData:rawdata options: NSJSONReadingMutableContainers error: &error];
     
     NSLog(@"dict: %@",dict);
     NSLog(@"error: %@", error);
     
-    NSMutableDictionary *eta = [dict objectForKey:@"getestimatedtime"];
+    /*
+     {
+         "getuserstatus": {
+            "version": "1.0.0",
+            "runtime": 322.16811180115,
+            "data": {
+                "username": "paulb",
+                "shares": {
+                    "valid": 544,
+                    "invalid": 0
+                },
+                "hashrate": 1482,
+                "sharerate": "0.0883"
+             }
+         }
+     }
+     */
     
-    NSLog(@"eta dict: %@",eta);
+    NSMutableDictionary *status = [dict objectForKey:@"getuserstatus"];
+    
+    NSMutableDictionary *data = [status objectForKey:@"data"];
+    NSMutableDictionary *shares = [data objectForKey:@"shares"];
    
-    NSString *estimatedTimeInSeconds = (NSString*)[eta objectForKey:@"data"];
-    
-    NSLog(@"etis: %@", estimatedTimeInSeconds);
-    
-    self.estimatedSecondsPerBlock = [NSNumber numberWithInt:[estimatedTimeInSeconds intValue]];
-}
+    NSString *hashRate = (NSString*)[data objectForKey:@"hashrate"];
+    NSString *validShares = (NSString*)[shares objectForKey:@"valid"];
+    NSString *invalidShares = (NSString*)[shares objectForKey:@"invalid"];
 
+    
+    NSLog(@"hashRate: %@", hashRate);
+    
+    self.hashrateKHPS = [NSNumber numberWithInt:[hashRate intValue]];
+    self.validSharesThisRound = [NSNumber numberWithInt:[validShares intValue]];
+    self.invalidSharesThisRound = [NSNumber numberWithInt:[invalidShares intValue]];
+
+    
+    //////// GET USER BALANCE ////////
+    
+
+    
+    apiMethod = @"getuserbalance";
+    url = [NSURL URLWithString:
+                  [NSString stringWithFormat:@"%@&action=%@&api_key=%@",
+                   self.apiURL,
+                   apiMethod,
+                   self.apiKey
+                   ]
+                  ];
+    
+    rawdata = [NSData dataWithContentsOfURL:url];
+    
+    if( rawdata == nil) {
+        NSLog(@"could not fetch data from pool API");
+        return;
+    }
+    
+
+    
+    dict = [NSJSONSerialization JSONObjectWithData:rawdata options: NSJSONReadingMutableContainers error: &error];
+    
+    NSLog(@"dict: %@",dict);
+    NSLog(@"error: %@", error);
+    
+    /*
+     {
+         "getuserbalance": {
+             "version": "1.0.0",
+             "runtime": 11.191129684448,
+             "data": {
+                 "confirmed": 517.21680185,
+                 "unconfirmed": 1538.61649413,
+                 "orphaned": 90.79280431
+             }
+         }
+     }
+     */
+    
+    NSMutableDictionary *balance = [dict objectForKey:@"getuserbalance"];
+    
+    data = [balance objectForKey:@"data"];
+    
+    NSString *confirmed = (NSString*)[data objectForKey:@"confirmed"];
+    NSString *unconfrmed = (NSString*)[data objectForKey:@"unconfirmed"];
+    
+    
+   
+    self.confirmedBalance = [NSNumber numberWithInt:[confirmed intValue]];
+    self.unconfirmedBalance = [NSNumber numberWithInt:[unconfrmed intValue]];
+    
+    
+    // TODO: this should actually happen when apiKey and apiURL get set
+    [self saveDataToUserDefaults ];
+}
 
 
 /*
-
-NSURL * url=[NSURL URLWithString:@"http://api.geonames.org/citiesJSON?north=44.1&south=-9.9&east=-22.4&west=55.2&lang=de&username=demo"];   // pass your URL  Here.
-
-NSData * data=[NSData dataWithContentsOfURL:url];
-
-NSError * error;
-
-NSMutableDictionary  * json = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-
-NSLog(@"%@",json);
-
-
-NSMutableArray * referanceArray=[[NSMutableArray alloc]init];
-
-NSMutableArray * periodArray=[[NSMutableArray alloc]init];
-
-NSArray * responseArr = json[@"days"];
-
-for(NSDictionary * dict in responseArr)
-{
-    
-    [referanceArray addObject:[dict valueForKey:@"reference"]];
-    [periodArray addObject:[dict valueForKey:@"period"]];
-    
-}
-
-
-NSLog(@"%@",referanceArray);   // Here you get the Referance data
-NSLog(@"%@",periodArray);      // Here you get the Period data
-
-
-*/
+ {
+     "getpoolstatus": {
+         "version": "1.0.0",
+         "runtime": 25.833129882812,
+         "data": {
+             "pool_name": "suchcoins.com",
+             "hashrate": 4145161,
+             "efficiency": 98.03,
+             "workers": 3905,
+             "currentnetworkblock": 65415,
+             "nextnetworkblock": 65416,
+             "lastblock": 65399,
+             "networkdiff": 896.337924,
+             "esttime": 928.73161494681,
+             "estshares": 3671400.136704,
+             "timesincelast": 1020,
+             "nethashrate": 62159452148
+         }
+     }
+ }
+ */
 
 @end

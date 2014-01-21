@@ -10,9 +10,12 @@
 
 @interface DCMMiningPool : NSObject
 
-@property NSString *poolURL;
+@property NSString *apiURL;
 @property NSString *apiKey;
 
+// getuserbalance
+@property NSNumber *confirmedBalance;
+@property NSNumber *unconfirmedBalance;
 
 // gettimesincelastblock
 @property NSNumber *secondsSinceLastBlock;
@@ -32,6 +35,7 @@
 @property NSNumber *poolSharesThisRound;
 // @property NSNumber *dogecoinNetworkHashrateKHPS;
 
+-(void)updatePoolInfo;
 
 
 @end

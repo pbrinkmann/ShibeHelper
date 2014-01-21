@@ -10,4 +10,7 @@
 
 @interface DCMEditMiningPoolViewController : UIViewController
 
+@property NSString* miningPoolAPIURL;
+@property NSString* miningPoolAPIKey;
+
 @end

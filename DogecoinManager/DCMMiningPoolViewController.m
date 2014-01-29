@@ -9,6 +9,8 @@
 #import "DCMMiningPoolViewController.h"
 #import "DCMEditMiningPoolViewController.h"
 
+#import "DCMUtils.h"
+
 @interface DCMMiningPoolViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *poolNameLabel;
@@ -20,6 +22,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *poolHashrateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondsSinceLastBlockLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *lastUpdatedLabel;
 
 @end
 
@@ -33,6 +37,12 @@
     self.miningPool = [[DCMMiningPool alloc] init];
     
     [self updateMiningPoolInfo];
+    
+    lastUpdatedTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                        target:self
+                                                      selector:@selector(lastUpdatedTimerFired:)
+                                                      userInfo:nil
+                                                       repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,11 +123,11 @@
 
 }
 
--(NSString*)getFormatedDateStringForSeconds:(int)seconds_
+-(NSString*)getFormatedDateStringForSeconds:(int)total_seconds
 {
-    int seconds = seconds_ % 60;
-    int minutes = (seconds / 60) % 60;
-    int hours   = (seconds / 3600) % 60;
+    int seconds = total_seconds % 60;
+    int minutes = (total_seconds / 60) % 60;
+    int hours   = (total_seconds / 3600) % 60;
     
     if( hours > 0 ) {
         return [NSString stringWithFormat:@"%ih %im %is", hours, minutes, seconds];
@@ -128,6 +138,15 @@
     }
     else {
          return [NSString stringWithFormat:@"%is", seconds];
+    }
+}
+
+-(void)lastUpdatedTimerFired:(NSTimer *) theTimer
+{
+    if(self.miningPool.lastUpdate != nil) {
+        NSTimeInterval timeSinceLastUpdate =[[theTimer fireDate] timeIntervalSinceDate:self.miningPool.lastUpdate];
+        self.lastUpdatedLabel.text = [DCMUtils lastUpdatedForInterval:timeSinceLastUpdate];
+        
     }
 }
 

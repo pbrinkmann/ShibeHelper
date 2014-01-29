@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "DCMMiningPool.h"
 
-@interface DCMMiningPoolViewController : UIViewController
+@interface DCMMiningPoolViewController : UIViewController {
+    NSTimer* lastUpdatedTimer;
+}
 
 @property DCMMiningPool* miningPool;
 

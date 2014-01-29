@@ -9,10 +9,16 @@
 #import "DCMWalletViewController.h"
 
 #import "DCMEditWalletAddressViewController.h"
+#import "DCMUtils.h"
 
 @interface DCMWalletViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *lastWalletUpdate;
+@property (weak, nonatomic) IBOutlet UILabel *lastWalletUpdateLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editWalletAddressButton;
+@property (weak, nonatomic) IBOutlet UITextField *walletAddressTextfield;
+
+@property (weak, nonatomic) IBOutlet UILabel *balance;
+@property (weak, nonatomic) IBOutlet UILabel *balanceUSDLabel;
+
 
 @end
 
@@ -31,11 +37,11 @@
     
     [self updateWalletBalance];
     
-    aTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                              target:self
-                                            selector:@selector(timerFired:)
-                                            userInfo:nil
-                                             repeats:YES];
+    lastUpdatedTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                        target:self
+                                                      selector:@selector(lastUpdatedTimerFired:)
+                                                      userInfo:nil
+                                                      repeats:YES];
 
 }
 
@@ -72,8 +78,11 @@
     [numberFormatter setCurrencySymbol:@"Ɖ"];
     
     NSString *balance = [numberFormatter stringFromNumber:self.wallet.balance];
-
     self.balance.text = balance;
+
+    [numberFormatter setCurrencySymbol:@"$"];
+    NSString *balanceUSD = [numberFormatter stringFromNumber:self.wallet.balanceUSD];
+    self.balanceUSDLabel.text = [NSString stringWithFormat:@"(%@)",balanceUSD];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -90,31 +99,12 @@
     [self updateWalletBalance];
 }
 
--(void)timerFired:(NSTimer *) theTimer
+-(void)lastUpdatedTimerFired:(NSTimer *) theTimer
 {
     if(self.wallet.lastUpdate != nil) {
-        NSTimeInterval timeSinceUpdate = [[theTimer fireDate] timeIntervalSinceDate:self.wallet.lastUpdate];
-        if(timeSinceUpdate < 1 ) timeSinceUpdate = 1;
-        
-        if(timeSinceUpdate < 2)  {
-            self.lastWalletUpdate.text = @"last updated 1 second  ago";
-        }
-        else if( timeSinceUpdate < 60 ) {
-            self.lastWalletUpdate.text = [NSString stringWithFormat:@"last updated %d seconds ago", (int)timeSinceUpdate];
-        }
-        else if ( timeSinceUpdate < 120)  {
-            self.lastWalletUpdate.text = @"last updated 1 minute ago";
-        }
-        else if ( timeSinceUpdate < 3600) {
-            self.lastWalletUpdate.text = [NSString stringWithFormat:@"last updated %d minutes ago", (int)timeSinceUpdate/60];
-        }
-        else if ( timeSinceUpdate < 7200 ) {
-            self.lastWalletUpdate.text = @"last updated 1 hour ago";
-        }
-        else {
-            self.lastWalletUpdate.text = [NSString stringWithFormat:@"last updated %d hours ago", (int)timeSinceUpdate/3600];
-        }
-        
+        NSTimeInterval timeSinceLastUpdate =[[theTimer fireDate] timeIntervalSinceDate:self.wallet.lastUpdate];
+        self.lastWalletUpdateLabel.text = [DCMUtils lastUpdatedForInterval:timeSinceLastUpdate];
+               
     }
 }
 

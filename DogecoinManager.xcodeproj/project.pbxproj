@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040525AE188F903100BE3172 /* TODOs in Resources */ = {isa = PBXBuildFile; fileRef = 040525AD188F903100BE3172 /* TODOs */; };
+		040525B4188F933300BE3172 /* DCMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 040525B3188F933300BE3172 /* DCMUtils.m */; };
 		041470F2187FBB8200007425 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041470F1187FBB8200007425 /* Foundation.framework */; };
 		041470F4187FBB8200007425 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041470F3187FBB8200007425 /* CoreGraphics.framework */; };
 		041470F6187FBB8200007425 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041470F5187FBB8200007425 /* UIKit.framework */; };
@@ -45,6 +47,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040525AD188F903100BE3172 /* TODOs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODOs; sourceTree = "<group>"; };
+		040525B2188F933300BE3172 /* DCMUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMUtils.h; sourceTree = "<group>"; };
+		040525B3188F933300BE3172 /* DCMUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMUtils.m; sourceTree = "<group>"; };
 		041470EE187FBB8200007425 /* DogecoinManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogecoinManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		041470F1187FBB8200007425 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		041470F3187FBB8200007425 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -140,6 +145,7 @@
 		041470F7187FBB8200007425 /* DogecoinManager */ = {
 			isa = PBXGroup;
 			children = (
+				040525AD188F903100BE3172 /* TODOs */,
 				04147103187FBB8200007425 /* Main.storyboard */,
 				04D7B9BF188CCD5700113831 /* thirdparty */,
 				0414713D188B655200007425 /* View Controllers */,
@@ -151,6 +157,8 @@
 				04147101187FBB8200007425 /* DCMAppDelegate.m */,
 				0414710C187FBB8200007425 /* Images.xcassets */,
 				041470F8187FBB8200007425 /* Supporting Files */,
+				040525B2188F933300BE3172 /* DCMUtils.h */,
+				040525B3188F933300BE3172 /* DCMUtils.m */,
 			);
 			path = DogecoinManager;
 			sourceTree = "<group>";
@@ -299,6 +307,7 @@
 				041471361889381400007425 /* doge 640x1136.png in Resources */,
 				041470FC187FBB8200007425 /* InfoPlist.strings in Resources */,
 				041471301889337200007425 /* doge.png in Resources */,
+				040525AE188F903100BE3172 /* TODOs in Resources */,
 				04147105187FBB8200007425 /* Main.storyboard in Resources */,
 				0414713C188B5CA900007425 /* wallet and coins.png in Resources */,
 			);
@@ -319,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				040525B4188F933300BE3172 /* DCMUtils.m in Sources */,
 				041470FE187FBB8200007425 /* main.m in Sources */,
 				04147140188B9F3D00007425 /* DCMMiningPool.m in Sources */,
 				0414712E1888DEDD00007425 /* DCMWallet.m in Sources */,

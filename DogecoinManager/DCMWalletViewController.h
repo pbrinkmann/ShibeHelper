@@ -11,12 +11,9 @@
 #import "DCMWallet.h"
 
 @interface DCMWalletViewController : UIViewController {
-    NSTimer* aTimer;
+    NSTimer* lastUpdatedTimer;
 }
 
-@property (weak, nonatomic) IBOutlet UITextField *walletAddressTextfield;
-
-@property (weak, nonatomic) IBOutlet UILabel *balance;
 
 @property DCMWallet* wallet;
 

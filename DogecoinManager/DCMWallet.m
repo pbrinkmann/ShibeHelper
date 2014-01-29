@@ -37,6 +37,13 @@
         self.balance = [[NSUserDefaults standardUserDefaults]
                         objectForKey:@"wallet.balance"];
 
+        self.balanceUSD = [[NSUserDefaults standardUserDefaults]
+                           objectForKey:@"wallet.balanceUSD"];
+        
+        if( self.balanceUSD == nil ) {
+            self.balanceUSD = [NSNumber numberWithInt:0];
+        }
+
         
         self.lastUpdate = [[NSUserDefaults standardUserDefaults]
                            objectForKey:@"wallet.lastUpdate"];
@@ -57,6 +64,9 @@
       setObject:self.balance forKey:@"wallet.balance"];
     
     [[NSUserDefaults standardUserDefaults]
+     setObject:self.balanceUSD forKey:@"wallet.balanceUSD"];
+    
+    [[NSUserDefaults standardUserDefaults]
      setObject:self.lastUpdate forKey:@"wallet.lastUpdate"];
     
     
@@ -75,7 +85,12 @@
     NSString* str = [NSString stringWithContentsOfURL:[NSURL URLWithString:serverAddress]];
     NSLog(@"feteched wallet balance of %@", str);
     
-    self.balance = [NSNumber numberWithInt:[str intValue]];
+    self.balance = [NSNumber numberWithFloat:[str floatValue]];
+    
+    str = [NSString stringWithContentsOfURL: [NSURL URLWithString:@"https://www.dogeapi.com/wow/?a=get_current_price"]];
+    NSLog(@"feteched usd conversion rate of %@", str);
+    self.balanceUSD = [NSNumber numberWithFloat: [self.balance floatValue] * [str floatValue]];
+
     self.lastUpdate = [NSDate date];
     
     

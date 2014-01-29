@@ -1,0 +1,119 @@
+
+For version 1.0 release to the wild:
+
+[ ] Fix issue with wallet QR code instructions not displaying
+[ ] Background wallet update
+[ ] Review license for dogecoin images
+[ ] Error handling when wallet update fails
+[ ] Error handling when mining pool update fails
+[ ] Backgroud mining pool update
+[ ] Make the mining pool screen more attractive
+[ ] Get working on iPhone 4/4S 3.5" display
+[X] display DOGE => USD
+[X] Add mining pool "last updated" string
+
+
+
+For "Pro" version 1.0:
+
+[ ] Support multiple wallet addresses
+[ ] Display wallet Summary
+[ ] Support multiple mining pools
+[ ] Display mining pool summary
+[ ] Profit calculator (ask for power usage and cost of power, use current hashrate BY DEFAULT, but let user change it)
+[ ] Display DOGE => BTC
+
+
+For version 1.1:
+[ ] Display "dashboard" - with current balance, current hashrate, current mining pool balance
+[ ] Support multipool.us as a mining pool type
+
+For "Pro" version 1.1:
+[ ] Alerts when pool hashrate drops
+[ ] Alerts when new block is discovered, OR when balance increments a certain amount
+[ ] Support multiple workers per pool
+
+
+For version 1.2:
+[ ] Graphs for BTC/USD values
+[ ] Multiple sources for BTC/USD conversions (for comparison and fallback)
+
+For "Pro" version 1.2:
+[ ] Alerts when pool workers hashrate drops
+
+======
+for autofill power usage:
+
+Grab price from here, by state:
+Grab state from IP? from GPS?
+
+from http://www.eia.gov/electricity/monthly/epm_table_grapher.cfm?t=epmt_5_6_a
+
+
+Table 5.6.A. Average Retail Price of Electricity to Ultimate Customers by End-Use Sector,
+by State, November 2013 and 2012 (Cents per Kilowatthour)
+ 	Residential	Commercial	Industrial	Transportation	All Sectors
+Census Division
+and StateGraph	November 2013	November 2012	November 2013	November 2012	November 2013	November 2012	November 2013	November 2012	November 2013	November 2012
+New EnglandGraph	 16.54	 15.36	 14.02	 13.45	 11.64	 11.59	 12.97	 6.86	 14.44	 13.70
+ConnecticutGraph	 18.21	 17.82	 14.74	 14.86	 12.90	 12.63	 11.17	 8.98	 15.98	 15.78
+MaineGraph	 14.39	 14.83	 11.70	 11.57	 7.88	 8.46	--	--	 11.70	 11.97
+MassachusettsGraph	 16.05	 13.77	 14.23	 13.32	 12.36	 12.15	 13.77	 5.29	 14.31	 13.05
+New HampshireGraph	 16.43	 15.90	 13.45	 13.40	 11.21	 12.09	--	--	 14.21	 14.17
+Rhode IslandGraph	 15.97	 13.07	 13.48	 11.23	 11.80	 10.46	 13.67	 12.76	 14.25	 11.86
+VermontGraph	 17.54	 19.26	 14.82	 13.75	 10.26	 9.35	--	--	 14.65	 14.78
+Middle AtlanticGraph	 15.50	 15.00	 12.09	 12.47	 6.73	 7.38	 11.92	 13.15	 12.16	 12.34
+New JerseyGraph	 15.33	 15.24	 12.29	 12.31	 10.13	 10.54	 11.56	 10.73	 13.13	 13.22
+New YorkGraph	 18.48	 17.44	 13.65	 14.25	 4.55	 6.18	 13.10	 14.68	 14.27	 14.46
+PennsylvaniaGraph	 12.97	 12.60	 9.17	 9.55	 6.81	 7.28	 7.39	 8.64	 9.69	 9.85
+East North CentralGraph	 12.04	 11.99	 9.43	 9.42	 6.47	 6.48	 5.37	 6.03	 9.23	 9.17
+IllinoisGraph	 10.21	 11.35	 7.73	 7.88	 5.60	 5.62	 4.93	 5.80	 7.83	 8.17
+IndianaGraph	 11.04	 10.45	 9.60	 9.05	 6.65	 6.27	 11.38	 9.65	 8.67	 8.16
+MichiganGraph	 14.59	 13.98	 10.89	 10.85	 7.33	 7.48	 9.89	 8.89	 10.94	 10.78
+OhioGraph	 11.88	 11.67	 9.35	 9.59	 6.05	 6.47	 6.84	 7.33	 9.14	 9.20
+WisconsinGraph	 13.61	 13.16	 10.72	 10.46	 7.36	 7.24	--	--	 10.50	 10.21
+West North CentralGraph	 10.53	 10.01	 8.46	 8.07	 6.22	 5.90	 8.40	 7.19	 8.43	 7.99
+IowaGraph	 10.88	 10.34	 8.05	 7.51	 5.34	 4.85	--	--	 7.64	 7.10
+KansasGraph	 11.40	 10.96	 9.21	 9.01	 6.80	 6.90	--	--	 9.14	 8.94
+MinnesotaGraph	 11.64	 11.03	 9.21	 8.66	 6.93	 6.35	 10.19	 8.67	 9.24	 8.62
+MissouriGraph	 9.80	 9.20	 7.84	 7.40	 5.43	 5.32	 6.80	 5.97	 8.09	 7.61
+NebraskaGraph	 9.93	 9.43	 8.29	 7.98	 6.49	 6.25	--	--	 8.08	 7.72
+North DakotaGraph	 8.85	 8.61	 8.08	 8.00	 7.13	 6.54	--	--	 8.02	 7.71
+South DakotaGraph	 10.06	 10.01	 8.37	 7.95	 6.77	 6.53	--	--	 8.67	 8.39
+South AtlanticGraph	 11.30	 11.20	 9.46	 9.35	 6.33	 6.46	 8.75	 8.64	 9.61	 9.57
+DelawareGraph	 13.41	 13.63	 10.36	 10.48	 8.37	 8.38	--	--	 11.09	 11.13
+District of ColumbiaGraph	 12.88	 12.21	 12.16	 11.63	 4.63	 6.64	 9.68	 9.39	 12.04	 11.55
+FloridaGraph	 11.51	 11.82	 9.67	 10.10	 7.63	 8.08	 8.96	 8.90	 10.40	 10.75
+GeorgiaGraph	 10.48	 10.28	 9.87	 9.47	 5.77	 5.73	 7.41	 6.68	 9.04	 8.83
+MarylandGraph	 13.15	 12.40	 10.76	 9.79	 8.05	 8.52	 8.57	 8.67	 11.62	 10.88
+North CarolinaGraph	 10.93	 10.53	 8.60	 8.36	 6.05	 6.07	 8.28	 8.02	 8.92	 8.76
+South CarolinaGraph	 11.85	 11.67	 10.02	 9.95	 5.95	 6.08	--	--	 8.97	 9.07
+VirginiaGraph	 10.99	 10.71	 8.20	 7.89	 6.74	 6.67	 8.66	 8.55	 9.07	 8.81
+West VirginiaGraph	 9.36	 9.85	 8.21	 8.59	 6.09	 6.48	 8.37	 9.11	 7.81	 8.26
+East South CentralGraph	 10.31	 10.35	 9.81	 9.95	 5.52	 5.75	 11.73	 11.36	 8.42	 8.35
+AlabamaGraph	 10.75	 11.04	 10.49	 10.62	 5.38	 5.81	--	--	 8.42	 8.76
+KentuckyGraph	 9.60	 9.41	 8.77	 8.79	 5.42	 5.14	--	--	 7.61	 7.06
+MississippiGraph	 11.32	 10.65	 10.34	 9.45	 6.11	 5.82	--	--	 9.07	 8.44
+TennesseeGraph	 10.01	 10.33	 9.74	 10.45	 5.42	 6.64	 11.73	 11.36	 8.78	 9.19
+West South CentralGraph	 10.90	 10.40	 7.91	 7.83	 5.67	 5.28	 8.08	 10.36	 8.16	 7.84
+ArkansasGraph	 9.67	 9.46	 7.78	 7.73	 5.58	 5.68	NM	 11.15	 7.52	 7.48
+LouisianaGraph	 9.15	 8.39	 8.76	 7.92	 5.74	 4.74	 8.50	 9.18	 7.68	 6.79
+OklahomaGraph	 9.61	 9.57	 7.04	 6.88	 5.02	 4.70	--	--	 7.27	 7.04
+TexasGraph	 11.68	 11.11	 7.90	 7.96	 5.77	 5.49	 7.66	 10.51	 8.51	 8.27
+MountainGraph	 11.02	 10.61	 9.23	 8.77	 5.98	 5.66	 10.67	 9.69	 8.71	 8.33
+ArizonaGraph	 11.06	 10.73	 9.29	 8.94	 6.11	 6.15	--	--	 9.27	 9.04
+ColoradoGraph	 11.65	 11.38	 9.96	 9.53	 7.49	 7.00	 10.48	 9.99	 9.78	 9.37
+IdahoGraph	 9.54	 8.67	 7.54	 6.84	 5.33	 4.69	--	--	 7.73	 6.87
+MontanaGraph	 10.27	 10.04	 9.61	 9.31	 5.27	 5.23	--	--	 8.57	 8.30
+NevadaGraph	 13.07	 12.45	 9.71	 8.78	 4.78	 4.42	 8.21	 7.65	 8.17	 7.57
+New MexicoGraph	 11.09	 10.69	 9.48	 8.93	 6.06	 5.59	--	--	 8.73	 8.24
+UtahGraph	 10.10	 9.70	 8.10	 7.72	 5.36	 5.24	 11.27	 9.66	 7.64	 7.47
+WyomingGraph	 10.24	 10.01	 8.76	 8.50	 6.41	 6.00	--	--	 7.54	 7.25
+Pacific ContiguousGraph	 13.50	 12.51	 12.80	 11.41	 8.45	 7.75	 7.37	 6.85	 12.02	 10.95
+CaliforniaGraph	 16.80	 14.88	 14.67	 12.66	 11.40	 10.24	 7.31	 6.78	 14.66	 12.88
+OregonGraph	 10.00	 9.82	 8.52	 8.47	 6.28	 5.81	 9.05	 8.23	 8.58	 8.37
+WashingtonGraph	 8.70	 8.61	 7.95	 7.87	 4.49	 4.24	 8.52	 9.54	 7.18	 7.06
+Pacific NoncontiguousGraph	 28.57	 27.44	 26.22	 24.80	 26.59	 25.98	--	--	 27.04	 25.98
+AlaskaGraph	 18.33	 17.10	 16.49	 14.70	 15.98	 15.03	--	--	 17.02	 15.62
+HawaiiGraph	 37.24	 36.81	 34.61	 34.15	 30.52	 30.27	--	--	 33.77	 33.41
+U.S. TotalGraph	 12.09	 11.75	 10.12	 9.89	 6.59	 6.50	 10.40	 10.41	 9.83	 9.58

@@ -60,12 +60,15 @@
     [self doUserBalanceAPICall];
     [self doPoolStatusAPICall];
     
-    
+    self.lastUpdate = [NSDate date];
+
     // TODO: this should actually happen when apiKey and apiURL get set
     [self saveDataToUserDefaults ];
 }
 
-/*  ok, since this is what multipool.us looksl like:
+/*  ok, since this is what multipool.us looks like:
+ 
+ for DCM VERSION 2.0 !!!!
 {
     "currency": {
  

@@ -10,6 +10,8 @@
 
 @interface DCMMiningPool : NSObject
 
+@property NSDate* lastUpdate;
+
 @property NSString *apiURL;
 @property NSString *apiKey;
 

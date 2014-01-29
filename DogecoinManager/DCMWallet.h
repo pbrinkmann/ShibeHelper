@@ -12,6 +12,8 @@
 
 @property NSString* address;
 @property NSNumber* balance;
+@property NSNumber* balanceUSD;
+
 @property NSDate* lastUpdate;
 
 

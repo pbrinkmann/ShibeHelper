@@ -1,16 +1,32 @@
 
 For version 1.0 release to the wild:
 
-[ ] Fix issue with wallet QR code instructions not displaying
-[ ] Background wallet update
+Bugs
+====
+
+[ ] On cancel from wallet address edit, don't do update
+    - Ok, this is caused by the fact that update or not depends on if there's a value present.
+      This needs to be updated to check for cancel button pressed
+[ ] Edit mining pool doesn't fill in pool URL and key, if previously scanned
+[ ] Edit mining pool will probably also do update on cancel, once pre-fill previous values works
+
+
+New Features/Not Bugs
+============
+[ ] Refresh indicator for wallet update
 [ ] Review license for dogecoin images
 [ ] Error handling when wallet update fails
 [ ] Error handling when mining pool update fails
-[ ] Backgroud mining pool update
+[ ] Refresh indicator for mining pool update
 [ ] Make the mining pool screen more attractive
 [ ] Get working on iPhone 4/4S 3.5" display
+[ ] Replace pool hashrate with last block info - finder, time, amount
+
+DONE!
 [X] display DOGE => USD
 [X] Add mining pool "last updated" string
+[X] Fix issue with wallet QR code instructions not displaying
+[X] Wallet and mining pool icons are pixellated :(
 
 
 
@@ -20,11 +36,13 @@ For "Pro" version 1.0:
 [ ] Display wallet Summary
 [ ] Support multiple mining pools
 [ ] Display mining pool summary
-[ ] Profit calculator (ask for power usage and cost of power, use current hashrate BY DEFAULT, but let user change it)
+[ ] Profit calculator (ask for power usage, SEE BELOW for cost of power, 
+    use current pool hashrate BY DEFAULT, but let user change it)
 [ ] Display DOGE => BTC
 
 
 For version 1.1:
+[ ] display delta amount when updating balances.  Fade in/out a green [+3500] or red [-1221] to show difference to last update
 [ ] Display "dashboard" - with current balance, current hashrate, current mining pool balance
 [ ] Support multipool.us as a mining pool type
 
@@ -40,6 +58,7 @@ For version 1.2:
 
 For "Pro" version 1.2:
 [ ] Alerts when pool workers hashrate drops
+[ ] Support multiple currencies as default display (not just $USD)
 
 ======
 for autofill power usage:

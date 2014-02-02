@@ -141,12 +141,12 @@
                                     <action selector="startScan:" destination="dKz-tl-rkw" eventType="touchUpInside" id="Efh-21-EYH"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="bottom" misplaced="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="You can generate a QR code on your computer to scan by entering your wallet address at:  http://dogechain.info/search" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Yfy-ay-6sl">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="bottom" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="You can generate a scannable QR code on your computer by entering your wallet address at:  http://dogechain.info/search" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Yfy-ay-6sl">
                                 <rect key="frame" x="40" y="386" width="240" height="122"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="122" id="g4J-9O-sdN"/>
+                                    <constraint firstAttribute="height" constant="122" id="iBl-KT-weX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -156,12 +156,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="g8f-oU-Ea7" firstAttribute="centerX" secondItem="RFh-tN-Iyg" secondAttribute="centerX" id="35a-l7-Isd"/>
+                            <constraint firstItem="Yfy-ay-6sl" firstAttribute="centerX" secondItem="g8f-oU-Ea7" secondAttribute="centerX" id="7M8-uY-6C0"/>
                             <constraint firstItem="g8f-oU-Ea7" firstAttribute="top" secondItem="RFh-tN-Iyg" secondAttribute="bottom" constant="20" id="8qg-DG-xO2"/>
-                            <constraint firstItem="Yfy-ay-6sl" firstAttribute="centerX" secondItem="g8f-oU-Ea7" secondAttribute="centerX" id="AGd-gx-w5Z"/>
                             <constraint firstItem="RFh-tN-Iyg" firstAttribute="centerY" secondItem="edp-Nc-LXT" secondAttribute="centerY" id="BsM-Ef-BLE"/>
-                            <constraint firstItem="Yfy-ay-6sl" firstAttribute="top" secondItem="g8f-oU-Ea7" secondAttribute="bottom" constant="37" id="TvP-8L-QtV"/>
-                            <constraint firstAttribute="centerY" secondItem="Yfy-ay-6sl" secondAttribute="centerY" constant="-163" id="ZcV-IP-nxd"/>
+                            <constraint firstItem="Yfy-ay-6sl" firstAttribute="top" secondItem="g8f-oU-Ea7" secondAttribute="bottom" constant="37" id="ScK-Bb-GFv"/>
                             <constraint firstItem="g8f-oU-Ea7" firstAttribute="centerX" secondItem="edp-Nc-LXT" secondAttribute="centerX" id="qdH-73-aLW"/>
+                            <constraint firstItem="Yfy-ay-6sl" firstAttribute="leading" secondItem="edp-Nc-LXT" secondAttribute="leading" constant="40" id="vix-3E-y8S"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Wallet Address" id="PBZ-Cd-R4s">
@@ -401,7 +401,7 @@
         <scene sceneID="2PD-Kc-igJ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YQp-fx-XrO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Wallet" image="wallet and coins.png" id="u1e-5L-l1D"/>
+                    <tabBarItem key="tabBarItem" title="Wallet" image="walletD.png" id="u1e-5L-l1D"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ypX-di-kck">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -438,7 +438,7 @@
         <scene sceneID="j2h-uI-url">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="j5l-Tu-gDR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Mining Pool" image="mining icon.png" id="Z7h-1E-pvt"/>
+                    <tabBarItem key="tabBarItem" title="Mining Pool" image="miningD.png" id="Z7h-1E-pvt"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZGo-tA-xpq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -474,8 +474,8 @@
     </scenes>
     <resources>
         <image name="doge.png" width="600" height="600"/>
-        <image name="mining icon.png" width="30" height="30"/>
-        <image name="wallet and coins.png" width="30" height="30"/>
+        <image name="miningD.png" width="20" height="23"/>
+        <image name="walletD.png" width="25" height="26"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

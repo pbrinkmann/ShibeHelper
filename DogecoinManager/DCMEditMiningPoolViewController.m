@@ -31,7 +31,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+
+    if( self.miningPoolAPIURL  != nil ) {
+        self.miningPoolAPIURLTextField.text = self.miningPoolAPIURL;
+        self.miningPoolAPIKeyTextField.text = self.miningPoolAPIKey;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,6 +43,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void) updateDefaultMiningPoolAdress:(NSString*)defaultAPIUrl andKey:(NSString*)defaultAPIKey
+{
+    if( defaultAPIUrl != nil) {
+        self.miningPoolAPIURL = defaultAPIUrl;
+        self.miningPoolAPIKey = defaultAPIKey;
+    }
+}
+
 
 - (IBAction)scanMiningPoolAPIKeyQRCode:(id)sender
 {
@@ -65,7 +78,12 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if(sender != self.doneButton ) return;
+    if(sender != self.doneButton ) {
+        self.miningPoolAPIURL = nil;
+        self.miningPoolAPIKey = nil;
+        
+        return;
+    }
         
     if(self.miningPoolAPIURLTextField.text.length > 0) {
         self.miningPoolAPIURL = self.miningPoolAPIURLTextField.text;

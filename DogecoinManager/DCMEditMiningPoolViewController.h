@@ -13,4 +13,7 @@
 @property NSString* miningPoolAPIURL;
 @property NSString* miningPoolAPIKey;
 
+-(void) updateDefaultMiningPoolAdress:(NSString*)defaultAPIUrl andKey:(NSString*)defaultAPIKey;
+
+
 @end

@@ -4,34 +4,35 @@ For version 1.0 release to the wild:
 Bugs
 ====
 
-[ ] On cancel from wallet address edit, don't do update
-    - Ok, this is caused by the fact that update or not depends on if there's a value present.
-      This needs to be updated to check for cancel button pressed
-[ ] Edit mining pool doesn't fill in pool URL and key, if previously scanned
-[ ] Edit mining pool will probably also do update on cancel, once pre-fill previous values works
+[ ] Crash on initial load, if you touch anything (I think)
+
 
 
 New Features/Not Bugs
 ============
 [ ] Refresh indicator for wallet update
-[ ] Review license for dogecoin images
+[ ] Refresh indicator for mining pool update
 [ ] Error handling when wallet update fails
 [ ] Error handling when mining pool update fails
-[ ] Refresh indicator for mining pool update
 [ ] Make the mining pool screen more attractive
 [ ] Get working on iPhone 4/4S 3.5" display
 [ ] Replace pool hashrate with last block info - finder, time, amount
+
 
 DONE!
 [X] display DOGE => USD
 [X] Add mining pool "last updated" string
 [X] Fix issue with wallet QR code instructions not displaying
 [X] Wallet and mining pool icons are pixellated :(
-
+[X] On cancel from wallet address edit, don't do update
+[X] Edit mining pool doesn't fill in pool URL and key, if previously scanned
+[X] Edit mining pool will probably also do update on cancel, once pre-fill previous values works
+[X] Review license for dogecoin images - license on github says do whatever you want :)
 
 
 For "Pro" version 1.0:
 
+[ ] Allow naming wallet addresses
 [ ] Support multiple wallet addresses
 [ ] Display wallet Summary
 [ ] Support multiple mining pools
@@ -45,6 +46,7 @@ For version 1.1:
 [ ] display delta amount when updating balances.  Fade in/out a green [+3500] or red [-1221] to show difference to last update
 [ ] Display "dashboard" - with current balance, current hashrate, current mining pool balance
 [ ] Support multipool.us as a mining pool type
+[ ] Add "Welcome" screen or tutorial tooltips that point to the edit buttons for first timers (https://www.cocoacontrols.com/controls/myintroductionview)
 
 For "Pro" version 1.1:
 [ ] Alerts when pool hashrate drops

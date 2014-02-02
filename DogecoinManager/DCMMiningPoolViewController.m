@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *secondsSinceLastBlockLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *lastUpdatedLabel;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 
 @end
 
@@ -121,6 +122,15 @@
                                                                                 blockTimePercent
                                                   ];
 
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if(sender != self.editButton ) return;
+    
+    DCMEditMiningPoolViewController *destination = (DCMEditMiningPoolViewController*)[[segue destinationViewController] visibleViewController];
+    
+    [destination updateDefaultMiningPoolAdress:self.miningPool.apiURL andKey:self.miningPool.apiKey];
 }
 
 -(NSString*)getFormatedDateStringForSeconds:(int)total_seconds

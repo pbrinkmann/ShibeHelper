@@ -54,10 +54,6 @@
     }
 }
 
-//-(void)setWalletAddress:(NSString *)walletAddress
-//{
-//    self.walletAddress = walletAddress;
-//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -67,7 +63,10 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if(sender != self.doneButton ) return;
+    if(sender != self.doneButton ) {
+        self.walletAddress = nil;
+        return;
+    }
     
     if(self.walletAddressTextField.text.length > 0) {
         NSLog(@"setting wallet address");

@@ -365,6 +365,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="confirmedBalanceLabel" destination="VmM-OM-5zk" id="Qn6-1N-dDw"/>
+                        <outlet property="editButton" destination="Cxb-OT-vIx" id="0JE-wP-SWC"/>
                         <outlet property="hashrateLabel" destination="IxS-F0-KbD" id="h38-ra-9l5"/>
                         <outlet property="lastUpdatedLabel" destination="Bv2-BW-UXC" id="re5-cp-Cet"/>
                         <outlet property="poolHashrateLabel" destination="K6w-mJ-4G8" id="UrW-VW-eOU"/>

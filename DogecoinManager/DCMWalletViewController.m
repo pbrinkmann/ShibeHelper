@@ -70,6 +70,9 @@
  }
 
 -(void)updateWalletBalance {
+    
+    if( self.wallet.address == nil ) return;
+    
     HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
     [HUD showInView:self.view];
     self.editWalletAddressButton.enabled = NO;
@@ -110,10 +113,6 @@
 }
 
 
--(IBAction)refreshBalance:(id)sender
-{
-    [self updateWalletBalance];
-}
 
 -(void)lastUpdatedTimerFired:(NSTimer *) theTimer
 {

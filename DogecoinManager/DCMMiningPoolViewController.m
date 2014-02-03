@@ -81,6 +81,8 @@
 
 -(void)updateMiningPoolInfo
 {
+    if (self.miningPool.apiURL == nil ) return;
+
     HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
     [HUD showInView:self.view];
     self.editMiningPoolButton.enabled = NO;

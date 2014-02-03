@@ -4,6 +4,7 @@ For version 1.0 release to the wild:
 Bugs
 ====
 
+[ ] On first run, fields show a bunch of nulls and NaNs
 [ ] Crash on initial load, if you touch anything (I think)
 
 

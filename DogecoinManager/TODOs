@@ -1,21 +1,24 @@
 
+======================================================================
 For version 1.0 release to the wild:
+======================================================================
 
 Bugs
 ====
-
-[ ] On first run, fields show a bunch of nulls and NaNs
-[ ] Crash on initial load, if you touch anything (I think)
+none, yay!
 
 
-
-New Features/Not Bugs
-============
-[ ] Error handling when wallet update fails
+New Features/Enhancements
+=========================
+[ ] Wallet address validation (# characters, starts with D)
 [ ] Error handling when mining pool update fails
 [ ] Replace pool hashrate with last block info - finder, time, amount
 [ ] Make the mining pool screen more attractive
 [ ] Get working on iPhone 4/4S 3.5" display (or make it a iPhone 5+ app if possible?)
+
+Unverified Bugs
+===============
+[ ] Sometimes crashes on initial load
 
 
 DONE!
@@ -29,9 +32,17 @@ DONE!
 [X] Review license for dogecoin images - license on github says do whatever you want :)
 [X] Refresh indicator for wallet update
 [X] Refresh indicator for mining pool update
+[X] On first run, fields show a bunch of nulls and NaNs
+[X] Error handling when wallet update fails
 
+
+
+======================================================================
 For "Pro" version 1.0:
+======================================================================
 
+New Features/Enhancements
+=========================
 [ ] Allow naming wallet addresses
 [ ] Support multiple wallet addresses
 [ ] Display wallet Summary
@@ -42,26 +53,49 @@ For "Pro" version 1.0:
 [ ] Display DOGE => BTC
 
 
+======================================================================
 For version 1.1:
+======================================================================
+
+New Features/Enhancements
+=========================
 [ ] on mining pool screen, if 0 invalid blocks, don't show the "0 (0.0%)" part
 [ ] display delta amount when updating balances.  Fade in/out a green [+3500] or red [-1221] to show difference to last update
 [ ] Display "dashboard" - with current balance, current hashrate, current mining pool balance
 [ ] Support multipool.us as a mining pool type
 [ ] Add "Welcome" screen or tutorial tooltips that point to the edit buttons for first timers (https://www.cocoacontrols.com/controls/myintroductionview)
 
+======================================================================
 For "Pro" version 1.1:
+======================================================================
+
+New Features/Enhancements
+=========================
 [ ] Alerts when pool hashrate drops
 [ ] Alerts when new block is discovered, OR when balance increments a certain amount
 [ ] Support multiple workers per pool
 
-
+======================================================================
 For version 1.2:
+======================================================================
+
+New Features/Enhancements
+=========================
 [ ] Graphs for BTC/USD values
 [ ] Multiple sources for BTC/USD conversions (for comparison and fallback)
 
+======================================================================
 For "Pro" version 1.2:
+======================================================================
+
+New Features/Enhancements
+=========================
 [ ] Alerts when pool workers hashrate drops
 [ ] Support multiple currencies as default display (not just $USD)
+
+
+
+
 
 ======
 for autofill power usage:

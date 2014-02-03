@@ -71,32 +71,76 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(void)updateBalance
+-(BOOL)updateBalance
 {
     if(self.address == nil) {
         NSLog(@"No address found, wallet skipping update");
-        return;
+        return FALSE;
     }
-    
+    //
+    // Fetch the wallet balance
+    //
     NSString* serverAddress = [NSString stringWithFormat: @"http://dogechain.info/chain/Dogecoin/q/addressbalance/%@", self.address];
     
-    NSString* str = [NSString stringWithContentsOfURL:[NSURL URLWithString:serverAddress]];
+    NSError *error;
+    NSString *str = [NSString stringWithContentsOfURL:[NSURL URLWithString:serverAddress] encoding:NSUTF8StringEncoding error:&error];
+    
+    if (str == nil) {
+        NSLog(@"Failed to fetch wallet balance: %@", [error localizedDescription]);
+        return FALSE;
+    }
+    
+    float balance;
+    NSScanner* scanner = [NSScanner scannerWithString:str];
+    
+    if( ![scanner scanFloat:&balance] ) {
+        if( [str hasPrefix:@"ERROR"] ) {
+            NSLog(@"Unable to retrieve balance for wallet: %@", str);
+        }
+        else {
+            NSLog(@"Unknown error when parsing string for float: %@", str);
+        }
+        return FALSE;
+    }
+    
+
     NSLog(@"feteched wallet balance of %@", str);
     
-    self.balance = [NSNumber numberWithFloat:[str floatValue]];
+  
     
-    str = [NSString stringWithContentsOfURL: [NSURL URLWithString:@"https://www.dogeapi.com/wow/?a=get_current_price"]];
+    //
+    // Fetch the DOGE => USD conversion rate
+    //
+    str = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"https://www.dogeapi.com/wow/?a=get_current_price"] encoding:NSUTF8StringEncoding error:&error];
     
     // strip quotes, which suddenly appeared one day
     str = [str stringByReplacingOccurrencesOfString:@"\"" withString:@""];
     
+    float doge_to_usd;
+    scanner = [NSScanner scannerWithString:str];
+    
+    if( ![scanner scanFloat:&doge_to_usd] ) {
+
+        NSLog(@"Unknown error when parsing string for float: %@", str);
+
+        return FALSE;
+    }
+
+    
     NSLog(@"feteched usd conversion rate of %@", str);
-    self.balanceUSD = [NSNumber numberWithFloat: [self.balance floatValue] * [str floatValue]];
+    
+    //
+    // Update our fields with the fetched data
+    //
+    self.balance    = [NSNumber numberWithFloat:balance];
+    self.balanceUSD = [NSNumber numberWithFloat: balance * doge_to_usd];
 
     self.lastUpdate = [NSDate date];
     
     
     [self saveDataToUserDefaults];
+    
+    return TRUE;
 }
 
 @end

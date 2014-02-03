@@ -42,6 +42,26 @@
     }
     
 }
+- (IBAction)walletAddressChanged:(id)sender {
+    
+    NSString *newWalletAddress =self.walletAddressTextField.text;
+    NSLog(@"wallet address now: %@", newWalletAddress);
+    
+    if ( newWalletAddress.length != 34) {
+        NSLog(@"Address not correct length");
+    }
+    
+    if( ! [newWalletAddress hasPrefix: @"D"] ) {
+        NSLog(@"Address does not start with d");
+    }
+    
+    if( [newWalletAddress uhh  containsOnly: @"123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"])
+    
+        how do I implement this?
+    }
+
+ALSO: todo, make this check disable the "Done" button and display an error msg
+}
 
 -(void)updateDefaultWalletAddress:(NSString*) defaultWalletAddress
 {

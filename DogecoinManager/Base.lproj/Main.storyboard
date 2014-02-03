@@ -42,7 +42,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="refreshBalance:" destination="Qh2-T1-AhA" eventType="touchUpInside" id="vHI-dJ-cQk"/>
+                                    <action selector="refreshWalletBalanceFromTouch:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="OQ6-ha-eWB"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="last updated never" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9AJ-uh-z6B">
@@ -67,19 +67,30 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Last update failed. Check wallet address, or try again later" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="2Vx-3H-v9A">
+                                <rect key="frame" x="20" y="391" width="280" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.054199093339398097" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yTD-1O-f8L" firstAttribute="trailing" secondItem="fe5-Bx-S4H" secondAttribute="trailing" id="0a5-dh-K8n"/>
                             <constraint firstItem="o3J-O1-PFd" firstAttribute="top" secondItem="yTD-1O-f8L" secondAttribute="bottom" constant="8" symbolic="YES" id="1Yh-9Z-XG2"/>
                             <constraint firstItem="O71-MT-qh9" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leading" constant="40" id="1gs-Zt-CDD"/>
+                            <constraint firstItem="2Vx-3H-v9A" firstAttribute="top" secondItem="9AJ-uh-z6B" secondAttribute="bottom" constant="21" id="1iU-9B-p3X"/>
                             <constraint firstItem="yTD-1O-f8L" firstAttribute="leading" secondItem="GE0-A1-1aD" secondAttribute="leading" id="1k7-rD-Thj"/>
+                            <constraint firstItem="2Vx-3H-v9A" firstAttribute="leading" secondItem="lyP-ze-xSt" secondAttribute="leading" id="20L-mW-f0g"/>
                             <constraint firstItem="lyP-ze-xSt" firstAttribute="trailing" secondItem="9AJ-uh-z6B" secondAttribute="trailing" id="3Le-97-zJZ"/>
                             <constraint firstItem="O71-MT-qh9" firstAttribute="centerX" secondItem="GE0-A1-1aD" secondAttribute="centerX" id="BGh-LN-pZk"/>
                             <constraint firstItem="O71-MT-qh9" firstAttribute="top" secondItem="fe5-Bx-S4H" secondAttribute="bottom" constant="8" symbolic="YES" id="FLA-Md-aNt"/>
                             <constraint firstAttribute="trailing" secondItem="lyP-ze-xSt" secondAttribute="trailing" constant="20" symbolic="YES" id="IxH-lp-NfW"/>
                             <constraint firstItem="lyP-ze-xSt" firstAttribute="leading" secondItem="9AJ-uh-z6B" secondAttribute="leading" id="Nw6-CG-qEn"/>
                             <constraint firstItem="O71-MT-qh9" firstAttribute="top" secondItem="GE0-A1-1aD" secondAttribute="bottom" constant="27" id="O5M-0C-yc5"/>
+                            <constraint firstItem="2Vx-3H-v9A" firstAttribute="trailing" secondItem="lyP-ze-xSt" secondAttribute="trailing" id="P7A-nk-JdF"/>
                             <constraint firstItem="fe5-Bx-S4H" firstAttribute="top" secondItem="3eu-KB-KCl" secondAttribute="bottom" constant="69" id="SKl-tV-639"/>
                             <constraint firstItem="yTD-1O-f8L" firstAttribute="trailing" secondItem="o3J-O1-PFd" secondAttribute="trailing" id="Tjk-o6-aVq"/>
                             <constraint firstItem="yTD-1O-f8L" firstAttribute="leading" secondItem="fe5-Bx-S4H" secondAttribute="leading" id="XMz-dR-lPr"/>
@@ -108,6 +119,7 @@
                         <outlet property="editWalletAddressButton" destination="CoR-i8-XRa" id="5kA-3k-32u"/>
                         <outlet property="lastWalletUpdateLabel" destination="9AJ-uh-z6B" id="v5O-wP-izV"/>
                         <outlet property="walletAddressTextfield" destination="o3J-O1-PFd" id="LwU-T9-3qq"/>
+                        <outlet property="walletUpdateFailedLabel" destination="2Vx-3H-v9A" id="sAD-OA-ngK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
@@ -131,6 +143,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <connections>
+                                    <action selector="walletAddressChanged:" destination="dKz-tl-rkw" eventType="valueChanged" id="YzK-lW-Z8X"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8f-oU-Ea7">
                                 <rect key="frame" x="105" y="319" width="111" height="30"/>

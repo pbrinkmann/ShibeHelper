@@ -18,9 +18,11 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editWalletAddressButton;
 @property (weak, nonatomic) IBOutlet UITextField *walletAddressTextfield;
 
+// used to display error messages when wallet update failed
+@property (weak, nonatomic) IBOutlet UILabel *walletUpdateFailedLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *balance;
 @property (weak, nonatomic) IBOutlet UILabel *balanceUSDLabel;
-
 
 @end
 
@@ -31,6 +33,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    self.walletUpdateFailedLabel.hidden = YES;
+
     self.wallet = [[DCMWallet alloc] init];
     
     if (self.wallet.address != nil) {
@@ -69,25 +73,43 @@
     }
  }
 
+-(IBAction)refreshWalletBalanceFromTouch:(id)sender
+{
+   [self updateWalletBalance];
+}
+
 -(void)updateWalletBalance {
     
-    if( self.wallet.address == nil ) return;
+    if( self.wallet.address == nil ) {
+        NSLog(@"controller skipping wallet update - no addres");
+        return;
+    }
     
     HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
     [HUD showInView:self.view];
     self.editWalletAddressButton.enabled = NO;
     
+    self.walletUpdateFailedLabel.hidden = YES;
+    
     dispatch_queue_t myQueue = dispatch_queue_create("Wallet Update Queue",NULL);
     dispatch_async(myQueue, ^{
 
         // synchronous update
-        [self.wallet updateBalance];
+        BOOL success = [self.wallet updateBalance];
         
         // must do UI updates on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             
             [HUD hide];
             self.editWalletAddressButton.enabled = YES;
+            
+            if (success) {
+                self.walletUpdateFailedLabel.hidden = YES;
+            }
+            else {
+                self.walletUpdateFailedLabel.hidden = NO;
+                return;
+            }
 
             
             NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];

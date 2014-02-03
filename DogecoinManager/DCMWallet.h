@@ -17,6 +17,6 @@
 @property NSDate* lastUpdate;
 
 
--(void)updateBalance;
+-(BOOL)updateBalance;
 
 @end

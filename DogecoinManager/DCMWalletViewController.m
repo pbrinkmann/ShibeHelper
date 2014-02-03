@@ -11,6 +11,8 @@
 #import "DCMEditWalletAddressViewController.h"
 #import "DCMUtils.h"
 
+#import "HTProgressHUD.h"
+
 @interface DCMWalletViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lastWalletUpdateLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editWalletAddressButton;
@@ -54,12 +56,9 @@
 
 - (IBAction)unwindToWalletBalance:(UIStoryboardSegue *)segue
 {
-    NSLog(@"User left wallet address edit view");
-    
     DCMEditWalletAddressViewController *source = [segue sourceViewController];
     
     if (source.walletAddress != nil) {
-        NSLog(@"Looks like we have a new address");
         self.walletAddressTextfield.text = source.walletAddress;
         self.wallet.address = source.walletAddress;
         
@@ -71,18 +70,35 @@
  }
 
 -(void)updateWalletBalance {
-    [self.wallet updateBalance];
+    HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
+    [HUD showInView:self.view];
+    self.editWalletAddressButton.enabled = NO;
     
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    [numberFormatter setCurrencySymbol:@"Ɖ"];
-    
-    NSString *balance = [numberFormatter stringFromNumber:self.wallet.balance];
-    self.balance.text = balance;
+    dispatch_queue_t myQueue = dispatch_queue_create("Wallet Update Queue",NULL);
+    dispatch_async(myQueue, ^{
 
-    [numberFormatter setCurrencySymbol:@"$"];
-    NSString *balanceUSD = [numberFormatter stringFromNumber:self.wallet.balanceUSD];
-    self.balanceUSDLabel.text = [NSString stringWithFormat:@"(%@)",balanceUSD];
+        // synchronous update
+        [self.wallet updateBalance];
+        
+        // must do UI updates on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [HUD hide];
+            self.editWalletAddressButton.enabled = YES;
+
+            
+            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+            [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+            [numberFormatter setCurrencySymbol:@"Ɖ"];
+            
+            NSString *balance = [numberFormatter stringFromNumber:self.wallet.balance];
+            self.balance.text = balance;
+            
+            [numberFormatter setCurrencySymbol:@"$"];
+            NSString *balanceUSD = [numberFormatter stringFromNumber:self.wallet.balanceUSD];
+            self.balanceUSDLabel.text = [NSString stringWithFormat:@"(%@)",balanceUSD];
+        });
+    });
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

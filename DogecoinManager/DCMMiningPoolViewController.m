@@ -11,6 +11,8 @@
 
 #import "DCMUtils.h"
 
+#import "HTProgressHUD.h"
+
 @interface DCMMiningPoolViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *poolNameLabel;
@@ -24,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *secondsSinceLastBlockLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *lastUpdatedLabel;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editMiningPoolButton;
 
 @end
 
@@ -79,8 +81,33 @@
 
 -(void)updateMiningPoolInfo
 {
-    [self.miningPool updatePoolInfo];
+    HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
+    [HUD showInView:self.view];
+    self.editMiningPoolButton.enabled = NO;
     
+    dispatch_queue_t myQueue = dispatch_queue_create("Mining Pool Update Queue",NULL);
+    dispatch_async(myQueue, ^{
+
+        // synchronous update
+        [self.miningPool updatePoolInfo];
+        
+        // must do UI updates on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [HUD hide];
+            self.editMiningPoolButton.enabled = YES;
+            
+            [self refreshViewLabels];
+        });
+    });
+}
+
+//
+// Recalculates all display items based on the latest self.miningPool data
+//
+-(void)refreshViewLabels
+{
+
     // Do some calculations first
     
     float invalidPercent   = 100.f * self.miningPool.invalidSharesThisRound / (self.miningPool.validSharesThisRound + self.miningPool.invalidSharesThisRound);
@@ -126,7 +153,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if(sender != self.editButton ) return;
+    if(sender != self.editMiningPoolButton ) return;
     
     DCMEditMiningPoolViewController *destination = (DCMEditMiningPoolViewController*)[[segue destinationViewController] visibleViewController];
     

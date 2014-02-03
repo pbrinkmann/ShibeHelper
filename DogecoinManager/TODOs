@@ -10,13 +10,11 @@ Bugs
 
 New Features/Not Bugs
 ============
-[ ] Refresh indicator for wallet update
-[ ] Refresh indicator for mining pool update
 [ ] Error handling when wallet update fails
 [ ] Error handling when mining pool update fails
-[ ] Make the mining pool screen more attractive
-[ ] Get working on iPhone 4/4S 3.5" display
 [ ] Replace pool hashrate with last block info - finder, time, amount
+[ ] Make the mining pool screen more attractive
+[ ] Get working on iPhone 4/4S 3.5" display (or make it a iPhone 5+ app if possible?)
 
 
 DONE!
@@ -28,7 +26,8 @@ DONE!
 [X] Edit mining pool doesn't fill in pool URL and key, if previously scanned
 [X] Edit mining pool will probably also do update on cancel, once pre-fill previous values works
 [X] Review license for dogecoin images - license on github says do whatever you want :)
-
+[X] Refresh indicator for wallet update
+[X] Refresh indicator for mining pool update
 
 For "Pro" version 1.0:
 
@@ -43,6 +42,7 @@ For "Pro" version 1.0:
 
 
 For version 1.1:
+[ ] on mining pool screen, if 0 invalid blocks, don't show the "0 (0.0%)" part
 [ ] display delta amount when updating balances.  Fade in/out a green [+3500] or red [-1221] to show difference to last update
 [ ] Display "dashboard" - with current balance, current hashrate, current mining pool balance
 [ ] Support multipool.us as a mining pool type

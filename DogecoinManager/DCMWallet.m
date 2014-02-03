@@ -17,10 +17,8 @@
 {
     self = [super init];
     if(self) {
- //       self.address = @"DLFXSX5e258mjURmEB7hZDVL5W5bCTerui";
         [self loadDataFromUserDefaults];
     }
-    
  
     return self;
 }
@@ -88,6 +86,10 @@
     self.balance = [NSNumber numberWithFloat:[str floatValue]];
     
     str = [NSString stringWithContentsOfURL: [NSURL URLWithString:@"https://www.dogeapi.com/wow/?a=get_current_price"]];
+    
+    // strip quotes, which suddenly appeared one day
+    str = [str stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+    
     NSLog(@"feteched usd conversion rate of %@", str);
     self.balanceUSD = [NSNumber numberWithFloat: [self.balance floatValue] * [str floatValue]];
 

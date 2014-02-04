@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *walletAddressErrorLabel;
 
 
 @end
@@ -36,31 +37,57 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    self.walletAddressErrorLabel.hidden = YES;
     
     if (self.walletAddress != nil) {
         self.walletAddressTextField.text = self.walletAddress;
     }
-    
 }
-- (IBAction)walletAddressChanged:(id)sender {
-    
+
+- (IBAction)walletAddressChanged:(id)sender
+{
+    [self doWalletAddressValidation];
+}
+
+- (void)doWalletAddressValidation
+{
+
     NSString *newWalletAddress =self.walletAddressTextField.text;
     NSLog(@"wallet address now: %@", newWalletAddress);
     
-    if ( newWalletAddress.length != 34) {
-        NSLog(@"Address not correct length");
-    }
-    
     if( ! [newWalletAddress hasPrefix: @"D"] ) {
-        NSLog(@"Address does not start with d");
-    }
-    
-    if( [newWalletAddress uhh  containsOnly: @"123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"])
-    
-        how do I implement this?
+        self.walletAddressErrorLabel.text =  @"Address does not start with D";
+        self.walletAddressErrorLabel.hidden = NO;
+        self.doneButton.enabled = NO;
+        return;
     }
 
-ALSO: todo, make this check disable the "Done" button and display an error msg
+    
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]+$"
+                                                                           options:0
+                                                                             error:&error];
+    NSUInteger numMatches = [regex numberOfMatchesInString:newWalletAddress
+                                                   options:0
+                                                     range:NSMakeRange(0, [newWalletAddress length])];
+    
+    if (numMatches == 0) {
+        self.walletAddressErrorLabel.text = @"Invalid character in wallet address";
+        self.walletAddressErrorLabel.hidden = NO;
+        self.doneButton.enabled = NO;
+        return;
+    }
+  
+    
+    if ( newWalletAddress.length != 34) {
+        self.walletAddressErrorLabel.text = @"Address not correct length";
+        self.walletAddressErrorLabel.hidden = NO;
+        self.doneButton.enabled = NO;
+        return;
+    }
+
+    self.walletAddressErrorLabel.hidden = YES;
+    self.doneButton.enabled = YES;
 }
 
 -(void)updateDefaultWalletAddress:(NSString*) defaultWalletAddress
@@ -96,7 +123,7 @@ ALSO: todo, make this check disable the "Done" button and display an error msg
 
 -(IBAction)startScan:(id)sender
 {
-    [CDZQRScanningViewController scanIntoTextField:self.walletAddressTextField fromViewController:self];
+    [CDZQRScanningViewController scanIntoTextField:self.walletAddressTextField fromViewController:self withValidationCallback:^{[self doWalletAddressValidation];} ];
 }
 
 

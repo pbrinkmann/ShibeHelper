@@ -144,7 +144,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 <connections>
-                                    <action selector="walletAddressChanged:" destination="dKz-tl-rkw" eventType="valueChanged" id="YzK-lW-Z8X"/>
+                                    <action selector="walletAddressChanged:" destination="dKz-tl-rkw" eventType="editingChanged" id="0nE-e1-f3N"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8f-oU-Ea7">
@@ -171,6 +171,14 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="address error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tps-eO-oG3">
+                                <rect key="frame" x="20" y="302" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.054199093339999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -199,6 +207,7 @@
                     <connections>
                         <outlet property="cancelButton" destination="WER-vd-iNX" id="VJM-55-fLA"/>
                         <outlet property="doneButton" destination="rjf-R6-tYB" id="Ptd-Z0-Moc"/>
+                        <outlet property="walletAddressErrorLabel" destination="tps-eO-oG3" id="i1J-hy-s5K"/>
                         <outlet property="walletAddressTextField" destination="RFh-tN-Iyg" id="YVg-EY-IpZ"/>
                     </connections>
                 </viewController>

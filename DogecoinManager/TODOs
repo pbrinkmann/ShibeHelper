@@ -10,7 +10,6 @@ none, yay!
 
 New Features/Enhancements
 =========================
-[ ] Wallet address validation (# characters, starts with D)
 [ ] Error handling when mining pool update fails
 [ ] Replace pool hashrate with last block info - finder, time, amount
 [ ] Make the mining pool screen more attractive
@@ -34,6 +33,7 @@ DONE!
 [X] Refresh indicator for mining pool update
 [X] On first run, fields show a bunch of nulls and NaNs
 [X] Error handling when wallet update fails
+[X] Wallet address validation (# characters, starts with D, limited character set)
 
 
 
@@ -64,6 +64,7 @@ New Features/Enhancements
 [ ] Display "dashboard" - with current balance, current hashrate, current mining pool balance
 [ ] Support multipool.us as a mining pool type
 [ ] Add "Welcome" screen or tutorial tooltips that point to the edit buttons for first timers (https://www.cocoacontrols.com/controls/myintroductionview)
+[ ] parallel requests for doing the various MPOS API calls.  Even more important with multiple pools
 
 ======================================================================
 For "Pro" version 1.1:
@@ -71,7 +72,7 @@ For "Pro" version 1.1:
 
 New Features/Enhancements
 =========================
-[ ] Alerts when pool hashrate drops
+[ ] Alerts when pool miners hashrate drops - hoping individual miner rates are more reliable than overall "dashboard" rate
 [ ] Alerts when new block is discovered, OR when balance increments a certain amount
 [ ] Support multiple workers per pool
 

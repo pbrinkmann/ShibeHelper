@@ -68,7 +68,7 @@
     if (source.miningPoolAPIKey != nil) {
         NSLog(@"Looks like we have a new mining pool API key: %@", source.miningPoolAPIKey);
         self.miningPool.apiKey = source.miningPoolAPIKey;
-        self.miningPool.apiURL = source.miningPoolAPIURL;
+        self.miningPool.websiteURL = source.miningPoolWebsiteURL;
 
         
         [self updateMiningPoolInfo];
@@ -81,7 +81,7 @@
 
 -(void)updateMiningPoolInfo
 {
-    if (self.miningPool.apiURL == nil ) return;
+    if (self.miningPool.websiteURL == nil ) return;
 
     HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
     [HUD showInView:self.view];
@@ -159,7 +159,7 @@
     
     DCMEditMiningPoolViewController *destination = (DCMEditMiningPoolViewController*)[[segue destinationViewController] visibleViewController];
     
-    [destination updateDefaultMiningPoolAdress:self.miningPool.apiURL andKey:self.miningPool.apiKey];
+    [destination updateDefaultMiningPoolAdress:self.miningPool.websiteURL andKey:self.miningPool.apiKey];
 }
 
 -(NSString*)getFormatedDateStringForSeconds:(int)total_seconds

@@ -10,7 +10,7 @@
 
 @interface DCMEditMiningPoolViewController : UIViewController
 
-@property NSString* miningPoolAPIURL;
+@property NSString* miningPoolWebsiteURL;
 @property NSString* miningPoolAPIKey;
 
 -(void) updateDefaultMiningPoolAdress:(NSString*)defaultAPIUrl andKey:(NSString*)defaultAPIKey;

@@ -11,6 +11,9 @@ none, yay!
 New Features/Enhancements
 =========================
 [ ] Error handling when mining pool update fails
+[ ] Add dismiss keyboard logic from EditMiningPoolViewController to all other text fields
+    Also, maybe dismiss keyboard on return?
+    Also, maybe make this a util function?  Pass in self and all text fields on the view
 [ ] Replace pool hashrate with last block info - finder, time, amount
 [ ] Make the mining pool screen more attractive
 [ ] Get working on iPhone 4/4S 3.5" display (or make it a iPhone 5+ app if possible?)
@@ -48,8 +51,6 @@ New Features/Enhancements
 [ ] Display wallet Summary
 [ ] Support multiple mining pools
 [ ] Display mining pool summary
-[ ] Profit calculator (ask for power usage, SEE BELOW for cost of power, 
-    use current pool hashrate BY DEFAULT, but let user change it)
 [ ] Display DOGE => BTC
 
 
@@ -59,6 +60,8 @@ For version 1.1:
 
 New Features/Enhancements
 =========================
+[ ] Profit calculator (ask for power usage, SEE BELOW for cost of power, 
+    use current pool hashrate BY DEFAULT, but let user change it)
 [ ] on mining pool screen, if 0 invalid blocks, don't show the "0 (0.0%)" part
 [ ] display delta amount when updating balances.  Fade in/out a green [+3500] or red [-1221] to show difference to last update
 [ ] Display "dashboard" - with current balance, current hashrate, current mining pool balance

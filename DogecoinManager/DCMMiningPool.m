@@ -10,7 +10,6 @@
 
 @interface DCMMiningPool ()
 
-// private stuff here I guess
 
 @end
 
@@ -29,11 +28,11 @@
 
 - (void)loadDataFromUserDefaults
 {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"apiURL"])
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"miningpool.websiteURL"])
     {
         
-        self.apiURL = [[NSUserDefaults standardUserDefaults]
-                        objectForKey:@"miningpool.apiURL"];
+        self.websiteURL = [[NSUserDefaults standardUserDefaults]
+                        objectForKey:@"miningpool.websiteURL"];
         
         self.apiKey = [[NSUserDefaults standardUserDefaults]
                         objectForKey:@"miningpool.apiKey"];
@@ -43,7 +42,7 @@
 - (void)saveDataToUserDefaults
 {
     [[NSUserDefaults standardUserDefaults]
-     setObject:self.apiURL forKey:@"miningpool.apiURL"];
+     setObject:self.websiteURL forKey:@"miningpool.websiteURL"];
     
     [[NSUserDefaults standardUserDefaults]
      setObject:self.apiKey forKey:@"miningpool.apiKey"];
@@ -53,7 +52,7 @@
 
 -(void)updatePoolInfo
 {
-    if( self.apiURL == nil || self.apiKey == nil) { NSLog(@"DCMMiningPool skipping initial load of mining pool"); return; }
+    if( self.websiteURL == nil || self.apiKey == nil) { NSLog(@"DCMMiningPool skipping initial load of mining pool"); return; }
     
     
     [self doUserStatusAPICall];
@@ -62,7 +61,7 @@
     
     self.lastUpdate = [NSDate date];
 
-    // TODO: this should actually happen when apiKey and apiURL get set
+    // TODO: this should actually happen when apiKey and websiteURL get set
     [self saveDataToUserDefaults ];
 }
 
@@ -231,8 +230,8 @@
     NSLog(@"Calling api method: %@", apiMethod);
     
     NSURL *url = [NSURL URLWithString:
-                  [NSString stringWithFormat:@"%@&action=%@&api_key=%@",
-                   self.apiURL,
+                  [NSString stringWithFormat:@"%@/index.php?page=api&action=%@&api_key=%@",
+                   self.websiteURL,
                    apiMethod,
                    self.apiKey
                    ]
@@ -253,7 +252,7 @@
         return nil;
     }
     
-    NSLog(@"dict: %@",dict);
+    // NSLog(@"dict: %@",dict);
     
     return dict;
 }

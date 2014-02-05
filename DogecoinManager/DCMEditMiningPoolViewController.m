@@ -11,10 +11,11 @@
 #import "CDZQRScanningViewController.h"
 
 @interface DCMEditMiningPoolViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *miningPoolAPIURLTextField;
+@property (weak, nonatomic) IBOutlet UITextField *miningPoolWebsiteURLTextField;
 @property (weak, nonatomic) IBOutlet UITextField *miningPoolAPIKeyTextField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *mposPoolsOnlyLabel;
 @end
 
 @implementation DCMEditMiningPoolViewController
@@ -32,10 +33,23 @@
 {
     [super viewDidLoad];
 
-    if( self.miningPoolAPIURL  != nil ) {
-        self.miningPoolAPIURLTextField.text = self.miningPoolAPIURL;
+    if( self.miningPoolWebsiteURL  != nil ) {
+        self.miningPoolWebsiteURLTextField.text = self.miningPoolWebsiteURL;
         self.miningPoolAPIKeyTextField.text = self.miningPoolAPIKey;
     }
+    
+    // wire up fake link behavior
+    self.mposPoolsOnlyLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openMPOSPoolList:)];
+    [self.mposPoolsOnlyLabel addGestureRecognizer:gr];
+    gr.numberOfTapsRequired = 1;
+    
+    // dismiss keyboard when tap outside of text field
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,10 +58,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)openMPOSPoolList:(id)sender
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.doktorrf.com/dogecoin/pools.html"]];
+    NSLog(@"touchy touchy");
+}
+
 -(void) updateDefaultMiningPoolAdress:(NSString*)defaultAPIUrl andKey:(NSString*)defaultAPIKey
 {
     if( defaultAPIUrl != nil) {
-        self.miningPoolAPIURL = defaultAPIUrl;
+        self.miningPoolWebsiteURL = defaultAPIUrl;
         self.miningPoolAPIKey = defaultAPIKey;
     }
 }
@@ -71,7 +91,16 @@
     
     NSLog(@"URL: %@\nKEY: %@\nID: %@\n", [resultItems objectAtIndex:1],[resultItems objectAtIndex:2],[resultItems objectAtIndex:3] );
     
-    self.miningPoolAPIURLTextField.text = [resultItems objectAtIndex:1];
+    NSString* url = [resultItems objectAtIndex:1];
+    NSRange indexphpLocation =  [url rangeOfString:@"/index.php"];
+    
+    if(indexphpLocation.location == NSNotFound ) {
+        // TODO: let the user know this
+        NSLog(@"%@ doesn't look like a valid MPOS URL", url);
+        return;
+    }
+    
+    self.miningPoolWebsiteURLTextField.text = [url substringToIndex:indexphpLocation.location];
     self.miningPoolAPIKeyTextField.text = [resultItems objectAtIndex:2];
     
 }
@@ -79,16 +108,35 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if(sender != self.doneButton ) {
-        self.miningPoolAPIURL = nil;
+        self.miningPoolWebsiteURL = nil;
         self.miningPoolAPIKey = nil;
         
         return;
     }
         
-    if(self.miningPoolAPIURLTextField.text.length > 0) {
-        self.miningPoolAPIURL = self.miningPoolAPIURLTextField.text;
+    if(self.miningPoolWebsiteURLTextField.text.length > 0) {
+        self.miningPoolWebsiteURL = self.miningPoolWebsiteURLTextField.text;
         self.miningPoolAPIKey = self.miningPoolAPIKeyTextField.text;
     }
+}
+
+-(IBAction)ensureHTTPOnWebsiteURL:(id)sender
+{
+    if( [self.miningPoolWebsiteURLTextField.text isEqualToString:@"http:/"] ) {
+        self.miningPoolWebsiteURLTextField.text = @"http://";
+    }
+    else if( [self.miningPoolWebsiteURLTextField.text isEqualToString:@"https:/"] ) {
+        self.miningPoolWebsiteURLTextField.text = @"https://";
+    }
+    else if ( ![self.miningPoolWebsiteURLTextField.text hasPrefix:@"http://"] && ![self.miningPoolWebsiteURLTextField.text hasPrefix:@"https://"] ) {
+        self.miningPoolWebsiteURLTextField.text = [NSString stringWithFormat:@"http://%@", self.miningPoolWebsiteURLTextField.text ];
+    }
+}
+
+-(void)dismissKeyboard
+{
+    [self.miningPoolWebsiteURLTextField resignFirstResponder];
+    [self.miningPoolAPIKeyTextField resignFirstResponder];
 }
 
 @end

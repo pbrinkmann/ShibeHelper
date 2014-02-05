@@ -12,7 +12,7 @@
 
 @property NSDate* lastUpdate;
 
-@property NSString *apiURL;
+@property NSString *websiteURL;
 @property NSString *apiKey;
 
 // getuserbalance

@@ -20,20 +20,24 @@
 @property float unconfirmedBalance;
 
 // getpoolstatus
+@property NSString *poolName;
+@property int poolHashrate; // KHPS
 @property int secondsSinceLastBlock;
 @property int estimatedSecondsPerBlock;
+@property int currentDifficulty;
 
 // getuserstatus
 @property int hashrate; // KHPS
 @property int validSharesThisRound;
 @property int invalidSharesThisRound;
 
-// public
-@property NSString *poolName;
-@property int poolHashrate; // KHPS
-@property int poolWorkers;
-@property int poolSharesThisRound;
-// @property NSNumber *dogecoinNetworkHashrateKHPS;
+// getblocksfound
+@property int lastBlockAmount;
+@property int lastBlockDifficulty;
+@property int timeToFindLastBlock; // time seconds to find the block
+@property int expectedSharesUntilLastBlockFound;
+@property int actualSharesToFindLastBlock;
+@property NSString* lastBlockFinder;
 
 -(void)updatePoolInfo;
 

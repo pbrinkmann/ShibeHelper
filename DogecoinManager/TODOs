@@ -10,12 +10,8 @@ none, yay!
 
 New Features/Enhancements
 =========================
-[ ] Error handling when mining pool update fails
-[ ] Add dismiss keyboard logic from EditMiningPoolViewController to all other text fields
-    Also, maybe dismiss keyboard on return?
-    Also, maybe make this a util function?  Pass in self and all text fields on the view
-[ ] Replace pool hashrate with last block info - finder, time, amount
 [ ] Make the mining pool screen more attractive
+[ ] Error handling when mining pool update fails
 [ ] Get working on iPhone 4/4S 3.5" display (or make it a iPhone 5+ app if possible?)
 
 Unverified Bugs
@@ -37,6 +33,8 @@ DONE!
 [X] On first run, fields show a bunch of nulls and NaNs
 [X] Error handling when wallet update fails
 [X] Wallet address validation (# characters, starts with D, limited character set)
+[X] Add dismiss keyboard logic from EditMiningPoolViewController to EditWalletAddress
+[X] Replace pool hashrate with last block info - finder, time, amount
 
 
 

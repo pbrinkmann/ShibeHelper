@@ -174,12 +174,12 @@
 				0414713F188B9F3D00007425 /* DCMMiningPool.m */,
 				0414712C1888DEDD00007425 /* DCMWallet.h */,
 				0414712D1888DEDD00007425 /* DCMWallet.m */,
-				04147100187FBB8200007425 /* DCMAppDelegate.h */,
-				04147101187FBB8200007425 /* DCMAppDelegate.m */,
-				0414710C187FBB8200007425 /* Images.xcassets */,
-				041470F8187FBB8200007425 /* Supporting Files */,
 				040525B2188F933300BE3172 /* DCMUtils.h */,
 				040525B3188F933300BE3172 /* DCMUtils.m */,
+				0414710C187FBB8200007425 /* Images.xcassets */,
+				041470F8187FBB8200007425 /* Supporting Files */,
+				04147100187FBB8200007425 /* DCMAppDelegate.h */,
+				04147101187FBB8200007425 /* DCMAppDelegate.m */,
 			);
 			path = DogecoinManager;
 			sourceTree = "<group>";
@@ -221,16 +221,32 @@
 		0414713D188B655200007425 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				04147141188BDA8B00007425 /* DCMEditMiningPoolViewController.h */,
-				04147142188BDA8B00007425 /* DCMEditMiningPoolViewController.m */,
-				0414712918889AF900007425 /* DCMEditWalletAddressViewController.h */,
-				0414712A18889AF900007425 /* DCMEditWalletAddressViewController.m */,
-				04147109187FBB8200007425 /* DCMMiningPoolViewController.h */,
-				0414710A187FBB8200007425 /* DCMMiningPoolViewController.m */,
-				04147106187FBB8200007425 /* DCMWalletViewController.h */,
-				04147107187FBB8200007425 /* DCMWalletViewController.m */,
+				04AE4B7718A4DECC00F2E0AA /* Mining Pool */,
+				04AE4B7618A4DEBE00F2E0AA /* Wallet */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		04AE4B7618A4DEBE00F2E0AA /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				04147106187FBB8200007425 /* DCMWalletViewController.h */,
+				04147107187FBB8200007425 /* DCMWalletViewController.m */,
+				0414712918889AF900007425 /* DCMEditWalletAddressViewController.h */,
+				0414712A18889AF900007425 /* DCMEditWalletAddressViewController.m */,
+			);
+			name = Wallet;
+			sourceTree = "<group>";
+		};
+		04AE4B7718A4DECC00F2E0AA /* Mining Pool */ = {
+			isa = PBXGroup;
+			children = (
+				04147109187FBB8200007425 /* DCMMiningPoolViewController.h */,
+				0414710A187FBB8200007425 /* DCMMiningPoolViewController.m */,
+				04147141188BDA8B00007425 /* DCMEditMiningPoolViewController.h */,
+				04147142188BDA8B00007425 /* DCMEditMiningPoolViewController.m */,
+			);
+			name = "Mining Pool";
 			sourceTree = "<group>";
 		};
 		04D7B9BF188CCD5700113831 /* thirdparty */ = {

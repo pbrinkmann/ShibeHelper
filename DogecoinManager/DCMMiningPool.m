@@ -58,6 +58,7 @@
     [self doUserStatusAPICall];
     [self doUserBalanceAPICall];
     [self doPoolStatusAPICall];
+    [self doBlocksFoundAPICall];
     
     self.lastUpdate = [NSDate date];
 
@@ -214,6 +215,7 @@
     NSString *poolHashrate              = (NSString*)[data objectForKey:@"hashrate"];
     NSString *estimatedSecondsPerBlock  = (NSString*)[data objectForKey:@"esttime"];
     NSString *secondsSinceLastBlock     = (NSString*)[data objectForKey:@"timesincelast"];
+    NSString *currentDifficulty         = (NSString*)[data objectForKey:@"networkdiff"];
 
     
     
@@ -221,9 +223,87 @@
     self.poolHashrate             = [poolHashrate intValue];
     self.estimatedSecondsPerBlock = [estimatedSecondsPerBlock intValue];
     self.secondsSinceLastBlock    = [secondsSinceLastBlock intValue];
+    self.currentDifficulty        = [currentDifficulty intValue];
 }
 
+-(void)doBlocksFoundAPICall
+{
+    NSMutableDictionary *dict = [self callPoolAPIMethod:@"getblocksfound"];
+    
+    if( dict == nil) {
+        NSLog(@"API call failed, cancelling getblocksfound update");
+        return;
+    }
+    
+    
+    /*
+     getblocksfound: {
+        version: "1.0.0",
+        runtime: 3.115177154541,
+        data: [
+            {
+                id: 706,
+                height: 90158,
+                blockhash: "df582a7f4e96be6740e88a1dfba8eca1591179a8eae7d66618ee94eb73d5fa03",
+                confirmations: 65,
+                amount: 580339,
+                difficulty: 1361.12751474,
+                time: 1391759608,
+                accounted: 1,
+                account_id: 10795,
+                worker_name: "umbra.1",
+                shares: 6563345,
+                share_id: 331141810,
+                finder: "umbra",
+                is_anonymous: 0,
+                estshares: 5575178
+            },
+            {
+                id: 705,
+                height: 90061,
+                blockhash: "a239a63b3432fa6c3911192865f722625e9a9771fc7cdcd65226dd0cde0e8cca",
+                confirmations: 66,
+                amount: 239173.95106218,
+                difficulty: 1361.12751474,
+                time: 1391754198,
+                accounted: 1,
+                account_id: 7091,
+                worker_name: "Nalix.Jerry",
+                shares: 4898159,
+                share_id: 330217963,
+                finder: "Nalix",
+                is_anonymous: 0,
+                estshares: 5575178
+            },
+            ...
+     */
+    
+    NSMutableDictionary *status = [dict objectForKey:@"getblocksfound"];
+    
+    NSMutableArray *data   = [status objectForKey:@"data"];
+    NSMutableDictionary *lastBlock = [data objectAtIndex:0];        // TODO: this won't work on a brand new pool
+    NSMutableDictionary *twoBlocksAgo = [data objectAtIndex:1];     // TODO: this won't work on a brand new pool
 
+    
+    NSString *lastBlockAmount                   = (NSString*)[lastBlock objectForKey:@"amount"];
+    NSString *lastBlockDifficulty               = (NSString*)[lastBlock objectForKey:@"difficulty"];
+    NSString *lastBlockFinder                   = (NSString*)[lastBlock objectForKey:@"finder"];
+    NSString *expectedSharesUntilLastBlockFound = (NSString*)[lastBlock objectForKey:@"estshares"];
+    NSString *actualSharesToFindLastBlock       = (NSString*)[lastBlock objectForKey:@"shares"];
+
+    NSString *lastBlockTimestamp                = (NSString*)[lastBlock objectForKey:@"time"];
+    NSString *twoBlocksAgoTimestamp             = (NSString*)[twoBlocksAgo objectForKey:@"time"];
+
+    
+    
+    self.lastBlockAmount                   = [lastBlockAmount intValue];
+    self.lastBlockDifficulty               = [lastBlockDifficulty intValue];
+
+    self.timeToFindLastBlock                     = [lastBlockTimestamp intValue] - [twoBlocksAgoTimestamp intValue];
+    self.lastBlockFinder                   = lastBlockFinder;
+    self.expectedSharesUntilLastBlockFound = [expectedSharesUntilLastBlockFound intValue];
+    self.actualSharesToFindLastBlock       = [actualSharesToFindLastBlock intValue];
+}
 
 -(NSMutableDictionary*) callPoolAPIMethod: (NSString*)apiMethod {
     

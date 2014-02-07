@@ -42,6 +42,13 @@
     if (self.walletAddress != nil) {
         self.walletAddressTextField.text = self.walletAddress;
     }
+    
+    // dismiss keyboard when tap outside of text field
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
 }
 
 - (IBAction)walletAddressChanged:(id)sender
@@ -127,5 +134,9 @@
 }
 
 
+-(void)dismissKeyboard
+{
+    [self.walletAddressTextField resignFirstResponder];
+}
 
 @end

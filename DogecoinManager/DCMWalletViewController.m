@@ -42,6 +42,8 @@
     
     if (self.wallet.address != nil) {
         self.walletAddressTextfield.text = self.wallet.address;
+        
+        [self updateBalanceViews];
     }
     
     // hide wallet address on smaller devices
@@ -119,20 +121,35 @@
                 self.walletUpdateFailedLabel.hidden = NO;
                 return;
             }
-
-            
-            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-            [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-            [numberFormatter setCurrencySymbol:@"Ɖ"];
-            
-            NSString *balance = [numberFormatter stringFromNumber:self.wallet.balance];
-            self.balance.text = balance;
-            
-            [numberFormatter setCurrencySymbol:@"$"];
-            NSString *balanceUSD = [numberFormatter stringFromNumber:self.wallet.balanceUSD];
-            self.balanceUSDLabel.text = [NSString stringWithFormat:@"(%@)",balanceUSD];
+            [self updateBalanceViews];
         });
     });
+}
+
+-(void)updateBalanceViews
+{
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    [numberFormatter setCurrencySymbol:@"Ɖ"];
+    
+    NSString *balance = [numberFormatter stringFromNumber:self.wallet.balance];
+    self.balance.text = balance;
+    
+    // we set the conversion rate to -1 if there was an error, so negative balance means something went wrong
+    // In this case, just hide the USD balance display
+    if( [self.wallet.balanceUSD floatValue] < 0) {
+        self.balanceUSDLabel.hidden = YES;
+    }
+    else {
+        self.balanceUSDLabel.hidden = NO;
+        
+        [numberFormatter setCurrencySymbol:@"$"];
+        NSString *balanceUSD = [numberFormatter stringFromNumber:self.wallet.balanceUSD];
+        self.balanceUSDLabel.text = [NSString stringWithFormat:@"(%@)",balanceUSD];
+    }
+    
+
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -113,17 +113,24 @@
     //
     str = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"https://www.dogeapi.com/wow/?a=get_current_price"] encoding:NSUTF8StringEncoding error:&error];
     
-    // strip quotes, which suddenly appeared one day
-    str = [str stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-    
     float doge_to_usd;
-    scanner = [NSScanner scannerWithString:str];
     
-    if( ![scanner scanFloat:&doge_to_usd] ) {
+    if( str == nil) {
+        NSLog(@"Failed to fetch USD conversion rate: %@", [error localizedDescription] );
+        doge_to_usd = -1;
+    }
+    else {
+        // strip quotes, which suddenly appeared one day
+        str = [str stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        
+        scanner = [NSScanner scannerWithString:str];
+        
+        if( ![scanner scanFloat:&doge_to_usd] ) {
 
-        NSLog(@"Unknown error when parsing string for float: %@", str);
+            NSLog(@"Unknown error when parsing string for float: %@", str);
 
-        return FALSE;
+            doge_to_usd = -1;
+        }
     }
 
     
@@ -132,7 +139,7 @@
     //
     // Update our fields with the fetched data
     //
-    self.balance    = [NSNumber numberWithFloat:balance];
+    self.balance    = [NSNumber numberWithFloat: balance];
     self.balanceUSD = [NSNumber numberWithFloat: balance * doge_to_usd];
 
     self.lastUpdate = [NSDate date];

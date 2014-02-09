@@ -10,7 +10,6 @@ none, yay!
 
 New Features/Enhancements
 =========================
-[ ] Get working on iPhone 4/4S 3.5" display - this is MANDATORY!
 [ ] save all values for both wallet and mining pool, so when starting up app you don't have blank values
 [ ] cache last block info (only refresh initially and if poolstatusinfo block # changes)
 [ ] Error handling when mining pool update fails
@@ -39,6 +38,7 @@ DONE!
 [X] Make the mining pool screen more attractive
 [X] Retry API calls that fail
 [X] dynamically calculate avg block reward (for mining pool)
+[X] Get working on iPhone 4/4S 3.5" display - this is MANDATORY!
 
 
 
@@ -92,6 +92,7 @@ New Features/Enhancements
 [ ] Miner control - have presets, like "watch TV" which sets intensity of [cs]gminers to 12 (and maybe after a timeout period set back to 18/20/whatever)
 [ ] Graphs for BTC/USD values
 [ ] Multiple sources for BTC/USD conversions (for comparison and fallback)
+[ ] Enhance values for mining pool - emphasize important ones (hasrate, balance), indicate above/below average values for block reward and block time
 
 ======================================================================
 For "Pro" version 1.2:

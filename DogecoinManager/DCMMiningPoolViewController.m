@@ -191,7 +191,7 @@
     NSString *totalBalance       = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:
                                                             self.miningPool.confirmedBalance + self.miningPool.unconfirmedBalance]];
     int avgBlockReward           = [DCMUtils getAvgBlockRewardForBlock:self.miningPool.currentNetworkBlock];
-    float estEarnings            = avgBlockReward * self.miningPool.validSharesThisRound / (float)self.miningPool.poolSharesThisRound;
+    float estEarnings            = (float)avgBlockReward * self.miningPool.validSharesThisRound / (float)self.miningPool.poolSharesThisRound;
     NSString *estimatedEarnings  = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:estEarnings]];
     
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];

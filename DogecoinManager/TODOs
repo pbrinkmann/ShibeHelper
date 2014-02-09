@@ -89,6 +89,7 @@ For version 1.2:
 
 New Features/Enhancements
 =========================
+[ ] Miner control - have presets, like "watch TV" which sets intensity of [cs]gminers to 12 (and maybe after a timeout period set back to 18/20/whatever)
 [ ] Graphs for BTC/USD values
 [ ] Multiple sources for BTC/USD conversions (for comparison and fallback)
 

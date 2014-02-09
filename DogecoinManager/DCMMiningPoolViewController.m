@@ -19,19 +19,28 @@
 @property (weak, nonatomic) IBOutlet UILabel *poolNameLabel;
 
 // Your Mining
+@property (weak, nonatomic) IBOutlet UILabel *yourAccountLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *hashrateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *confirmedBalanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *unconfirmedBalanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalBalanceLabel;
 
 // Round Progress
+@property (weak, nonatomic) IBOutlet UILabel *currentRoundLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *timeSinceLastBlockLabel;
+@property (weak, nonatomic) IBOutlet UILabel *estPercentDoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *validSharesLabel;
-@property (weak, nonatomic) IBOutlet UILabel *secondsSinceLastBlockLabel;
-@property (weak, nonatomic) IBOutlet UILabel *currentDifficultyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *validsharesPercentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *estimatedEarningsLabel;
 
 // Last Block
+@property (weak, nonatomic) IBOutlet UILabel *lastBlockLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *lastBlockAmountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *lastBlockDifficultyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastBlockTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastBlockPercentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastBlockFinderLabel;
 
 
@@ -41,6 +50,7 @@
 @end
 
 @implementation DCMMiningPoolViewController
+
 
 - (void)viewDidLoad
 {
@@ -57,7 +67,9 @@
                                                       userInfo:nil
                                                        repeats:YES];
     
-
+    [self makeLabelHeaderLabel:self.yourAccountLabel];
+    [self makeLabelHeaderLabel:self.currentRoundLabel];
+    [self makeLabelHeaderLabel:self.lastBlockLabel];
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,6 +77,21 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)makeLabelHeaderLabel:(UILabel*)headerLabel
+{
+    CALayer *yourAccountLayer = [headerLabel layer];
+    CALayer *bottomBorder = [CALayer layer];
+    bottomBorder.borderColor =  CreateDeviceRGBColor(.6,.6,.6,1); //[UIColor lightGrayColor].CGColor;
+    bottomBorder.borderWidth = 1;
+    bottomBorder.frame =
+    CGRectMake(-1, yourAccountLayer.frame.size.height - 1, yourAccountLayer.frame.size.width, 1);
+    //[bottomBorder setBorderColor:[UIColor blackColor].CGColor];
+    [yourAccountLayer addSublayer:bottomBorder];
+    
+    yourAccountLayer.backgroundColor = CreateDeviceRGBColor(.9,.9,.9,1);
+}
+
 
 -(IBAction)doRefresh:(id)sender
 {
@@ -124,10 +151,14 @@
 
     // Do some calculations first
     
-    float invalidPercent   = 100.f * self.miningPool.invalidSharesThisRound / (self.miningPool.validSharesThisRound + self.miningPool.invalidSharesThisRound);
-    float blockTimePercent = 100.f * self.miningPool.secondsSinceLastBlock / self.miningPool.estimatedSecondsPerBlock;
+    float validSharesPercent =
+        100.f - 100.f * self.miningPool.invalidSharesThisRound /
+                    (self.miningPool.validSharesThisRound + self.miningPool.invalidSharesThisRound);
+    float blockTimePercent =
+        100.f * self.miningPool.secondsSinceLastBlock / self.miningPool.estimatedSecondsPerBlock;
 
-    float lastBlockPercent = 100.f *self.miningPool.actualSharesToFindLastBlock / self.miningPool.expectedSharesUntilLastBlockFound;
+    float lastBlockPercent = 100.f * self.miningPool.actualSharesToFindLastBlock /
+                             self.miningPool.expectedSharesUntilLastBlockFound;
 
     // And pretty up our numbers
     
@@ -137,14 +168,18 @@
     
     NSString *confirmedBalance   = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:self.miningPool.confirmedBalance]];
     NSString *unconfirmedBalance = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:self.miningPool.unconfirmedBalance]];
-
+    NSString *totalBalance       = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:
+                                                            self.miningPool.confirmedBalance + self.miningPool.unconfirmedBalance]];
+    int AVG_BLOCK_REWARD = 500000;
+    float estEarnings = AVG_BLOCK_REWARD * self.miningPool.validSharesThisRound / (float)self.miningPool.poolSharesThisRound;
+    NSString *estimatedEarnings  = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:estEarnings]];
     
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
     
     NSString *hashrate     = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:self.miningPool.hashrate]];
 
     // even though this is a currency, there are never fractional amounts
-    NSString *lastBlockAmount = [NSString stringWithFormat:@"yielded Ɖ%@",
+    NSString *lastBlockAmount = [NSString stringWithFormat:@"Ɖ%@",
                                         [numberFormatter stringFromNumber:
                                                    [NSNumber numberWithInt:self.miningPool.lastBlockAmount]
                                          ]
@@ -160,35 +195,27 @@
     //
     // Your mining
     //
-    self.hashrateLabel.text                     = [NSString stringWithFormat:@"%@ kh/s", hashrate];
-    self.confirmedBalanceLabel.text             = [NSString stringWithFormat:@"%@ confirmed", confirmedBalance];
-    self.unconfirmedBalanceLabel.text           = [NSString stringWithFormat:@"%@ unconfirmed", unconfirmedBalance];
-    
+    self.hashrateLabel.text              = [NSString stringWithFormat:@"%@ kh/s", hashrate];
+    self.confirmedBalanceLabel.text      = confirmedBalance;
+    self.unconfirmedBalanceLabel.text    = unconfirmedBalance;
+    self.totalBalanceLabel.text          = totalBalance;
     
     //
     // Round Progress
     //
+    self.timeSinceLastBlockLabel.text   = timeSinceLastBlock;
+    self.estPercentDoneLabel.text       = [NSString stringWithFormat:@"%.1f%%", blockTimePercent];
+    self.validSharesLabel.text          = [NSString stringWithFormat:@"%d", self.miningPool.validSharesThisRound];
+    self.validsharesPercentLabel.text   = [NSString stringWithFormat:@"%.1f%%", validSharesPercent];
+    self.estimatedEarningsLabel.text    = estimatedEarnings;
     
-    self.validSharesLabel.text                  = [NSString stringWithFormat:@"%d/%d (%%%.1f) valid/invalid shares",
-                                                                               self.miningPool.validSharesThisRound,
-                                                                               self.miningPool.invalidSharesThisRound,
-                                                                               invalidPercent
-                                                   ];
-        
-    self.secondsSinceLastBlockLabel.text        = [NSString stringWithFormat:@"%@ (%%%.1f) since last block",
-                                                                                timeSinceLastBlock,
-                                                                                blockTimePercent
-                                                  ];
-
-    self.currentDifficultyLabel.text = [NSString stringWithFormat:@"%d difficulty", self.miningPool.currentDifficulty];
-
     //
     // Last Block
     //
     self.lastBlockAmountLabel.text      = lastBlockAmount;
-    self.lastBlockDifficultyLabel.text  = [NSString stringWithFormat:@"%d difficulty", self.miningPool.lastBlockDifficulty];
-    self.lastBlockTimeLabel.text        = [NSString stringWithFormat:@"%@ (%%%.1f of expected)", timeToFindLastBlock, lastBlockPercent];
-    self.lastBlockFinderLabel.text      = [NSString stringWithFormat:@"found by %@", self.miningPool.lastBlockFinder];
+    self.lastBlockTimeLabel.text        = timeToFindLastBlock;
+    self.lastBlockPercentLabel.text     = [NSString stringWithFormat:@"%.1f%%", lastBlockPercent];
+    self.lastBlockFinderLabel.text      = self.miningPool.lastBlockFinder;
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -225,6 +252,15 @@
         self.lastUpdatedLabel.text = [DCMUtils lastUpdatedForInterval:timeSinceLastUpdate];
         
     }
+}
+                                        
+CGColorRef CreateDeviceRGBColor(CGFloat r, CGFloat g, CGFloat b, CGFloat a)
+{
+    CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
+    CGFloat comps[] = {r, g, b, a};
+    CGColorRef color = CGColorCreate(rgb, comps);
+    CGColorSpaceRelease(rgb);
+    return color;
 }
 
 

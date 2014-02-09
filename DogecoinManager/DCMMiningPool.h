@@ -26,6 +26,9 @@
 @property int estimatedSecondsPerBlock;
 @property int currentDifficulty;
 
+// public
+@property int poolSharesThisRound;
+
 // getuserstatus
 @property int hashrate; // KHPS
 @property int validSharesThisRound;

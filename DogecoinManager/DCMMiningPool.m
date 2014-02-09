@@ -59,6 +59,7 @@
     [self doUserBalanceAPICall];
     [self doPoolStatusAPICall];
     [self doBlocksFoundAPICall];
+    [self doPublicAPICall];
     
     self.lastUpdate = [NSDate date];
 
@@ -304,6 +305,33 @@
     self.expectedSharesUntilLastBlockFound = [expectedSharesUntilLastBlockFound intValue];
     self.actualSharesToFindLastBlock       = [actualSharesToFindLastBlock intValue];
 }
+
+-(void)doPublicAPICall
+{
+    NSMutableDictionary *dict = [self callPoolAPIMethod:@"public"];
+    
+    if( dict == nil) {
+        NSLog(@"API call failed, cancelling public update");
+        return;
+    }
+    
+    /*
+     
+     {
+     pool_name: "TeamDoge Digging",
+     hashrate: 1139421,
+     workers: 2545,
+     shares_this_round: 2597992,
+     last_block: 92922,
+     network_hashrate: 100408944027
+     }
+     */
+    
+    NSString *poolSharesThisRound  = (NSString*)[dict objectForKey:@"shares_this_round"];
+
+    self.poolSharesThisRound = [poolSharesThisRound intValue];
+}
+
 
 -(NSMutableDictionary*) callPoolAPIMethod: (NSString*)apiMethod {
     

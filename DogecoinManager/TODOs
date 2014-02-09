@@ -10,7 +10,10 @@ none, yay!
 
 New Features/Enhancements
 =========================
-[ ] Make the mining pool screen more attractive
+[ ] save all values for both wallet and mining pool, so when starting up app you don't have blank values
+[ ] Retry API calls that fail
+[ ] dynamically fetch avg block reward (for mining pool)
+[ ] cache last block info (only refresh initially and if poolstatusinfo block # changes)
 [ ] Error handling when mining pool update fails
 [ ] Get working on iPhone 4/4S 3.5" display (or make it a iPhone 5+ app if possible?)
 
@@ -35,6 +38,7 @@ DONE!
 [X] Wallet address validation (# characters, starts with D, limited character set)
 [X] Add dismiss keyboard logic from EditMiningPoolViewController to EditWalletAddress
 [X] Replace pool hashrate with last block info - finder, time, amount
+[X] Make the mining pool screen more attractive
 
 
 
@@ -60,7 +64,6 @@ New Features/Enhancements
 =========================
 [ ] Profit calculator (ask for power usage, SEE BELOW for cost of power, 
     use current pool hashrate BY DEFAULT, but let user change it)
-[ ] on mining pool screen, if 0 invalid blocks, don't show the "0 (0.0%)" part
 [ ] display delta amount when updating balances.  Fade in/out a green [+3500] or red [-1221] to show difference to last update
 [ ] Display "dashboard" - with current balance, current hashrate, current mining pool balance
 [ ] Support multipool.us as a mining pool type

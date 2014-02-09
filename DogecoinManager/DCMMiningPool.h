@@ -25,6 +25,7 @@
 @property int secondsSinceLastBlock;
 @property int estimatedSecondsPerBlock;
 @property int currentDifficulty;
+@property int currentNetworkBlock;
 
 // public
 @property int poolSharesThisRound;
@@ -42,7 +43,11 @@
 @property int actualSharesToFindLastBlock;
 @property NSString* lastBlockFinder;
 
--(void)updatePoolInfo;
+
+@property int numUpdateSteps;
+
+-(NSString*)getStepName:(int)step;
+-(BOOL)updatePoolInfoForStep:(int) step;
 
 
 @end

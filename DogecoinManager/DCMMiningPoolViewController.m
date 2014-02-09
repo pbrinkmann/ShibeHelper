@@ -12,6 +12,8 @@
 #import "DCMUtils.h"
 
 #import "HTProgressHUD.h"
+#import "HTProgressHUDFadeZoomAnimation.h"
+#import "HTProgressHUDPieIndicatorView.h"
 
 @interface DCMMiningPoolViewController ()
 
@@ -122,25 +124,43 @@
 {
     if (self.miningPool.websiteURL == nil ) return;
 
-    HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
-    [HUD showInView:self.view];
     self.editMiningPoolButton.enabled = NO;
     
-    dispatch_queue_t myQueue = dispatch_queue_create("Mining Pool Update Queue",NULL);
-    dispatch_async(myQueue, ^{
+    __block HTProgressHUD *progressHUD = [[HTProgressHUD alloc] init];
+    progressHUD.animation = [HTProgressHUDFadeZoomAnimation animation];
+    progressHUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypePie];
+    progressHUD.text = @"Loading...";
+    
+    [progressHUD showWithAnimation:YES inView:self.view whileExecutingBlock:^{
+        
+        DCMMiningPool* pool = self.miningPool;
+                              
+        int numUpdateSteps = pool.numUpdateSteps;
+        
+        for (int i = 0; i < numUpdateSteps; i++) {
+            
+            progressHUD.text = [NSString stringWithFormat:@"fetching %@", [pool getStepName:i]];
 
-        // synchronous update
-        [self.miningPool updatePoolInfo];
+            BOOL stepOk = [pool updatePoolInfoForStep:i];
+            
+            if( !stepOk) {
+                progressHUD.progress = (i*2.f + 1.f) / (numUpdateSteps * 2.f);
+                progressHUD.text = [NSString stringWithFormat:@"retrying %@", [pool getStepName:i]];
+
+                [pool updatePoolInfoForStep:i];
+            }
+            
+            progressHUD.progress = ((i+1)*2.f)/ (numUpdateSteps * 2.f);
+
+        }
         
         // must do UI updates on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [HUD hide];
             self.editMiningPoolButton.enabled = YES;
             
             [self refreshViewLabels];
         });
-    });
+    }];
 }
 
 //
@@ -170,8 +190,8 @@
     NSString *unconfirmedBalance = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:self.miningPool.unconfirmedBalance]];
     NSString *totalBalance       = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:
                                                             self.miningPool.confirmedBalance + self.miningPool.unconfirmedBalance]];
-    int AVG_BLOCK_REWARD = 500000;
-    float estEarnings = AVG_BLOCK_REWARD * self.miningPool.validSharesThisRound / (float)self.miningPool.poolSharesThisRound;
+    int avgBlockReward           = [DCMUtils getAvgBlockRewardForBlock:self.miningPool.currentNetworkBlock];
+    float estEarnings            = avgBlockReward * self.miningPool.validSharesThisRound / (float)self.miningPool.poolSharesThisRound;
     NSString *estimatedEarnings  = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:estEarnings]];
     
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];

@@ -11,5 +11,6 @@
 @interface DCMUtils : NSObject
 
 +(NSString*) lastUpdatedForInterval:(NSTimeInterval) interval;
++(int) getAvgBlockRewardForBlock:(int)block;
 
 @end

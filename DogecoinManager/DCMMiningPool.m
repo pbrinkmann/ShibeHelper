@@ -10,7 +10,6 @@
 
 @interface DCMMiningPool ()
 
-
 @end
 
 @implementation DCMMiningPool
@@ -18,6 +17,9 @@
 -(id)init
 {
     self = [super init];
+    
+    self.numUpdateSteps = 5;
+    
     if(self) {
 
         [self loadDataFromUserDefaults];
@@ -50,56 +52,63 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(void)updatePoolInfo
+-(NSString*)getStepName:(int)step
 {
-    if( self.websiteURL == nil || self.apiKey == nil) { NSLog(@"DCMMiningPool skipping initial load of mining pool"); return; }
-    
-    
-    [self doUserStatusAPICall];
-    [self doUserBalanceAPICall];
-    [self doPoolStatusAPICall];
-    [self doBlocksFoundAPICall];
-    [self doPublicAPICall];
-    
-    self.lastUpdate = [NSDate date];
-
-    // TODO: this should actually happen when apiKey and websiteURL get set
-    [self saveDataToUserDefaults ];
-}
-
-/*  ok, since this is what multipool.us looks like:
- 
- for DCM VERSION 2.0 !!!!
-{
-    "currency": {
- 
-        "doge": {
-            "confirmed_rewards": "351.4674396",
-            "hashrate": "1167",
-            "estimated_rewards": "28.7412",
-            "payout_history": "10963.4614339",
-            "pool_hashrate": 16485314,
-            "round_shares": "704",
-            "block_shares": "671132783"
-        },
-    },
-    "workers": {
-        "doge": {
-            "paulb.1": {
-                "hashrate": "1167"
-            }
-        },    
+    switch (step) {
+        case 0:
+            return @"User Status";
+        case 1:
+            return @"User Balance";
+        case 2:
+            return @"Pool Status";
+        case 3:
+            return @"Last Block Info";
+        case 4:
+            return @"Current round progress";
+        default:
+            NSLog(@"Invalid getStepName step %d", step);
+            return @"";
     }
 }
-*/
 
--(void)doUserStatusAPICall
+
+-(BOOL)updatePoolInfoForStep:(int) step
+{
+    if( self.websiteURL == nil || self.apiKey == nil) { NSLog(@"DCMMiningPool skipping initial load of mining pool"); return FALSE; }
+    
+    switch (step) {
+        case 0:
+            return [self doUserStatusAPICall];
+        case 1:
+            return [self doUserBalanceAPICall];
+        case 2:
+            return [self doPoolStatusAPICall];
+        case 3:
+            return [self doBlocksFoundAPICall];
+        case 4:
+            if( [self doPublicAPICall] == FALSE ) return FALSE;
+
+            self.lastUpdate = [NSDate date];
+            
+            // TODO: this should actually happen when apiKey and websiteURL get set
+            [self saveDataToUserDefaults ];
+            
+            return TRUE;
+            
+        default:
+            NSLog(@"Invalid updatePoolInfoForStep step %d", step);
+            return FALSE;
+    }
+   
+}
+
+-(BOOL)doUserStatusAPICall
 {
     NSMutableDictionary *dict = [self callPoolAPIMethod:@"getuserstatus"];
     
     if( dict == nil) {
         NSLog(@"API call failed, cancelling getuserstatus update");
-        return;
+        return FALSE;
     }
 
 
@@ -137,16 +146,17 @@
     self.validSharesThisRound   = [validShares intValue];
     self.invalidSharesThisRound = [invalidShares intValue];
 
+    return TRUE;
 }
 
 
--(void)doUserBalanceAPICall
+-(BOOL)doUserBalanceAPICall
 {
     NSMutableDictionary *dict = [self callPoolAPIMethod:@"getuserbalance"];
     
     if( dict == nil) {
         NSLog(@"API call failed, cancelling getuserbalance update");
-        return;
+        return FALSE;
     }
     
     /*
@@ -174,16 +184,16 @@
     self.confirmedBalance   = [confirmed floatValue];
     self.unconfirmedBalance = [unconfrmed floatValue];
     
-
+    return TRUE;
 }
 
--(void)doPoolStatusAPICall
+-(BOOL)doPoolStatusAPICall
 {
     NSMutableDictionary *dict = [self callPoolAPIMethod:@"getpoolstatus"];
     
     if( dict == nil) {
         NSLog(@"API call failed, cancelling getpoolstatus update");
-        return;
+        return FALSE;
     }
 /*
  {
@@ -217,23 +227,26 @@
     NSString *estimatedSecondsPerBlock  = (NSString*)[data objectForKey:@"esttime"];
     NSString *secondsSinceLastBlock     = (NSString*)[data objectForKey:@"timesincelast"];
     NSString *currentDifficulty         = (NSString*)[data objectForKey:@"networkdiff"];
+    NSString *currentNetworkBlock       = (NSString*)[data objectForKey:@"currentnetworkblock"];
 
-    
     
     self.poolName                 = poolName;
     self.poolHashrate             = [poolHashrate intValue];
     self.estimatedSecondsPerBlock = [estimatedSecondsPerBlock intValue];
     self.secondsSinceLastBlock    = [secondsSinceLastBlock intValue];
     self.currentDifficulty        = [currentDifficulty intValue];
+    self.currentNetworkBlock      = [currentNetworkBlock intValue];
+    
+    return TRUE;
 }
 
--(void)doBlocksFoundAPICall
+-(BOOL)doBlocksFoundAPICall
 {
     NSMutableDictionary *dict = [self callPoolAPIMethod:@"getblocksfound"];
     
     if( dict == nil) {
         NSLog(@"API call failed, cancelling getblocksfound update");
-        return;
+        return FALSE;
     }
     
     
@@ -304,15 +317,17 @@
     self.lastBlockFinder                   = lastBlockFinder;
     self.expectedSharesUntilLastBlockFound = [expectedSharesUntilLastBlockFound intValue];
     self.actualSharesToFindLastBlock       = [actualSharesToFindLastBlock intValue];
+    
+    return TRUE;
 }
 
--(void)doPublicAPICall
+-(BOOL)doPublicAPICall
 {
     NSMutableDictionary *dict = [self callPoolAPIMethod:@"public"];
     
     if( dict == nil) {
         NSLog(@"API call failed, cancelling public update");
-        return;
+        return FALSE;
     }
     
     /*
@@ -330,6 +345,8 @@
     NSString *poolSharesThisRound  = (NSString*)[dict objectForKey:@"shares_this_round"];
 
     self.poolSharesThisRound = [poolSharesThisRound intValue];
+    
+    return TRUE;
 }
 
 

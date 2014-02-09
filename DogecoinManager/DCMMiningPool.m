@@ -18,6 +18,7 @@
 {
     self = [super init];
     
+    // TODO: ... make these steps more dynamic, this current setup is pretty fragile
     self.numUpdateSteps = 5;
     
     if(self) {
@@ -56,15 +57,15 @@
 {
     switch (step) {
         case 0:
-            return @"User Status";
+            return @"user status";
         case 1:
-            return @"User Balance";
+            return @"user balance";
         case 2:
-            return @"Pool Status";
+            return @"pool status";
         case 3:
-            return @"Last Block Info";
+            return @"last block info";
         case 4:
-            return @"Current round progress";
+            return @"current round progress";
         default:
             NSLog(@"Invalid getStepName step %d", step);
             return @"";

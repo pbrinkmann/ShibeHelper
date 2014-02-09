@@ -72,5 +72,9 @@
     }
 }
 
++ (BOOL)isTallDevice {
+    return [[UIScreen mainScreen] bounds].size.height >= 568 ? TRUE : FALSE;
+}
+
 
 @end

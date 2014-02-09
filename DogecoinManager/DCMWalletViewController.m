@@ -14,9 +14,12 @@
 #import "HTProgressHUD.h"
 
 @interface DCMWalletViewController ()
+
 @property (weak, nonatomic) IBOutlet UILabel *lastWalletUpdateLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editWalletAddressButton;
+
 @property (weak, nonatomic) IBOutlet UITextField *walletAddressTextfield;
+@property (weak, nonatomic) IBOutlet UILabel *walletAddressTitleLabel;
 
 // used to display error messages when wallet update failed
 @property (weak, nonatomic) IBOutlet UILabel *walletUpdateFailedLabel;
@@ -39,6 +42,12 @@
     
     if (self.wallet.address != nil) {
         self.walletAddressTextfield.text = self.wallet.address;
+    }
+    
+    // hide wallet address on smaller devices
+    if( ! [DCMUtils isTallDevice] ) {
+        self.walletAddressTextfield.hidden = TRUE;
+        self.walletAddressTitleLabel.hidden = TRUE;
     }
     
     [self updateWalletBalance];

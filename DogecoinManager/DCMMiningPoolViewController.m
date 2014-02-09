@@ -58,8 +58,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-     
+    
+    [self makeLabelHeaderLabel:self.yourAccountLabel];
+    [self makeLabelHeaderLabel:self.currentRoundLabel];
+    [self makeLabelHeaderLabel:self.lastBlockLabel];
+    
     self.miningPool = [[DCMMiningPool alloc] init];
+    [self refreshViewLabels];
+
+    
     
     [self updateMiningPoolInfo];
     
@@ -69,9 +76,7 @@
                                                       userInfo:nil
                                                        repeats:YES];
     
-    [self makeLabelHeaderLabel:self.yourAccountLabel];
-    [self makeLabelHeaderLabel:self.currentRoundLabel];
-    [self makeLabelHeaderLabel:self.lastBlockLabel];
+
 }
 
 - (void)didReceiveMemoryWarning

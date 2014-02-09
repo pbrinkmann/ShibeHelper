@@ -24,51 +24,35 @@
 }
 
 
-- (void)loadDataFromUserDefaults
-{
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"address"])
-    {
-        
-        self.address = [[NSUserDefaults standardUserDefaults]
-                        objectForKey:@"wallet.address"];
-        
-        self.balance = [[NSUserDefaults standardUserDefaults]
-                        objectForKey:@"wallet.balance"];
+- (void)loadDataFromUserDefaults {
+    NSUserDefaults *stdDefaults = [NSUserDefaults standardUserDefaults];
 
-        self.balanceUSD = [[NSUserDefaults standardUserDefaults]
-                           objectForKey:@"wallet.balanceUSD"];
-        
-        if( self.balanceUSD == nil ) {
+    if ([stdDefaults objectForKey:@"address"]) {
+
+        self.address    = [stdDefaults objectForKey:@"wallet.address"];
+        self.balance    = [stdDefaults objectForKey:@"wallet.balance"];
+        self.balanceUSD = [stdDefaults objectForKey:@"wallet.balanceUSD"];
+        self.lastUpdate = [stdDefaults objectForKey:@"wallet.lastUpdate"];
+
+        if (self.balanceUSD == nil) {
             self.balanceUSD = [NSNumber numberWithInt:0];
         }
 
-        
-        self.lastUpdate = [[NSUserDefaults standardUserDefaults]
-                           objectForKey:@"wallet.lastUpdate"];
-    }
-    else {
+    } else {
         NSLog(@"no defaults found, setting balance to 0");
         self.balance = [NSNumber numberWithInt:0];
     }
-    
 }
 
-- (void)saveDataToUserDefaults
-{
-    [[NSUserDefaults standardUserDefaults]
-     setObject:self.address forKey:@"wallet.address"];
-    
-    [[NSUserDefaults standardUserDefaults]
-      setObject:self.balance forKey:@"wallet.balance"];
-    
-    [[NSUserDefaults standardUserDefaults]
-     setObject:self.balanceUSD forKey:@"wallet.balanceUSD"];
-    
-    [[NSUserDefaults standardUserDefaults]
-     setObject:self.lastUpdate forKey:@"wallet.lastUpdate"];
-    
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
+- (void)saveDataToUserDefaults {
+    NSUserDefaults *stdDefaults = [NSUserDefaults standardUserDefaults];
+
+    [stdDefaults setObject:self.address    forKey:@"wallet.address"];
+    [stdDefaults setObject:self.balance    forKey:@"wallet.balance"];
+    [stdDefaults setObject:self.balanceUSD forKey:@"wallet.balanceUSD"];
+    [stdDefaults setObject:self.lastUpdate forKey:@"wallet.lastUpdate"];
+
+    [stdDefaults synchronize];
 }
 
 -(BOOL)updateBalance

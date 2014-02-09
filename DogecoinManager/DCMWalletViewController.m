@@ -43,7 +43,7 @@
     if (self.wallet.address != nil) {
         self.walletAddressTextfield.text = self.wallet.address;
         
-        [self updateBalanceViews];
+        [self refreshViewLabels];
     }
     
     // hide wallet address on smaller devices
@@ -121,12 +121,12 @@
                 self.walletUpdateFailedLabel.hidden = NO;
                 return;
             }
-            [self updateBalanceViews];
+            [self refreshViewLabels];
         });
     });
 }
 
--(void)updateBalanceViews
+-(void)refreshViewLabels
 {
     
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];

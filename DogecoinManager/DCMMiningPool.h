@@ -26,6 +26,7 @@
 @property int estimatedSecondsPerBlock;
 @property int currentDifficulty;
 @property int currentNetworkBlock;
+@property int lastBlockFound;
 
 // public
 @property int poolSharesThisRound;

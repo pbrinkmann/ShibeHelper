@@ -10,6 +10,8 @@
 
 @interface DCMMiningPool ()
 
+@property BOOL stillOnSameBlock;
+
 @end
 
 @implementation DCMMiningPool
@@ -23,6 +25,7 @@
     
     if(self) {
 
+
         [self loadDataFromUserDefaults];
     }
     
@@ -31,26 +34,93 @@
 
 - (void)loadDataFromUserDefaults
 {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"miningpool.websiteURL"])
+    NSUserDefaults* stdDefaults =[NSUserDefaults standardUserDefaults];
+
+    if ([stdDefaults objectForKey:@"miningpool.websiteURL"])
     {
+        self.websiteURL                     = [stdDefaults objectForKey:@"miningpool.websiteURL"];
+        self.apiKey                         = [stdDefaults objectForKey:@"miningpool.apiKey"];
+        self.lastUpdate                     = [stdDefaults objectForKey:@"miningpool.lastUpdate"];
         
-        self.websiteURL = [[NSUserDefaults standardUserDefaults]
-                        objectForKey:@"miningpool.websiteURL"];
+        self.confirmedBalance               = [[stdDefaults objectForKey:@"miningpool.confirmedBalance"] floatValue];
+        self.unconfirmedBalance             = [[stdDefaults objectForKey:@"miningpool.unconfirmedBalance"] floatValue];
         
-        self.apiKey = [[NSUserDefaults standardUserDefaults]
-                        objectForKey:@"miningpool.apiKey"];
+        self.poolName                       = [stdDefaults objectForKey:@"miningpool.poolName"];
+        self.poolHashrate                   = [[stdDefaults objectForKey:@"miningpool.poolHashrate"] intValue];
+        self.secondsSinceLastBlock          = [[stdDefaults objectForKey:@"miningpool.secondsSinceLastBlock"] intValue];
+        self.estimatedSecondsPerBlock       = [[stdDefaults objectForKey:@"miningpool.estimatedSecondsPerBlock"] intValue];
+        self.currentDifficulty              = [[stdDefaults objectForKey:@"miningpool.currentDifficulty"] intValue];
+        self.currentNetworkBlock            = [[stdDefaults objectForKey:@"miningpool.currentNetworkBlock"] intValue];
+        self.lastBlockFound                 = [[stdDefaults objectForKey:@"miningpool.lastBlockFound"] intValue];
+        
+        self.poolSharesThisRound            = [[stdDefaults objectForKey:@"miningpool.poolSharesThisRound"] intValue];
+        
+        self.hashrate                       = [[stdDefaults objectForKey:@"miningpool.hashrate"] intValue];
+        self.validSharesThisRound           = [[stdDefaults objectForKey:@"miningpool.validSharesThisRound"] intValue];
+        self.invalidSharesThisRound         = [[stdDefaults objectForKey:@"miningpool.invalidSharesThisRound"] intValue];
+        
+        self.lastBlockAmount                    = [[stdDefaults objectForKey:@"miningpool.lastBlockAmount"] intValue];
+        self.lastBlockDifficulty                = [[stdDefaults objectForKey:@"miningpool.lastBlockDifficulty"] intValue];
+        self.timeToFindLastBlock                = [[stdDefaults objectForKey:@"miningpool.timeToFindLastBlock"] intValue];
+        self.expectedSharesUntilLastBlockFound  = [[stdDefaults objectForKey:@"miningpool.expectedSharesUntilLastBlockFound"] intValue];
+        self.actualSharesToFindLastBlock        = [[stdDefaults objectForKey:@"miningpool.actualSharesToFindLastBlock"] intValue];
+        self.lastBlockFinder                    = [stdDefaults objectForKey:@"miningpool.lastBlockFinder"];
+    }
+    else {
+        // This is the only value (other than URL and key) that's accessed when loading info, so it needs a default value
+        // I actually don't know if Objective-C sets default values for members or not, so maybe this is unneccesary
+        self.lastBlockFound = 0;
     }
 }
 
-- (void)saveDataToUserDefaults
-{
-    [[NSUserDefaults standardUserDefaults]
-     setObject:self.websiteURL forKey:@"miningpool.websiteURL"];
-    
-    [[NSUserDefaults standardUserDefaults]
-     setObject:self.apiKey forKey:@"miningpool.apiKey"];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
+- (void)saveDataToUserDefaults {
+    NSUserDefaults *stdDefaults = [NSUserDefaults standardUserDefaults];
+
+    [stdDefaults setObject:self.websiteURL forKey:@"miningpool.websiteURL"];
+    [stdDefaults setObject:self.apiKey forKey:@"miningpool.apiKey"];
+    [stdDefaults setObject:self.lastUpdate forKey:@"miningpool.lastUpdate"];
+
+    [stdDefaults setObject:[NSNumber numberWithFloat:self.confirmedBalance]
+                    forKey:@"miningpool.confirmedBalance"];
+    [stdDefaults setObject:[NSNumber numberWithFloat:self.unconfirmedBalance]
+                    forKey:@"miningpool.unconfirmedBalance"];
+
+    [stdDefaults setObject:self.poolName forKey:@"miningpool.poolName"];
+    [stdDefaults setObject:[NSNumber numberWithInt:self.poolHashrate]
+                    forKey:@"miningpool.poolHashrate"];
+    [stdDefaults setObject:[NSNumber numberWithInt:self.secondsSinceLastBlock]
+                    forKey:@"miningpool.secondsSinceLastBlock"];
+    [stdDefaults setObject:[NSNumber numberWithInt:self.estimatedSecondsPerBlock]
+                    forKey:@"miningpool.estimatedSecondsPerBlock"];
+    [stdDefaults setObject:[NSNumber numberWithInt:self.currentDifficulty]
+                    forKey:@"miningpool.currentDifficulty"];
+    [stdDefaults setObject:[NSNumber numberWithInt:self.currentNetworkBlock]
+                    forKey:@"miningpool.currentNetworkBlock"];
+    [stdDefaults setObject:[NSNumber numberWithInt:self.lastBlockFound]
+                    forKey:@"lastBlockFound"];
+
+    [stdDefaults setObject:[NSNumber numberWithInt:self.poolSharesThisRound]
+                    forKey:@"miningpool.poolSharesThisRound"];
+
+    [stdDefaults setObject:[NSNumber numberWithInt:self.hashrate] forKey:@"miningpool.hashrate"];
+    [stdDefaults setObject:[NSNumber numberWithInt:self.validSharesThisRound]
+                    forKey:@"miningpool.validSharesThisRound"];
+    [stdDefaults setObject:[NSNumber numberWithInt:self.invalidSharesThisRound]
+                    forKey:@"miningpool.invalidSharesThisRound"];
+
+    [stdDefaults setObject:[NSNumber numberWithInt:self.lastBlockAmount]
+                    forKey:@"miningpool.lastBlockAmount"];
+    [stdDefaults setObject:[NSNumber numberWithInt:self.lastBlockDifficulty]
+                    forKey:@"miningpool.lastBlockDifficulty"];
+    [stdDefaults setObject:[NSNumber numberWithInt:self.timeToFindLastBlock]
+                    forKey:@"miningpool.timeToFindLastBlock"];
+    [stdDefaults setObject:[NSNumber numberWithInt:self.expectedSharesUntilLastBlockFound]
+                    forKey:@"miningpool.expectedSharesUntilLastBlockFound"];
+    [stdDefaults setObject:[NSNumber numberWithInt:self.actualSharesToFindLastBlock]
+                    forKey:@"miningpool.actualSharesToFindLastBlock"];
+    [stdDefaults setObject:self.lastBlockFinder forKey:@"miningpool.lastBlockFinder"];
+
+    [stdDefaults synchronize];
 }
 
 -(NSString*)getStepName:(int)step
@@ -229,6 +299,7 @@
     NSString *secondsSinceLastBlock     = (NSString*)[data objectForKey:@"timesincelast"];
     NSString *currentDifficulty         = (NSString*)[data objectForKey:@"networkdiff"];
     NSString *currentNetworkBlock       = (NSString*)[data objectForKey:@"currentnetworkblock"];
+    NSString *lastBlockFound            = (NSString*)[data objectForKey:@"lastblock"];
 
     
     self.poolName                 = poolName;
@@ -237,6 +308,16 @@
     self.secondsSinceLastBlock    = [secondsSinceLastBlock intValue];
     self.currentDifficulty        = [currentDifficulty intValue];
     self.currentNetworkBlock      = [currentNetworkBlock intValue];
+    
+    if( self.lastBlockFound == [lastBlockFound intValue] ) {
+        self.stillOnSameBlock = TRUE;
+    }
+    else {
+        self.stillOnSameBlock = FALSE;
+    }
+    
+    self.lastBlockFound           = [lastBlockFound intValue];
+
     
     return TRUE;
 }
@@ -249,7 +330,10 @@
         NSLog(@"API call failed, cancelling getblocksfound update");
         return FALSE;
     }
-    
+    if( self.stillOnSameBlock ) {
+        NSLog(@"Skipping getblocksfound API call since no new blocks have been found since last time we checked");
+        return TRUE;
+    }
     
     /*
      getblocksfound: {
@@ -314,7 +398,7 @@
     self.lastBlockAmount                   = [lastBlockAmount intValue];
     self.lastBlockDifficulty               = [lastBlockDifficulty intValue];
 
-    self.timeToFindLastBlock                     = [lastBlockTimestamp intValue] - [twoBlocksAgoTimestamp intValue];
+    self.timeToFindLastBlock               = [lastBlockTimestamp intValue] - [twoBlocksAgoTimestamp intValue];
     self.lastBlockFinder                   = lastBlockFinder;
     self.expectedSharesUntilLastBlockFound = [expectedSharesUntilLastBlockFound intValue];
     self.actualSharesToFindLastBlock       = [actualSharesToFindLastBlock intValue];

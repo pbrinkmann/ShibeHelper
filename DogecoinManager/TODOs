@@ -10,9 +10,9 @@ none, yay!
 
 New Features/Enhancements
 =========================
-[ ] save all values for both wallet and mining pool, so when starting up app you don't have blank values
-[ ] cache last block info (only refresh initially and if poolstatusinfo block # changes)
 [ ] Error handling when mining pool update fails
+[ ] Review license for both thirdparty libraries
+[ ] Get rid of all compiler warnings
 
 Unverified Bugs
 ===============
@@ -39,6 +39,8 @@ DONE!
 [X] Retry API calls that fail
 [X] dynamically calculate avg block reward (for mining pool)
 [X] Get working on iPhone 4/4S 3.5" display - this is MANDATORY!
+[X] save all values for both wallet and mining pool, so when starting up app you don't have blank values
+[X] cache last block info (only refresh initially and if poolstatusinfo block # changes)
 
 
 

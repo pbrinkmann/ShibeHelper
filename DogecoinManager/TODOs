@@ -12,12 +12,10 @@ New Features/Enhancements
 =========================
 [ ] Error handling when mining pool update fails
 [ ] Review license for both thirdparty libraries
-[ ] Get rid of all compiler warnings
-
-Unverified Bugs
-===============
-[ ] Sometimes crashes on initial load
-
+[ ] Try and get rid of all compiler warnings
+[ ] No validation on mining pool entries (just need basics - both URL and API KEY and not empty string)
+[ ] bug:Initial load of mining pool without having saved values to load results in NaN% and other ugliness
+[ ] test on top 15 MPOS pools - maybe issue warnings if any of them specifically don't support the API?
 
 DONE!
 [X] display DOGE => USD
@@ -41,7 +39,7 @@ DONE!
 [X] Get working on iPhone 4/4S 3.5" display - this is MANDATORY!
 [X] save all values for both wallet and mining pool, so when starting up app you don't have blank values
 [X] cache last block info (only refresh initially and if poolstatusinfo block # changes)
-
+[X] bug: Wallet address doesn't save
 
 
 ======================================================================

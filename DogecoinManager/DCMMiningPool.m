@@ -70,6 +70,12 @@
         // This is the only value (other than URL and key) that's accessed when loading info, so it needs a default value
         // I actually don't know if Objective-C sets default values for members or not, so maybe this is unneccesary
         self.lastBlockFound = 0;
+        
+        // quick hacks to prevent NaNs from displayinh
+        self.validSharesThisRound = 1;
+        self.estimatedSecondsPerBlock = 1;
+        self.expectedSharesUntilLastBlockFound = 1;
+        self.poolSharesThisRound = 1;
     }
 }
 

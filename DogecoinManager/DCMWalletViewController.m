@@ -86,6 +86,17 @@
 
 -(IBAction)refreshWalletBalanceFromTouch:(id)sender
 {
+    if( self.wallet.address == nil ) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No wallet address configured"
+                                                        message:@"You need to add a wallet address (click Edit in the top right)"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    
    [self updateWalletBalance];
 }
 

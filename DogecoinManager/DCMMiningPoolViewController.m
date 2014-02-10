@@ -49,6 +49,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lastUpdatedLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editMiningPoolButton;
 
+
 @end
 
 @implementation DCMMiningPoolViewController
@@ -59,6 +60,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+   
     [self makeLabelHeaderLabel:self.yourAccountLabel];
     [self makeLabelHeaderLabel:self.currentRoundLabel];
     [self makeLabelHeaderLabel:self.lastBlockLabel];
@@ -100,8 +102,18 @@
 }
 
 
--(IBAction)doRefresh:(id)sender
+-(IBAction)refreshMiningPoolFromTouch:(id)sender
 {
+    if( self.miningPool.websiteURL == nil || self.miningPool.apiKey == nil ) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No mining pool configured"
+                                                        message:@"You need to configure your mining pool (click Edit in the top right)"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     [self updateMiningPoolInfo];
 }
 
@@ -127,20 +139,24 @@
 
 -(void)updateMiningPoolInfo
 {
-    if (self.miningPool.websiteURL == nil ) return;
+    if (self.miningPool.websiteURL == nil ) {
+        NSLog(@"skipping update mining pool, no website URL");
+        return;
+    }
 
     self.editMiningPoolButton.enabled = NO;
     
     __block HTProgressHUD *progressHUD = [[HTProgressHUD alloc] init];
     progressHUD.animation = [HTProgressHUDFadeZoomAnimation animation];
     progressHUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypePie];
-    progressHUD.text = @"Loading...";
     
     [progressHUD showWithAnimation:YES inView:self.view whileExecutingBlock:^{
         
         DCMMiningPool* pool = self.miningPool;
                               
         int numUpdateSteps = pool.numUpdateSteps;
+        
+        BOOL updatesFailed = NO;
         
         for (int i = 0; i < numUpdateSteps; i++) {
             
@@ -152,7 +168,12 @@
                 progressHUD.progress = (i*2.f + 1.f) / (numUpdateSteps * 2.f);
                 progressHUD.text = [NSString stringWithFormat:@"retrying %@", [pool getStepName:i]];
 
-                [pool updatePoolInfoForStep:i];
+                stepOk = [pool updatePoolInfoForStep:i];
+                
+                if( stepOk == NO ) {
+                    updatesFailed = YES;
+                    break;
+                }
             }
             
             progressHUD.progress = ((i+1)*2.f)/ (numUpdateSteps * 2.f);
@@ -163,7 +184,17 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.editMiningPoolButton.enabled = YES;
             
-            [self refreshViewLabels];
+            if( updatesFailed ) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unable failed"
+                                                                message:@"Unable to update mining pool, please check your settings or try again later"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            }
+            else {
+                [self refreshViewLabels];
+            }
         });
     }];
 }

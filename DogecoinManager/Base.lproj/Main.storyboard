@@ -418,7 +418,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="doRefresh:" destination="QUy-BD-bpt" eventType="touchUpInside" id="Uax-5a-TAe"/>
+                                    <action selector="refreshMiningPoolFromTouch:" destination="QUy-BD-bpt" eventType="touchUpInside" id="AgY-Mi-QIV"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Ɖ0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmM-OM-5zk">

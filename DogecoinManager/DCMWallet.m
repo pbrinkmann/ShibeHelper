@@ -27,7 +27,7 @@
 - (void)loadDataFromUserDefaults {
     NSUserDefaults *stdDefaults = [NSUserDefaults standardUserDefaults];
 
-    if ([stdDefaults objectForKey:@"address"]) {
+    if ([stdDefaults objectForKey:@"wallet.address"]) {
 
         self.address    = [stdDefaults objectForKey:@"wallet.address"];
         self.balance    = [stdDefaults objectForKey:@"wallet.balance"];

@@ -120,7 +120,33 @@
     }
 }
 
--(IBAction)ensureHTTPOnWebsiteURL:(id)sender
+-(IBAction)miningPoolWebsiteURLChanged:(id)sender
+{
+    [self ensureHTTPOnWebsiteURL];
+    
+    [self validateCurrentValues];
+    
+
+}
+
+-(IBAction)miningPoolAPIKeyChanged:(id)sender
+{
+    [self validateCurrentValues];
+}
+
+-(void)validateCurrentValues
+{
+    if( self.miningPoolWebsiteURLTextField.text.length < 9 || self.miningPoolAPIKeyTextField.text.length < 10) {
+        self.doneButton.enabled = FALSE;
+    }
+    else {
+        self.doneButton.enabled = TRUE;
+        
+    }
+}
+
+
+-(void)ensureHTTPOnWebsiteURL
 {
     if( [self.miningPoolWebsiteURLTextField.text isEqualToString:@"http:/"] ) {
         self.miningPoolWebsiteURLTextField.text = @"http://";

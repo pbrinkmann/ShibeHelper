@@ -47,6 +47,8 @@
 
 
 @property (weak, nonatomic) IBOutlet UILabel *lastUpdatedLabel;
+@property (nonatomic) BOOL lastUpdateFailed;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editMiningPoolButton;
 
 
@@ -59,6 +61,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.lastUpdateFailed = FALSE;
     
    
     [self makeLabelHeaderLabel:self.yourAccountLabel];
@@ -185,14 +189,16 @@
             self.editMiningPoolButton.enabled = YES;
             
             if( updatesFailed ) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unable failed"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Update failed"
                                                                 message:@"Unable to update mining pool, please check your settings or try again later"
                                                                delegate:nil
                                                       cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
                 [alert show];
+                self.lastUpdateFailed = TRUE;
             }
             else {
+                self.lastUpdateFailed = FALSE;
                 [self refreshViewLabels];
             }
         });
@@ -304,12 +310,22 @@
 -(void)lastUpdatedTimerFired:(NSTimer *) theTimer
 {
     if(self.miningPool.lastUpdate != nil) {
-        NSTimeInterval timeSinceLastUpdate =[[theTimer fireDate] timeIntervalSinceDate:self.miningPool.lastUpdate];
-        self.lastUpdatedLabel.text = [DCMUtils lastUpdatedForInterval:timeSinceLastUpdate];
         
+        if( self.lastUpdateFailed ) {
+            self.lastUpdatedLabel.backgroundColor = [UIColor redColor];
+            self.lastUpdatedLabel.textColor = [UIColor whiteColor];
+            self.lastUpdatedLabel.text = @"last updated failed";
+        }
+        else {
+            self.lastUpdatedLabel.backgroundColor = [UIColor whiteColor];
+            self.lastUpdatedLabel.textColor = [UIColor blackColor];
+            NSTimeInterval timeSinceLastUpdate =[[theTimer fireDate] timeIntervalSinceDate:self.miningPool.lastUpdate];
+            self.lastUpdatedLabel.text = [DCMUtils lastUpdatedForInterval:timeSinceLastUpdate];
+        }
     }
 }
-                                        
+
+
 CGColorRef CreateDeviceRGBColor(CGFloat r, CGFloat g, CGFloat b, CGFloat a)
 {
     CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();

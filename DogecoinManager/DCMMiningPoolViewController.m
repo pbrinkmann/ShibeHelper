@@ -168,10 +168,15 @@
 
             BOOL stepOk = [pool updatePoolInfoForStep:i];
             
+            // some APIs seem to like a small break between calls
+            [NSThread sleepForTimeInterval: .1];
+            
             if( !stepOk) {
                 progressHUD.progress = (i*2.f + 1.f) / (numUpdateSteps * 2.f);
-                progressHUD.text = [NSString stringWithFormat:@"retrying %@", [pool getStepName:i]];
-
+                NSString *msg =[NSString stringWithFormat:@"retrying %@", [pool getStepName:i]];
+                progressHUD.text = msg;
+                NSLog(@"previous call failed, %@", msg);
+                
                 stepOk = [pool updatePoolInfoForStep:i];
                 
                 if( stepOk == NO ) {
@@ -212,10 +217,16 @@
 {
 
     // Do some calculations first
-    
-    float validSharesPercent =
-        100.f - 100.f * self.miningPool.invalidSharesThisRound /
-                    (self.miningPool.validSharesThisRound + self.miningPool.invalidSharesThisRound);
+
+    float validSharesPercent;
+    if (self.miningPool.validSharesThisRound + self.miningPool.invalidSharesThisRound > 0) {
+        validSharesPercent =
+            100.f - 100.f * self.miningPool.invalidSharesThisRound /
+                        (self.miningPool.validSharesThisRound + self.miningPool.invalidSharesThisRound);
+    } else {
+        validSharesPercent = 0;
+    }
+
     float blockTimePercent =
         100.f * self.miningPool.secondsSinceLastBlock / self.miningPool.estimatedSecondsPerBlock;
 

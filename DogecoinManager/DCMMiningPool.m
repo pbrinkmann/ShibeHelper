@@ -456,7 +456,7 @@
     NSData *rawdata = [NSData dataWithContentsOfURL:url];
     
     if( rawdata == nil) {
-        NSLog(@"could not fetch data from pool API");
+        NSLog(@"could not fetch data from pool API for method %@", apiMethod);
         return nil;
     }
     

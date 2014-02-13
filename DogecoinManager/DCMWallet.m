@@ -115,6 +115,11 @@
 
             doge_to_usd = -1;
         }
+        
+        if( doge_to_usd == 0 ) {
+            NSLog(@"Doge to USD is 0, dogeapi is probably having issues");
+            doge_to_usd = -1;
+        }
     }
 
     

@@ -9,37 +9,22 @@ Bugs
 
 New Features/Enhancements
 =========================
+[ ] Add "new block!" overlay that fades out if the existing block doesn't match the current one
 [ ] Make wallet address copyable (or copy when it's touched) on wallet balance screen
 [ ] Try and get rid of all compiler warnings
-[ ] test on top 15 MPOS pools - maybe issue warnings if any of them specifically don't support the API?
-  [:(] https://dogehouse.org/ - no api available, has 501 error
-  [:(] https://fast-pool.com/ - no api available, has 501 error
-  [X] https://doge.hashfaster.com/
-  [X] https://doge.nut2pools.com/
-  [X] https://www.suchcoins.com/ 
-  [X] https://pool.dogechain.info/
-  [x] https://teamdoge.com/ - no QR code, but manual entry works
-  [:(] https://doge.netcodepool.org/ - no api available, has 501 error
-  [?] http://doge.poolerino.com/ - doge pool was down during testing
-  [X] https://doge.rapidhash.net/
-  [X] http://doge.dedicatedpool.com/
-  [X] https://doge.cryptoculture.net/  CHECK FOR DOGECOINS!!!!!! WAS MINING HERE ALL NIGHT
-  [:(] https://www.shibepool.com/ - no api available, has 501 error
-  [:|] https://pool.chunky.ms/ - has special URL for API, no QR code - https://pool.chunky.ms/doge/index.php?page=api&action=public
-  [!$?!%?@%@] https://doge.pool.pm/ - has QR code, but it sets HTTP://, API only works on httpS://
-[ ] Add custom warning for the following popular pools without API support if someone enters that in the miniing pool URL field
-    ! OR , hit <website>/index.php?page=api&action=public and look for 501 Not implemented
-    * dogehouse.org 
-    * fast-pool.com
-    * doge.netcodepool.org
-    * www.shibepool.com
-[ ] Special warning for non-standard API location?  No QR code. https://pool.chunky.ms/doge/index.php?page=api&action=public
-[ ] If no response on http, retry with https?  See doge.poo.pm
-
+[ ] Add warning for the pools without API support if someone enters a URL in the mining pool URL field
+    and hitting <website>/index.php?page=api&action=public returns a 501 Not implemented
+[ ] Add special compatibility layer -
+        * for pool.chunky.ms, add the /doge component - https://pool.chunky.ms/doge/index.php?page=api&action=public
+        * for doge.pool.pm, make sure the requests are going to https, NOT http (which is what the QR code says to do)
 [ ] Replace NSLogs with something that doesn't spam in production
-[ ] Check balance for valid pools - might be a few hundred doges lying around :)
-    or... wait until multiple pool support for PRO version!!!!
-
+[ ] relocate "refresh" button for mining pool - it's too easy to hit the wallet nav button instead
+[ ] Write description for App Store,
+    include mention that the following popular pools are NOT supported:
+        * dogehouse.org 
+        * fast-pool.com
+        * doge.netcodepool.org
+        * www.shibepool.com
 
 DONE!
 [X] display DOGE => USD
@@ -68,7 +53,23 @@ DONE!
 [X] bug:Initial load of mining pool without having saved values to load results in NaN% and other ugliness
 [X] No validation on mining pool entries (just need basics - both URL and API KEY and not empty string)
 [X] Review license for both thirdparty libraries
-
+[X] test on top 15 MPOS pools - maybe issue warnings if any of them specifically don't support the API?
+  [:(] https://dogehouse.org/ - no api available, has 501 error
+  [:(] https://fast-pool.com/ - no api available, has 501 error
+  [X] https://doge.hashfaster.com/
+  [X] https://doge.nut2pools.com/
+  [X] https://www.suchcoins.com/ 
+  [X] https://pool.dogechain.info/
+  [x] https://teamdoge.com/ - no QR code, but manual entry works
+  [:(] https://doge.netcodepool.org/ - no api available, has 501 error
+  [?] http://doge.poolerino.com/ - doge pool was down during testing
+  [X] https://doge.rapidhash.net/
+  [X] http://doge.dedicatedpool.com/
+  [X] https://doge.cryptoculture.net/  CHECK FOR DOGECOINS!!!!!! WAS MINING HERE ALL NIGHT
+  [:(] https://www.shibepool.com/ - no api available, has 501 error
+  [:|] https://pool.chunky.ms/ - has special URL for API, no QR code - https://pool.chunky.ms/doge/index.php?page=api&action=public
+  [!$?!%?@%@] https://doge.pool.pm/ - has QR code, but it sets HTTP://, API only works on httpS://
+[X] If dogeapi returns 0 for DOGE => USD conversion, don't show USD amount
 
 ======================================================================
 For "Pro" version 1.0:
@@ -100,6 +101,7 @@ New Features/Enhancements
     Do parallel requests to multiple pools
     Do only the needed requests for the summary display
     Do all requests when hitting detail view
+[ ] Multiple sources for DOGE => USD conversions (for comparison [PRO?] and fallback)
 
 ======================================================================
 For "Pro" version 1.1:
@@ -119,7 +121,6 @@ New Features/Enhancements
 =========================
 [ ] Miner control - have presets, like "watch TV" which sets intensity of [cs]gminers to 12 (and maybe after a timeout period set back to 18/20/whatever)
 [ ] Graphs for BTC/USD values
-[ ] Multiple sources for BTC/USD conversions (for comparison and fallback)
 [ ] Enhance values for mining pool - emphasize important ones (hasrate, balance), indicate above/below average values for block reward and block time
 
 ======================================================================

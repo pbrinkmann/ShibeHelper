@@ -47,6 +47,10 @@
 
 @property int numUpdateSteps;
 
+// Are we still on the same block as we were after the last update (or load of saved data)?
+@property BOOL stillOnSameBlock;
+
+
 -(NSString*)getStepName:(int)step;
 -(BOOL)updatePoolInfoForStep:(int) step;
 

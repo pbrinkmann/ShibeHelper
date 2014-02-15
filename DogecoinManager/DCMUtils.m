@@ -76,5 +76,23 @@
     return [[UIScreen mainScreen] bounds].size.height >= 568 ? TRUE : FALSE;
 }
 
++ (void)drawVerticallyCenteredString:(NSString *)s withFont:(UIFont *)font inRect:(CGRect)contextRect withColor:(UIColor*)color {
+    
+    CGFloat fontHeight = font.pointSize;
+    CGFloat yOffset = (contextRect.size.height - fontHeight) / 2.0;
+    
+    CGRect textRect = CGRectMake(0, yOffset, contextRect.size.width, fontHeight);
+    NSMutableParagraphStyle *textStyle =
+    [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
+    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    textStyle.alignment = NSTextAlignmentCenter;
+    
+    [s drawInRect:textRect
+   withAttributes:@{
+                    NSFontAttributeName : font,
+                    NSParagraphStyleAttributeName : textStyle,
+                    NSForegroundColorAttributeName : color
+                    }];
+}
 
 @end

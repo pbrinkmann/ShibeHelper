@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		040525AE188F903100BE3172 /* TODOs in Resources */ = {isa = PBXBuildFile; fileRef = 040525AD188F903100BE3172 /* TODOs */; };
 		040525B4188F933300BE3172 /* DCMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 040525B3188F933300BE3172 /* DCMUtils.m */; };
+		0410462F18B00BC1009BEE3F /* DCMFlashDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410462E18B00BC1009BEE3F /* DCMFlashDisplayView.m */; };
 		041470F2187FBB8200007425 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041470F1187FBB8200007425 /* Foundation.framework */; };
 		041470F4187FBB8200007425 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041470F3187FBB8200007425 /* CoreGraphics.framework */; };
 		041470F6187FBB8200007425 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041470F5187FBB8200007425 /* UIKit.framework */; };
@@ -58,6 +59,8 @@
 		040525AD188F903100BE3172 /* TODOs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODOs; sourceTree = "<group>"; };
 		040525B2188F933300BE3172 /* DCMUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMUtils.h; sourceTree = "<group>"; };
 		040525B3188F933300BE3172 /* DCMUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMUtils.m; sourceTree = "<group>"; };
+		0410462D18B00BC1009BEE3F /* DCMFlashDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMFlashDisplayView.h; sourceTree = "<group>"; };
+		0410462E18B00BC1009BEE3F /* DCMFlashDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMFlashDisplayView.m; sourceTree = "<group>"; };
 		041470EE187FBB8200007425 /* DogecoinManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogecoinManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		041470F1187FBB8200007425 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		041470F3187FBB8200007425 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -244,6 +247,8 @@
 		04AE4B7718A4DECC00F2E0AA /* Mining Pool */ = {
 			isa = PBXGroup;
 			children = (
+				0410462D18B00BC1009BEE3F /* DCMFlashDisplayView.h */,
+				0410462E18B00BC1009BEE3F /* DCMFlashDisplayView.m */,
 				04147109187FBB8200007425 /* DCMMiningPoolViewController.h */,
 				0414710A187FBB8200007425 /* DCMMiningPoolViewController.m */,
 				04147141188BDA8B00007425 /* DCMEditMiningPoolViewController.h */,
@@ -400,6 +405,7 @@
 				04EC0ED2189F215E000BE0A1 /* HTProgressHUDIndicatorView.m in Sources */,
 				04EC0ECE189F215E000BE0A1 /* HTProgressHUD.m in Sources */,
 				0414712E1888DEDD00007425 /* DCMWallet.m in Sources */,
+				0410462F18B00BC1009BEE3F /* DCMFlashDisplayView.m in Sources */,
 				04147143188BDA8B00007425 /* DCMEditMiningPoolViewController.m in Sources */,
 				04147102187FBB8200007425 /* DCMAppDelegate.m in Sources */,
 				0414712B18889AF900007425 /* DCMEditWalletAddressViewController.m in Sources */,

@@ -13,5 +13,6 @@
 +(NSString*) lastUpdatedForInterval:(NSTimeInterval) interval;
 +(int) getAvgBlockRewardForBlock:(int)block;
 +(BOOL) isTallDevice;
++(void)drawVerticallyCenteredString:(NSString *)s withFont:(UIFont *)font inRect:(CGRect)contextRect withColor:(UIColor*)color;
 
 @end

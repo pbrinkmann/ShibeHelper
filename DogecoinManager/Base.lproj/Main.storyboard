@@ -584,6 +584,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qJR-Ld-xaz" customClass="DCMFlashDisplayView">
+                                <rect key="frame" x="224" y="220" width="90" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -597,6 +601,7 @@
                             <constraint firstItem="HwJ-Il-Ltw" firstAttribute="baseline" secondItem="dB4-fl-wtE" secondAttribute="baseline" id="7a5-c9-Ds7"/>
                             <constraint firstItem="IxS-F0-KbD" firstAttribute="leading" secondItem="XBa-Dk-9t5" secondAttribute="leading" id="8TG-L9-xJ5"/>
                             <constraint firstItem="NbN-P0-enB" firstAttribute="leading" secondItem="LnG-PM-BCk" secondAttribute="leading" id="8YB-uN-bUI"/>
+                            <constraint firstItem="qJR-Ld-xaz" firstAttribute="top" secondItem="20u-vV-rPU" secondAttribute="bottom" constant="85" id="8lD-EJ-tAl"/>
                             <constraint firstItem="zb3-it-gJX" firstAttribute="baseline" secondItem="vyI-4Y-9N3" secondAttribute="baseline" id="99F-yC-q4C"/>
                             <constraint firstItem="NbN-P0-enB" firstAttribute="baseline" secondItem="LnG-PM-BCk" secondAttribute="baseline" id="9nN-2K-Zko"/>
                             <constraint firstItem="97a-3t-f4n" firstAttribute="trailing" secondItem="dVQ-aq-ILH" secondAttribute="trailing" id="9qg-K8-PZJ"/>
@@ -608,12 +613,14 @@
                             <constraint firstItem="HwJ-Il-Ltw" firstAttribute="leading" secondItem="9k7-KT-Odu" secondAttribute="leading" id="IHF-co-cK8"/>
                             <constraint firstItem="5B1-6g-Dbr" firstAttribute="leading" secondItem="9k7-KT-Odu" secondAttribute="leading" id="IZW-6s-Ga7"/>
                             <constraint firstItem="LnG-PM-BCk" firstAttribute="leading" secondItem="4xQ-9N-g4X" secondAttribute="leading" id="Ifb-gQ-FOT"/>
+                            <constraint firstItem="qJR-Ld-xaz" firstAttribute="leading" secondItem="ezR-mW-M6M" secondAttribute="trailing" constant="-76" id="IvH-4q-vxQ"/>
                             <constraint firstItem="LnG-PM-BCk" firstAttribute="leading" secondItem="thj-eR-5pd" secondAttribute="leading" id="Ix9-Um-DAA"/>
                             <constraint firstItem="RYC-zj-qV0" firstAttribute="top" secondItem="VmM-OM-5zk" secondAttribute="top" id="J20-9N-6iz"/>
                             <constraint firstItem="9k7-KT-Odu" firstAttribute="top" secondItem="LnG-PM-BCk" secondAttribute="bottom" id="KDr-dG-vM9"/>
                             <constraint firstItem="pnv-fT-3Wk" firstAttribute="top" secondItem="vyI-4Y-9N3" secondAttribute="bottom" constant="20" id="LCB-Ne-WBr"/>
                             <constraint firstItem="ybn-6Q-lzt" firstAttribute="baseline" secondItem="8B2-U1-hcS" secondAttribute="baseline" id="LUd-3d-bzh"/>
                             <constraint firstItem="FgG-FL-KXK" firstAttribute="top" secondItem="3if-NT-hAF" secondAttribute="top" id="LzF-mC-DTc"/>
+                            <constraint firstItem="qJR-Ld-xaz" firstAttribute="top" secondItem="vhb-6D-dp4" secondAttribute="bottom" constant="5" id="M9z-L9-GjR"/>
                             <constraint firstItem="zb3-it-gJX" firstAttribute="top" secondItem="vyI-4Y-9N3" secondAttribute="top" id="Md5-Tc-5hM"/>
                             <constraint firstItem="97a-3t-f4n" firstAttribute="leading" secondItem="dVQ-aq-ILH" secondAttribute="leading" id="Myo-lw-35i"/>
                             <constraint firstItem="FgG-FL-KXK" firstAttribute="leading" secondItem="8B2-U1-hcS" secondAttribute="leading" id="Nq4-TP-MKH"/>
@@ -696,6 +703,7 @@
                         <outlet property="editMiningPoolButton" destination="Cxb-OT-vIx" id="Fcb-ke-yw7"/>
                         <outlet property="estPercentDoneLabel" destination="FJa-FC-MDv" id="AX0-sU-jau"/>
                         <outlet property="estimatedEarningsLabel" destination="thj-eR-5pd" id="XnH-dk-ojH"/>
+                        <outlet property="foundNewBlockFlashView" destination="qJR-Ld-xaz" id="ieT-rV-nDN"/>
                         <outlet property="hashrateLabel" destination="IxS-F0-KbD" id="h38-ra-9l5"/>
                         <outlet property="lastBlockAmountLabel" destination="NbN-P0-enB" id="Pj8-Z2-FOL"/>
                         <outlet property="lastBlockFinderLabel" destination="zb3-it-gJX" id="crm-7N-TCY"/>

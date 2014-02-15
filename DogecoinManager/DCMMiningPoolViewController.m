@@ -8,6 +8,7 @@
 
 #import "DCMMiningPoolViewController.h"
 #import "DCMEditMiningPoolViewController.h"
+#import "DCMFlashDisplayView.h"
 
 #import "DCMUtils.h"
 
@@ -51,6 +52,7 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editMiningPoolButton;
 
+@property (weak, nonatomic) IBOutlet DCMFlashDisplayView *foundNewBlockFlashView;
 
 @end
 
@@ -82,6 +84,8 @@
                                                       userInfo:nil
                                                        repeats:YES];
     
+
+    [self.foundNewBlockFlashView initViewWithText:@"new block!"];
 
 }
 
@@ -205,6 +209,10 @@
             else {
                 self.lastUpdateFailed = FALSE;
                 [self refreshViewLabels];
+                
+                if(! self.miningPool.stillOnSameBlock) {
+                    [self.foundNewBlockFlashView doFlashAnimation];
+                }
             }
         });
     }];
@@ -344,6 +352,12 @@ CGColorRef CreateDeviceRGBColor(CGFloat r, CGFloat g, CGFloat b, CGFloat a)
     CGColorRef color = CGColorCreate(rgb, comps);
     CGColorSpaceRelease(rgb);
     return color;
+}
+
+
+-(IBAction)flashme:(id)sender{
+    [self.foundNewBlockFlashView doFlashAnimation];
+
 }
 
 

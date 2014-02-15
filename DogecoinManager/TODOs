@@ -9,7 +9,6 @@ Bugs
 
 New Features/Enhancements
 =========================
-[ ] Add "new block!" overlay that fades out if the existing block doesn't match the current one
 [ ] Make wallet address copyable (or copy when it's touched) on wallet balance screen
 [ ] Try and get rid of all compiler warnings
 [ ] Add warning for the pools without API support if someone enters a URL in the mining pool URL field
@@ -19,6 +18,13 @@ New Features/Enhancements
         * for doge.pool.pm, make sure the requests are going to https, NOT http (which is what the QR code says to do)
 [ ] Replace NSLogs with something that doesn't spam in production
 [ ] relocate "refresh" button for mining pool - it's too easy to hit the wallet nav button instead
+
+
+Release Steps
+=============
+[ ] Test on actual iPhone 4/4S screen
+[ ] Do whatever steps are necessary to produce production bundle
+[ ] Screenshots for App Store
 [ ] Write description for App Store,
     include mention that the following popular pools are NOT supported:
         * dogehouse.org 
@@ -70,6 +76,15 @@ DONE!
   [:|] https://pool.chunky.ms/ - has special URL for API, no QR code - https://pool.chunky.ms/doge/index.php?page=api&action=public
   [!$?!%?@%@] https://doge.pool.pm/ - has QR code, but it sets HTTP://, API only works on httpS://
 [X] If dogeapi returns 0 for DOGE => USD conversion, don't show USD amount
+[X] Add "new block!" overlay that fades out if the existing block doesn't match the current one
+[X] FUCK - I can have either: custom view to display New Block!, OR: scrollable view.. WTF FUCK FUCK WTF this is retarded
+
+
+
+
+
+
+
 
 ======================================================================
 For "Pro" version 1.0:

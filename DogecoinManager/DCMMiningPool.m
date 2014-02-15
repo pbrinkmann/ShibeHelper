@@ -10,7 +10,6 @@
 
 @interface DCMMiningPool ()
 
-@property BOOL stillOnSameBlock;
 
 @end
 
@@ -24,8 +23,6 @@
     self.numUpdateSteps = 5;
     
     if(self) {
-
-
         [self loadDataFromUserDefaults];
     }
     
@@ -103,7 +100,7 @@
     [stdDefaults setObject:[NSNumber numberWithInt:self.currentNetworkBlock]
                     forKey:@"miningpool.currentNetworkBlock"];
     [stdDefaults setObject:[NSNumber numberWithInt:self.lastBlockFound]
-                    forKey:@"lastBlockFound"];
+                    forKey:@"miningpool.lastBlockFound"];
 
     [stdDefaults setObject:[NSNumber numberWithInt:self.poolSharesThisRound]
                     forKey:@"miningpool.poolSharesThisRound"];
@@ -315,6 +312,7 @@
     self.currentDifficulty        = [currentDifficulty intValue];
     self.currentNetworkBlock      = [currentNetworkBlock intValue];
     
+    NSLog(@"lastblock: %d, this block: %@", self.lastBlockFound, lastBlockFound);
     if( self.lastBlockFound == [lastBlockFound intValue] ) {
         self.stillOnSameBlock = TRUE;
     }

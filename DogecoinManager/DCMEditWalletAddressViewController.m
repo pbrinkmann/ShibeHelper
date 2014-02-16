@@ -60,7 +60,7 @@
 {
 
     NSString *newWalletAddress =self.walletAddressTextField.text;
-    NSLog(@"wallet address now: %@", newWalletAddress);
+    DLog(@"wallet address now: %@", newWalletAddress);
     
     if( ! [newWalletAddress hasPrefix: @"D"] ) {
         self.walletAddressErrorLabel.text =  @"Address does not start with D";
@@ -101,7 +101,7 @@
 {
     
     if( defaultWalletAddress != nil) {
-        NSLog(@"updating with %@", defaultWalletAddress);
+        DLog(@"updating with %@", defaultWalletAddress);
 
         self.walletAddress=defaultWalletAddress;
 
@@ -123,7 +123,7 @@
     }
     
     if(self.walletAddressTextField.text.length > 0) {
-        NSLog(@"setting wallet address");
+        DLog(@"setting wallet address");
         self.walletAddress = self.walletAddressTextField.text;
     }
 }

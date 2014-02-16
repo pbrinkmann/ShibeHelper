@@ -6,17 +6,8 @@ For version 1.0 release to the wild:
 Bugs
 ====
 
-
 New Features/Enhancements
 =========================
-[ ] For mining pool, verify that web address looks valid and HEAD returns a [23]00 value
-[ ] Add warning for the pools without API support if someone enters a URL in the mining pool URL field
-    and hitting <website>/index.php?page=api&action=public returns a 501 Not implemented
-[ ] Add special compatibility layer -
-        * for pool.chunky.ms, add the /doge component - https://pool.chunky.ms/doge/index.php?page=api&action=public
-        * for doge.pool.pm, make sure the requests are going to https, NOT http (which is what the QR code says to do)
-[ ] Replace NSLogs with something that doesn't spam in production
-
 [ ] Try and get rid of all compiler warnings - hmmm... it doesn't like my storyboard constraints, BUT, if I change them, shit gets fucked up.
 
 
@@ -82,7 +73,13 @@ DONE!
 [X] trim whitespace on all mining pool text fields (wallet address already errors on invalid characters)
 [X] relocate "refresh" button for mining pool - it's too easy to hit the wallet nav button instead
     - Traditionally, it's the circular arrow icon somewhere, OR the "pull to refresh" shit
-
+[X] Add URL validation to edit mining pool after user changes URL. 
+    Do a HEAD request to the public API (no token required), and report on:
+        * 501 Not implemented - report probably not supported
+        * 404 - check path?
+        * anything else - invalid website?
+[X] bugfix: Mining pool layout gets screwed up after returning from edit screen
+[X] Replace NSLogs with something that doesn't spam in production
 
 
 
@@ -121,6 +118,10 @@ New Features/Enhancements
     Do all requests when hitting detail view
 [ ] Multiple sources for DOGE => USD conversions (for comparison [PRO?] and fallback)
 [ ] More "native" copy for wallet address, see UIMenuController or something like https://github.com/questbeat/QBPopupMenu
+[ ] Add special compatibility layer (after verifying these are still issues) -
+        * for pool.chunky.ms, add the /doge component - https://pool.chunky.ms/doge/index.php?page=api&action=public
+        * for doge.pool.pm, make sure the requests are going to https, NOT http (which is what the QR code says to do)
+        
 
 ======================================================================
 For "Pro" version 1.1:

@@ -131,19 +131,19 @@
 
 - (IBAction)unwindToMiningPool:(UIStoryboardSegue *)segue
 {
-    NSLog(@"User left mining pool edit view");
+    DLog(@"User left mining pool edit view");
     
     DCMEditMiningPoolViewController *source = [segue sourceViewController];
     
     if (source.miningPoolAPIKey != nil) {
-        NSLog(@"Looks like we have a new mining pool API key: %@", source.miningPoolAPIKey);
+        DLog(@"Looks like we have a new mining pool API key: %@", source.miningPoolAPIKey);
         self.miningPool.apiKey = source.miningPoolAPIKey;
         self.miningPool.websiteURL = source.miningPoolWebsiteURL;
 
         [self updateMiningPoolInfo];
     }
     else {
-        NSLog(@"No pool info entered");
+        DLog(@"No pool info entered");
         
     }
 }
@@ -151,13 +151,12 @@
 -(void)updateMiningPoolInfo
 {
     if (self.miningPool.websiteURL == nil ) {
-        NSLog(@"skipping update mining pool, no website URL");
+        DLog(@"skipping update mining pool, no website URL");
         return;
     }
 
     self.editMiningPoolButton.enabled = NO;
     self.refreshingMiningPoolButton.enabled = NO;
-
     
     __block HTProgressHUD *progressHUD = [[HTProgressHUD alloc] init];
     progressHUD.animation = [HTProgressHUDFadeZoomAnimation animation];
@@ -184,7 +183,7 @@
                 progressHUD.progress = (i*2.f + 1.f) / (numUpdateSteps * 2.f);
                 NSString *msg =[NSString stringWithFormat:@"retrying %@", [pool getStepName:i]];
                 progressHUD.text = msg;
-                NSLog(@"previous call failed, %@", msg);
+                DLog(@"previous call failed, %@", msg);
                 
                 stepOk = [pool updatePoolInfoForStep:i];
                 
@@ -366,6 +365,7 @@ CGColorRef CreateDeviceRGBColor(CGFloat r, CGFloat g, CGFloat b, CGFloat a)
     [self.foundNewBlockFlashView doFlashAnimation];
 
 }
+
 
 
 @end

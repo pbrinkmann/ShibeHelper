@@ -39,7 +39,7 @@
         }
 
     } else {
-        NSLog(@"no defaults found, setting balance to 0");
+        DLog(@"no defaults found, setting balance to 0");
         self.balance = [NSNumber numberWithInt:0];
     }
 }
@@ -58,7 +58,7 @@
 -(BOOL)updateBalance
 {
     if(self.address == nil) {
-        NSLog(@"No address found, wallet skipping update");
+        DLog(@"No address found, wallet skipping update");
         return FALSE;
     }
     //
@@ -70,7 +70,7 @@
     NSString *str = [NSString stringWithContentsOfURL:[NSURL URLWithString:serverAddress] encoding:NSUTF8StringEncoding error:&error];
     
     if (str == nil) {
-        NSLog(@"Failed to fetch wallet balance: %@", [error localizedDescription]);
+        DLog(@"Failed to fetch wallet balance: %@", [error localizedDescription]);
         return FALSE;
     }
     
@@ -79,16 +79,16 @@
     
     if( ![scanner scanFloat:&balance] ) {
         if( [str hasPrefix:@"ERROR"] ) {
-            NSLog(@"Unable to retrieve balance for wallet: %@", str);
+            DLog(@"Unable to retrieve balance for wallet: %@", str);
         }
         else {
-            NSLog(@"Unknown error when parsing string for float: %@", str);
+            DLog(@"Unknown error when parsing string for float: %@", str);
         }
         return FALSE;
     }
     
 
-    NSLog(@"feteched wallet balance of %@", str);
+    DLog(@"feteched wallet balance of %@", str);
     
   
     
@@ -100,7 +100,7 @@
     float doge_to_usd;
     
     if( str == nil) {
-        NSLog(@"Failed to fetch USD conversion rate: %@", [error localizedDescription] );
+        DLog(@"Failed to fetch USD conversion rate: %@", [error localizedDescription] );
         doge_to_usd = -1;
     }
     else {
@@ -111,19 +111,19 @@
         
         if( ![scanner scanFloat:&doge_to_usd] ) {
 
-            NSLog(@"Unknown error when parsing string for float: %@", str);
+            DLog(@"Unknown error when parsing string for float: %@", str);
 
             doge_to_usd = -1;
         }
         
         if( doge_to_usd == 0 ) {
-            NSLog(@"Doge to USD is 0, dogeapi is probably having issues");
+            DLog(@"Doge to USD is 0, dogeapi is probably having issues");
             doge_to_usd = -1;
         }
     }
 
     
-    NSLog(@"feteched usd conversion rate of %@", str);
+    DLog(@"feteched usd conversion rate of %@", str);
     
     //
     // Update our fields with the fetched data

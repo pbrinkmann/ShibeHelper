@@ -55,4 +55,7 @@
 -(BOOL)updatePoolInfoForStep:(int) step;
 
 
+// Returns an error string, or nil if no error
++(NSString*)checkForValidURL:(NSString*)poolURL;
+
 @end

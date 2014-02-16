@@ -89,7 +89,7 @@
         CGPoint p  = [sender locationOfTouch:(NSUInteger)0 inView:(UIView *)self.view];
         
         if( CGRectContainsPoint( self.walletAddressTextfield.frame, p) ) {
-            NSLog(@"We hit the address!");
+            DLog(@"We hit the address!");
             UIPasteboard *pb = [UIPasteboard generalPasteboard];
             [pb setString:[self.walletAddressTextfield text]];
             [self.walletAddressCopiedFlashView doFlashAnimation];
@@ -117,7 +117,7 @@
         [self updateWalletBalance];
     }
     else {
-        NSLog(@"No new address entered");
+        DLog(@"No new address entered");
     }
  }
 
@@ -140,7 +140,7 @@
 -(void)updateWalletBalance {
     
     if( self.wallet.address == nil ) {
-        NSLog(@"controller skipping wallet update - no addres");
+        DLog(@"controller skipping wallet update - no addres");
         return;
     }
     

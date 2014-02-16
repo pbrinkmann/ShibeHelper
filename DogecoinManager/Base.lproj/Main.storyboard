@@ -137,7 +137,7 @@
                                 <rect key="frame" x="20" y="264" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="walletAddressChanged:" destination="dKz-tl-rkw" eventType="editingChanged" id="0nE-e1-f3N"/>
                                 </connections>
@@ -225,16 +225,17 @@
                                 <rect key="frame" x="20" y="220" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="miningPoolWebsiteURLChanged:" destination="ynS-fH-gD4" eventType="editingChanged" id="J2D-sw-eO1"/>
+                                    <action selector="validateURLAfterEditDone:" destination="ynS-fH-gD4" eventType="editingDidEndOnExit" id="vI7-Sm-LtQ"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="please enter your API key here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wJB-xw-o9p">
                                 <rect key="frame" x="20" y="302" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="miningPoolAPIKeyChanged:" destination="ynS-fH-gD4" eventType="editingChanged" id="XdY-XI-p53"/>
                                 </connections>
@@ -314,6 +315,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelButton" destination="Bng-ad-9Va" id="75k-4y-FNJ"/>
                         <outlet property="doneButton" destination="Zx8-Ox-ER4" id="0T4-WS-baW"/>
                         <outlet property="miningPoolAPIKeyTextField" destination="wJB-xw-o9p" id="TkW-kb-IUu"/>
                         <outlet property="miningPoolWebsiteURLTextField" destination="7UP-3z-O7w" id="AM4-Gt-U9U"/>
@@ -582,7 +584,7 @@
                         <constraints>
                             <constraint firstItem="Bv2-BW-UXC" firstAttribute="trailing" secondItem="zb3-it-gJX" secondAttribute="trailing" id="0FF-wC-ghI"/>
                             <constraint firstItem="FJa-FC-MDv" firstAttribute="top" secondItem="Dyj-hc-860" secondAttribute="bottom" id="1EX-4U-sof"/>
-                            <constraint firstItem="gYP-RO-hkt" firstAttribute="leading" secondItem="pl2-HY-XJL" secondAttribute="trailing" constant="-156" id="2FM-tG-x1K"/>
+                            <constraint firstItem="gYP-RO-hkt" firstAttribute="trailing" secondItem="IxS-F0-KbD" secondAttribute="trailing" id="20n-Ll-IZW"/>
                             <constraint firstItem="RYC-zj-qV0" firstAttribute="centerY" secondItem="VmM-OM-5zk" secondAttribute="centerY" id="2ab-vF-UbY"/>
                             <constraint firstItem="97a-3t-f4n" firstAttribute="top" secondItem="thj-eR-5pd" secondAttribute="bottom" constant="4" id="3eI-Bq-Pkl"/>
                             <constraint firstItem="LnG-PM-BCk" firstAttribute="leading" secondItem="ezR-mW-M6M" secondAttribute="leading" id="5IM-mf-X7Q"/>
@@ -615,9 +617,9 @@
                             <constraint firstItem="pl2-HY-XJL" firstAttribute="top" secondItem="VmM-OM-5zk" secondAttribute="bottom" id="PEa-d9-Tui"/>
                             <constraint firstItem="9k7-KT-Odu" firstAttribute="trailing" secondItem="4xQ-9N-g4X" secondAttribute="trailing" id="QVd-vz-9kY"/>
                             <constraint firstItem="XBa-Dk-9t5" firstAttribute="top" secondItem="whQ-25-aM7" secondAttribute="bottom" constant="30" id="Qeq-XR-NxY"/>
-                            <constraint firstItem="Bv2-BW-UXC" firstAttribute="leading" secondItem="vyI-4Y-9N3" secondAttribute="leading" id="Qh5-on-TA1"/>
                             <constraint firstItem="zb3-it-gJX" firstAttribute="trailing" secondItem="HwJ-Il-Ltw" secondAttribute="trailing" id="SRw-e2-467"/>
                             <constraint firstItem="IxS-F0-KbD" firstAttribute="baseline" secondItem="XBa-Dk-9t5" secondAttribute="baseline" id="SWa-fe-Mdm"/>
+                            <constraint firstItem="Bv2-BW-UXC" firstAttribute="centerX" secondItem="97a-3t-f4n" secondAttribute="centerX" id="T2O-jD-NO7"/>
                             <constraint firstItem="FJa-FC-MDv" firstAttribute="trailing" secondItem="YRe-7y-9qL" secondAttribute="trailing" id="UTA-N4-fOe"/>
                             <constraint firstItem="IxS-F0-KbD" firstAttribute="leading" secondItem="VmM-OM-5zk" secondAttribute="leading" id="UV3-3T-gMN"/>
                             <constraint firstItem="whQ-25-aM7" firstAttribute="leading" secondItem="20u-vV-rPU" secondAttribute="leading" id="Uub-zO-pbZ"/>

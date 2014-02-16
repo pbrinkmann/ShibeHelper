@@ -7,15 +7,24 @@
 //
 
 #import "DCMEditMiningPoolViewController.h"
+#import "DCMMiningPool.h"
 
 #import "CDZQRScanningViewController.h"
+#import "HTProgressHUD.h"
+#import "HTProgressHUDFadeZoomAnimation.h"
+#import "HTProgressHUDPieIndicatorView.h"
 
 @interface DCMEditMiningPoolViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *miningPoolWebsiteURLTextField;
 @property (weak, nonatomic) IBOutlet UITextField *miningPoolAPIKeyTextField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *mposPoolsOnlyLabel;
+
+// When doing URL validation, what was the last URL we checked
+@property (strong, nonatomic) NSString* lastCheckedMiningPoolWebsiteURL;
+
 @end
 
 @implementation DCMEditMiningPoolViewController
@@ -33,6 +42,9 @@
 {
     [super viewDidLoad];
 
+    self.lastCheckedMiningPoolWebsiteURL = nil;
+
+    
     if( self.miningPoolWebsiteURL  != nil ) {
         self.miningPoolWebsiteURLTextField.text = self.miningPoolWebsiteURL;
         self.miningPoolAPIKeyTextField.text = self.miningPoolAPIKey;
@@ -51,7 +63,6 @@
     
     [self.view addGestureRecognizer:tap];
     
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,7 +74,6 @@
 -(void)openMPOSPoolList:(id)sender
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.doktorrf.com/dogecoin/pools.html"]];
-    NSLog(@"touchy touchy");
 }
 
 -(void) updateDefaultMiningPoolAdress:(NSString*)defaultAPIUrl andKey:(NSString*)defaultAPIKey
@@ -91,14 +101,14 @@
     
     NSArray *resultItems = [result componentsSeparatedByString:@"|"];
     
-    NSLog(@"URL: %@\nKEY: %@\nID: %@\n", [resultItems objectAtIndex:1],[resultItems objectAtIndex:2],[resultItems objectAtIndex:3] );
+    DLog(@"URL: %@\nKEY: %@\nID: %@\n", [resultItems objectAtIndex:1],[resultItems objectAtIndex:2],[resultItems objectAtIndex:3] );
     
     NSString* url = [resultItems objectAtIndex:1];
     NSRange indexphpLocation =  [url rangeOfString:@"/index.php"];
     
     if(indexphpLocation.location == NSNotFound ) {
         // TODO: let the user know this
-        NSLog(@"%@ doesn't look like a valid MPOS URL", url);
+        DLog(@"%@ doesn't look like a valid MPOS URL", url);
         return;
     }
     
@@ -124,11 +134,7 @@
 
 -(IBAction)miningPoolWebsiteURLChanged:(id)sender
 {
-    [self ensureHTTPOnWebsiteURL];
-    
     [self validateCurrentValues];
-    
-
 }
 
 -(IBAction)miningPoolAPIKeyChanged:(id)sender
@@ -138,7 +144,7 @@
 
 -(void)validateCurrentValues
 {
-    if( self.miningPoolWebsiteURLTextField.text.length < 9 || self.miningPoolAPIKeyTextField.text.length < 10) {
+    if( self.miningPoolWebsiteURLTextField.text.length < 9 || self.miningPoolAPIKeyTextField.text.length < 15) {
         self.doneButton.enabled = FALSE;
     }
     else {
@@ -150,13 +156,8 @@
 
 -(void)ensureHTTPOnWebsiteURL
 {
-    if( [self.miningPoolWebsiteURLTextField.text isEqualToString:@"http:/"] ) {
-        self.miningPoolWebsiteURLTextField.text = @"http://";
-    }
-    else if( [self.miningPoolWebsiteURLTextField.text isEqualToString:@"https:/"] ) {
-        self.miningPoolWebsiteURLTextField.text = @"https://";
-    }
-    else if ( ![self.miningPoolWebsiteURLTextField.text hasPrefix:@"http://"] && ![self.miningPoolWebsiteURLTextField.text hasPrefix:@"https://"] ) {
+    if (   ![self.miningPoolWebsiteURLTextField.text hasPrefix:@"http://"]
+        && ![self.miningPoolWebsiteURLTextField.text hasPrefix:@"https://"] ) {
         self.miningPoolWebsiteURLTextField.text = [NSString stringWithFormat:@"http://%@", self.miningPoolWebsiteURLTextField.text ];
     }
 }
@@ -165,6 +166,57 @@
 {
     [self.miningPoolWebsiteURLTextField resignFirstResponder];
     [self.miningPoolAPIKeyTextField resignFirstResponder];
+    
+    [self validateURLAfterEditDone:nil];
 }
+
+-(IBAction)validateURLAfterEditDone:(id)sender
+{
+    if( self.lastCheckedMiningPoolWebsiteURL != nil && [self.lastCheckedMiningPoolWebsiteURL isEqualToString:self.miningPoolWebsiteURLTextField.text] ) {
+        // no validation needed if URL hasn't changed
+        return;
+    }
+    
+    [self ensureHTTPOnWebsiteURL];
+    
+    self.lastCheckedMiningPoolWebsiteURL  = self.miningPoolWebsiteURLTextField.text;
+    
+    self.doneButton.enabled = NO;
+    self.cancelButton.enabled = NO;
+
+    
+    __block HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
+    [HUD showInView:self.view];
+    
+    dispatch_queue_t myQueue = dispatch_queue_create("Mining Pool Validation Queue",NULL);
+    dispatch_async(myQueue, ^{
+        HUD.text = @"validating URL";
+
+        // synchronous call
+        NSString* error = [DCMMiningPool checkForValidURL:self.miningPoolWebsiteURLTextField.text];
+
+        
+        // must do UI updates on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [HUD hide];
+            
+            // set value of Done button
+            [self validateCurrentValues];
+            self.cancelButton.enabled = YES;
+
+            
+            if (error != nil) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Possible Invalid URL"
+                                                                message:error
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            }
+        });
+    });
+}
+
 
 @end

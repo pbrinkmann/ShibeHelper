@@ -140,7 +140,7 @@
         case 4:
             return @"current round progress";
         default:
-            NSLog(@"Invalid getStepName step %d", step);
+            DLog(@"Invalid getStepName step %d", step);
             return @"";
     }
 }
@@ -148,7 +148,7 @@
 
 -(BOOL)updatePoolInfoForStep:(int) step
 {
-    if( self.websiteURL == nil || self.apiKey == nil) { NSLog(@"DCMMiningPool skipping initial load of mining pool"); return FALSE; }
+    if( self.websiteURL == nil || self.apiKey == nil) { DLog(@"DCMMiningPool skipping initial load of mining pool"); return FALSE; }
     
     switch (step) {
         case 0:
@@ -170,7 +170,7 @@
             return TRUE;
             
         default:
-            NSLog(@"Invalid updatePoolInfoForStep step %d", step);
+            DLog(@"Invalid updatePoolInfoForStep step %d", step);
             return FALSE;
     }
    
@@ -181,7 +181,7 @@
     NSMutableDictionary *dict = [self callPoolAPIMethod:@"getuserstatus"];
     
     if( dict == nil) {
-        NSLog(@"API call failed, cancelling getuserstatus update");
+        DLog(@"API call failed, cancelling getuserstatus update");
         return FALSE;
     }
 
@@ -214,7 +214,7 @@
     NSString *invalidShares = (NSString*)[shares objectForKey:@"invalid"];
 
     
-    NSLog(@"hashRate: %@", hashRate);
+    DLog(@"hashRate: %@", hashRate);
     
     self.hashrate           = [hashRate intValue];
     self.validSharesThisRound   = [validShares intValue];
@@ -229,7 +229,7 @@
     NSMutableDictionary *dict = [self callPoolAPIMethod:@"getuserbalance"];
     
     if( dict == nil) {
-        NSLog(@"API call failed, cancelling getuserbalance update");
+        DLog(@"API call failed, cancelling getuserbalance update");
         return FALSE;
     }
     
@@ -266,7 +266,7 @@
     NSMutableDictionary *dict = [self callPoolAPIMethod:@"getpoolstatus"];
     
     if( dict == nil) {
-        NSLog(@"API call failed, cancelling getpoolstatus update");
+        DLog(@"API call failed, cancelling getpoolstatus update");
         return FALSE;
     }
 /*
@@ -312,7 +312,7 @@
     self.currentDifficulty        = [currentDifficulty intValue];
     self.currentNetworkBlock      = [currentNetworkBlock intValue];
     
-    NSLog(@"lastblock: %d, this block: %@", self.lastBlockFound, lastBlockFound);
+    DLog(@"lastblock: %d, this block: %@", self.lastBlockFound, lastBlockFound);
     if( self.lastBlockFound == [lastBlockFound intValue] ) {
         self.stillOnSameBlock = TRUE;
     }
@@ -331,11 +331,11 @@
     NSMutableDictionary *dict = [self callPoolAPIMethod:@"getblocksfound"];
     
     if( dict == nil) {
-        NSLog(@"API call failed, cancelling getblocksfound update");
+        DLog(@"API call failed, cancelling getblocksfound update");
         return FALSE;
     }
     if( self.stillOnSameBlock ) {
-        NSLog(@"Skipping getblocksfound API call since no new blocks have been found since last time we checked");
+        DLog(@"Skipping getblocksfound API call since no new blocks have been found since last time we checked");
         return TRUE;
     }
     
@@ -415,7 +415,7 @@
     NSMutableDictionary *dict = [self callPoolAPIMethod:@"public"];
     
     if( dict == nil) {
-        NSLog(@"API call failed, cancelling public update");
+        DLog(@"API call failed, cancelling public update");
         return FALSE;
     }
     
@@ -441,7 +441,7 @@
 
 -(NSMutableDictionary*) callPoolAPIMethod: (NSString*)apiMethod {
     
-    NSLog(@"Calling api method: %@", apiMethod);
+    DLog(@"Calling api method: %@", apiMethod);
     
     NSURL *url = [NSURL URLWithString:
                   [NSString stringWithFormat:@"%@/index.php?page=api&action=%@&api_key=%@",
@@ -454,7 +454,7 @@
     NSData *rawdata = [NSData dataWithContentsOfURL:url];
     
     if( rawdata == nil) {
-        NSLog(@"could not fetch data from pool API for method %@", apiMethod);
+        DLog(@"could not fetch data from pool API for method %@", apiMethod);
         return nil;
     }
     
@@ -462,21 +462,20 @@
     NSMutableDictionary  * dict = [NSJSONSerialization JSONObjectWithData:rawdata options: NSJSONReadingMutableContainers error: &error];
     
     if(error != nil) {
-        NSLog(@"error: %@", error);
+        DLog(@"error: %@", error);
         return nil;
     }
     
-    // NSLog(@"dict: %@",dict);
+    // DLog(@"dict: %@",dict);
     
     return dict;
 }
 
-// TODO: use this for validation in mining pool edit screen
--(BOOL)poolSupportsAPI
++(NSString*)checkForValidURL:(NSString*)poolURL
 {
     NSURL *url = [NSURL URLWithString:
                   [NSString stringWithFormat:@"%@/index.php?page=api&action=public",
-                   self.websiteURL
+                   poolURL
                    ]
                   ];
     NSMutableURLRequest* headRequest = [NSMutableURLRequest requestWithURL: url];
@@ -486,21 +485,32 @@
     NSHTTPURLResponse* response;
     NSError * error;
     
-    NSLog(@"starting request..");
+    DLog(@"starting request..");
     
     [NSURLConnection sendSynchronousRequest:(NSURLRequest *)headRequest returningResponse:&response error:&error];
     
-    NSLog(@"reponse: %@", response);
-    NSLog(@"error: %@", error);
-
-    NSDictionary* headers = [response allHeaderFields];
-    NSString* statusCode = [headers valueForKey:@"status code"];
+    DLog(@"reponse: %@", response);
+    DLog(@"error: %@", error);
     
-    if(statusCode != nil && [statusCode isEqualToString:@"200"]) {
-           return TRUE;
+    if( error != nil ) {
+        return [error localizedDescription];
     }
-    else {
-        return FALSE;
+
+    NSInteger statusCode = [response statusCode];
+    
+    switch( statusCode ){
+        case 200:
+            return nil; // success
+            break;
+        case 404:
+            return @"Hmm, nothing was found at that location";
+            break;
+        case 501:
+            return @"Bad news :( It looks like this pool doesn't support remote data reporting";
+            break;
+        default:
+            return @"Unable to determine if URL is correct";
+            break;
     }
 }
 

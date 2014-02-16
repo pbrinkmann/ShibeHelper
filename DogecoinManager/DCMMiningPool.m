@@ -471,4 +471,37 @@
     return dict;
 }
 
+// TODO: use this for validation in mining pool edit screen
+-(BOOL)poolSupportsAPI
+{
+    NSURL *url = [NSURL URLWithString:
+                  [NSString stringWithFormat:@"%@/index.php?page=api&action=public",
+                   self.websiteURL
+                   ]
+                  ];
+    NSMutableURLRequest* headRequest = [NSMutableURLRequest requestWithURL: url];
+    
+    headRequest.HTTPMethod= @"HEAD";
+    
+    NSHTTPURLResponse* response;
+    NSError * error;
+    
+    NSLog(@"starting request..");
+    
+    [NSURLConnection sendSynchronousRequest:(NSURLRequest *)headRequest returningResponse:&response error:&error];
+    
+    NSLog(@"reponse: %@", response);
+    NSLog(@"error: %@", error);
+
+    NSDictionary* headers = [response allHeaderFields];
+    NSString* statusCode = [headers valueForKey:@"status code"];
+    
+    if(statusCode != nil && [statusCode isEqualToString:@"200"]) {
+           return TRUE;
+    }
+    else {
+        return FALSE;
+    }
+}
+
 @end

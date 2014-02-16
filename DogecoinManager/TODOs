@@ -9,6 +9,8 @@ Bugs
 
 New Features/Enhancements
 =========================
+[ ] relocate "refresh" button for mining pool - it's too easy to hit the wallet nav button instead
+    - Traditionally, it's the circular arrow icon somewhere, OR the "pull to refresh" shit
 [ ] For mining pool, verify that web address looks valid and HEAD returns a [23]00 value
 [ ] Add warning for the pools without API support if someone enters a URL in the mining pool URL field
     and hitting <website>/index.php?page=api&action=public returns a 501 Not implemented
@@ -16,8 +18,7 @@ New Features/Enhancements
         * for pool.chunky.ms, add the /doge component - https://pool.chunky.ms/doge/index.php?page=api&action=public
         * for doge.pool.pm, make sure the requests are going to https, NOT http (which is what the QR code says to do)
 [ ] Replace NSLogs with something that doesn't spam in production
-[ ] relocate "refresh" button for mining pool - it's too easy to hit the wallet nav button instead
-    - Traditionally, it's the circular arrow icon somewhere, OR the "pull to refresh" shit
+
 [ ] Try and get rid of all compiler warnings - hmmm... it doesn't like my storyboard constraints, BUT, if I change them, shit gets fucked up.
 
 

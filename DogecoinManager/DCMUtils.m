@@ -97,4 +97,42 @@
                        }];
 }
 
+//
+// colors from:
+// https://developer.apple.com/library/ios/documentation/userexperience/conceptual/mobilehig/ColorImagesText.html#//apple_ref/doc/uid/TP40006556-CH58-SW1
+//
+
++ (UIColor*) lightBlueColor
+{
+    return [UIColor colorWithRed:75.f/255 green:202.f/255 blue:248.f/255 alpha:1];
+}
++ (UIColor*) darkBlueColor
+{
+    return [UIColor colorWithRed:0.f/255 green:125.f/255 blue:251.f/255 alpha:1];
+}
++ (UIColor*) yellowColor
+{
+    return [UIColor colorWithRed:255.f/255 green:202.f/255 blue:46.f/255 alpha:1];
+}
++ (UIColor*) greenColor
+{
+    return [UIColor colorWithRed:72.f/255 green:217.f/255 blue:107.f/255 alpha:1];
+}
++ (UIColor*) orangeColor
+{
+    return [UIColor colorWithRed:255.f/255 green:146.f/255 blue:35.f/255 alpha:1];
+}
++ (UIColor*)redColor
+{
+    return [UIColor colorWithRed:255.f/255 green:50.f/255 blue:53.f/255 alpha:1];
+}
++ (UIColor*)maroonColor
+{
+    return [UIColor colorWithRed:255.f/255 green:33.f/255 blue:86.f/255 alpha:1];
+}
++ (UIColor*)greyColor
+{
+    return [UIColor colorWithRed:142.f/255 green:142.f/255 blue:147.f/255 alpha:1];
+}
+
 @end

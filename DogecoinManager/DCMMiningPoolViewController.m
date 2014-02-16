@@ -102,7 +102,7 @@
 {
     CALayer *yourAccountLayer = [headerLabel layer];
     CALayer *bottomBorder = [CALayer layer];
-    bottomBorder.borderColor =  CreateDeviceRGBColor(.6,.6,.6,1); //[UIColor lightGrayColor].CGColor;
+    bottomBorder.borderColor =  CreateDeviceRGBColor(.6,.6,.6,1);
     bottomBorder.borderWidth = 1;
     bottomBorder.frame =
     CGRectMake(-1, yourAccountLayer.frame.size.height - 1, yourAccountLayer.frame.size.width, 1);
@@ -139,7 +139,6 @@
         self.miningPool.apiKey = source.miningPoolAPIKey;
         self.miningPool.websiteURL = source.miningPoolWebsiteURL;
 
-        
         [self updateMiningPoolInfo];
     }
     else {
@@ -334,7 +333,7 @@
     if(self.miningPool.lastUpdate != nil) {
         
         if( self.lastUpdateFailed ) {
-            self.lastUpdatedLabel.backgroundColor = [UIColor redColor];
+            self.lastUpdatedLabel.backgroundColor = [DCMUtils redColor];
             self.lastUpdatedLabel.textColor = [UIColor whiteColor];
             self.lastUpdatedLabel.text = @"last updated failed";
         }

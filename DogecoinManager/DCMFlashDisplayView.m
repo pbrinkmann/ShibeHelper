@@ -64,8 +64,8 @@
         bezierPathWithRoundedRect:CGRectMake(2, 2, frame.size.width - 4, frame.size.height - 4)
                      cornerRadius:10];
     path.lineWidth = 1;
-
-    [UIColor.greenColor setFill];
+    
+    [[DCMUtils greenColor] setFill];
     [path fill];
 
     UIFont *textFont = [UIFont systemFontOfSize:12];

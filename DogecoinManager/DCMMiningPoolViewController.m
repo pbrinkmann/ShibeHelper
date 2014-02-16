@@ -51,6 +51,7 @@
 @property (nonatomic) BOOL lastUpdateFailed;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editMiningPoolButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshingMiningPoolButton;
 
 @property (weak, nonatomic) IBOutlet DCMFlashDisplayView *foundNewBlockFlashView;
 
@@ -155,6 +156,8 @@
     }
 
     self.editMiningPoolButton.enabled = NO;
+    self.refreshingMiningPoolButton.enabled = NO;
+
     
     __block HTProgressHUD *progressHUD = [[HTProgressHUD alloc] init];
     progressHUD.animation = [HTProgressHUDFadeZoomAnimation animation];
@@ -198,6 +201,8 @@
         // must do UI updates on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             self.editMiningPoolButton.enabled = YES;
+            self.refreshingMiningPoolButton.enabled = YES;
+
             
             if( updatesFailed ) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Update failed"

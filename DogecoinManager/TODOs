@@ -9,8 +9,6 @@ Bugs
 
 New Features/Enhancements
 =========================
-[ ] relocate "refresh" button for mining pool - it's too easy to hit the wallet nav button instead
-    - Traditionally, it's the circular arrow icon somewhere, OR the "pull to refresh" shit
 [ ] For mining pool, verify that web address looks valid and HEAD returns a [23]00 value
 [ ] Add warning for the pools without API support if someone enters a URL in the mining pool URL field
     and hitting <website>/index.php?page=api&action=public returns a 501 Not implemented
@@ -82,7 +80,8 @@ DONE!
 [X] FUCK - I can have either: custom view to display New Block!, OR: scrollable view.. WTF FUCK FUCK WTF this is retarded
 [X] Make wallet address copyable (or copy when it's touched) on wallet balance screen
 [X] trim whitespace on all mining pool text fields (wallet address already errors on invalid characters)
-
+[X] relocate "refresh" button for mining pool - it's too easy to hit the wallet nav button instead
+    - Traditionally, it's the circular arrow icon somewhere, OR the "pull to refresh" shit
 
 
 

@@ -1,5 +1,5 @@
 //
-//  DCMFirstViewController.h
+//  DCMWalletViewController.h
 //  DogecoinManager
 //
 //  Created by Paul Brinkmann on 1/9/14.

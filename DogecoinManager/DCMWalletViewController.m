@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *lastWalletUpdateLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editWalletAddressButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshWalletBalanceButton;
 
 @property (weak, nonatomic) IBOutlet UITextField *walletAddressTextfield;
 @property (weak, nonatomic) IBOutlet UILabel *walletAddressTitleLabel;
@@ -64,7 +65,6 @@
                                                       selector:@selector(lastUpdatedTimerFired:)
                                                       userInfo:nil
                                                       repeats:YES];
-
 }
 
 -(void)setupWalletAddressCopyOnTouch
@@ -147,6 +147,8 @@
     HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
     [HUD showInView:self.view];
     self.editWalletAddressButton.enabled = NO;
+    self.refreshWalletBalanceButton.enabled = NO;
+
     
     self.walletUpdateFailedLabel.hidden = YES;
     
@@ -161,6 +163,8 @@
             
             [HUD hide];
             self.editWalletAddressButton.enabled = YES;
+            self.refreshWalletBalanceButton.enabled = YES;
+
             
             if (success) {
                 self.walletUpdateFailedLabel.hidden = YES;

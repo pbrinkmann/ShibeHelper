@@ -9,6 +9,7 @@
 #import "DCMWalletViewController.h"
 
 #import "DCMEditWalletAddressViewController.h"
+#import "DCMFlashDisplayView.h"
 #import "DCMUtils.h"
 
 #import "HTProgressHUD.h"
@@ -26,6 +27,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *balance;
 @property (weak, nonatomic) IBOutlet UILabel *balanceUSDLabel;
+@property (weak, nonatomic) IBOutlet DCMFlashDisplayView *walletAddressCopiedFlashView;
 
 @end
 
@@ -51,6 +53,9 @@
         self.walletAddressTextfield.hidden = TRUE;
         self.walletAddressTitleLabel.hidden = TRUE;
     }
+    else {
+        [self setupWalletAddressCopyOnTouch];
+    }
     
     [self updateWalletBalance];
     
@@ -61,6 +66,38 @@
                                                       repeats:YES];
 
 }
+
+-(void)setupWalletAddressCopyOnTouch
+{
+    // Check for tap on disabled wallet address view, copy address if it's touched
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(viewTouched:)];
+    
+    [self.view addGestureRecognizer:tap];
+    
+    [self.walletAddressCopiedFlashView initViewWithText:@"address copied"
+                                           initialDelay:0.0
+                                               duration:2.0
+     ];
+    
+}
+- (void)viewTouched:(UITapGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateEnded)
+    {
+        CGPoint p  = [sender locationOfTouch:(NSUInteger)0 inView:(UIView *)self.view];
+        
+        if( CGRectContainsPoint( self.walletAddressTextfield.frame, p) ) {
+            NSLog(@"We hit the address!");
+            UIPasteboard *pb = [UIPasteboard generalPasteboard];
+            [pb setString:[self.walletAddressTextfield text]];
+            [self.walletAddressCopiedFlashView doFlashAnimation];
+
+        }
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {

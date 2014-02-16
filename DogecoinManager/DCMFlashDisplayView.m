@@ -15,13 +15,21 @@
 // @property CGRect zeroFrame;
 
 @property(strong, nonatomic) NSString *text;
+@property float initialDelay;
+@property float duration;
+
 
 @end
 
 @implementation DCMFlashDisplayView
 
-- (void)initViewWithText:(NSString *)text {
+- (void)initViewWithText:(NSString *)text
+            initialDelay:(float)initialDelay
+                duration:(float)duration
+{
     self.text = text;
+    self.initialDelay = initialDelay;
+    self.duration = duration;
 
  
 
@@ -71,30 +79,29 @@
 
 
 - (void)doFlashAnimation {
-    [UIView animateWithDuration:0.7 delay:2.0 options:UIViewAnimationOptionCurveEaseInOut
-    animations:^{
-  //      NSLog(@"grow animation started");
-
- //       [self setFrame: self.initialFrame];
-        self.alpha = 1.0;
-    }
-                     completion:^(BOOL finished) {
- //       NSLog(@"grow animation done");
-        [self doShrinkAnimation];
-    }];
+    [UIView animateWithDuration:0.7
+                          delay:self.initialDelay
+                        options:UIViewAnimationOptionCurveEaseInOut
+                        animations:^{
+                                // [self setFrame: self.initialFrame];
+                                self.alpha = 1.0;
+                        }
+                        completion:^(BOOL finished) {
+                                [self doShrinkAnimation];
+                        }
+    ];
 }
 
 - (void)doShrinkAnimation {
-    [UIView animateWithDuration:0.5 delay:5.0 options:UIViewAnimationOptionCurveEaseInOut
+    [UIView animateWithDuration:0.5
+                          delay:self.duration
+                        options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-   //                      NSLog(@"shrink animation started");
-                         
-   //                   [self setFrame: self.zeroFrame];
-                         self.alpha = 0.0;
-                     }
-                     completion:^(BOOL finished) {
-    //    NSLog(@"shrink animation done");
-    }];
+                                    // [self setFrame: self.zeroFrame];
+                                    self.alpha = 0.0;
+                                }
+                     completion:^(BOOL finished) {}
+     ];
 }
 
 @end

@@ -117,8 +117,8 @@
     }
         
     if(self.miningPoolWebsiteURLTextField.text.length > 0) {
-        self.miningPoolWebsiteURL = self.miningPoolWebsiteURLTextField.text;
-        self.miningPoolAPIKey = self.miningPoolAPIKeyTextField.text;
+        self.miningPoolWebsiteURL = [self.miningPoolWebsiteURLTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        self.miningPoolAPIKey =     [self.miningPoolAPIKeyTextField.text     stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     }
 }
 

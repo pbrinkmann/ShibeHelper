@@ -138,6 +138,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0410463018B035B2009BEE3F /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				0410462D18B00BC1009BEE3F /* DCMFlashDisplayView.h */,
+				0410462E18B00BC1009BEE3F /* DCMFlashDisplayView.m */,
+			);
+			name = "Custom Views";
+			sourceTree = "<group>";
+		};
 		041470E5187FBB8200007425 = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +184,7 @@
 				04147103187FBB8200007425 /* Main.storyboard */,
 				04D7B9BF188CCD5700113831 /* thirdparty */,
 				0414713D188B655200007425 /* View Controllers */,
+				0410463018B035B2009BEE3F /* Custom Views */,
 				0414713E188B9F3D00007425 /* DCMMiningPool.h */,
 				0414713F188B9F3D00007425 /* DCMMiningPool.m */,
 				0414712C1888DEDD00007425 /* DCMWallet.h */,
@@ -247,8 +257,6 @@
 		04AE4B7718A4DECC00F2E0AA /* Mining Pool */ = {
 			isa = PBXGroup;
 			children = (
-				0410462D18B00BC1009BEE3F /* DCMFlashDisplayView.h */,
-				0410462E18B00BC1009BEE3F /* DCMFlashDisplayView.m */,
 				04147109187FBB8200007425 /* DCMMiningPoolViewController.h */,
 				0414710A187FBB8200007425 /* DCMMiningPoolViewController.m */,
 				04147141188BDA8B00007425 /* DCMEditMiningPoolViewController.h */,

@@ -10,7 +10,10 @@
 
 @interface DCMFlashDisplayView : UIView
 
--(void)initViewWithText:(NSString*)text;
+-(void)initViewWithText:(NSString *)text
+           initialDelay:(float)initialDelay
+               duration:(float)duration;
+
 -(void)doFlashAnimation;
 
 @end

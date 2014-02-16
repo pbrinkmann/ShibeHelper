@@ -85,7 +85,10 @@
                                                        repeats:YES];
     
 
-    [self.foundNewBlockFlashView initViewWithText:@"new block!"];
+    [self.foundNewBlockFlashView initViewWithText:@"new block!"
+                                     initialDelay:2.0
+                                         duration:5.0
+     ];
 
 }
 

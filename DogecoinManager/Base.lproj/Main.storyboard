@@ -75,9 +75,14 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fda-dW-yqp" customClass="DCMFlashDisplayView">
+                                <rect key="frame" x="80" y="459" width="160" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="fda-dW-yqp" firstAttribute="leading" secondItem="o3J-O1-PFd" secondAttribute="trailing" constant="-220" id="142-ae-3gI"/>
                             <constraint firstItem="o3J-O1-PFd" firstAttribute="top" secondItem="yTD-1O-f8L" secondAttribute="bottom" constant="8" symbolic="YES" id="1Yh-9Z-XG2"/>
                             <constraint firstItem="2Vx-3H-v9A" firstAttribute="top" secondItem="9AJ-uh-z6B" secondAttribute="bottom" constant="21" id="1iU-9B-p3X"/>
                             <constraint firstItem="lyP-ze-xSt" firstAttribute="top" secondItem="9AJ-uh-z6B" secondAttribute="bottom" constant="-5" id="9TY-x9-6nB"/>
@@ -95,6 +100,7 @@
                             <constraint firstItem="GE0-A1-1aD" firstAttribute="top" secondItem="3eu-KB-KCl" secondAttribute="bottom" constant="45" id="bz5-Ka-sx5"/>
                             <constraint firstAttribute="centerX" secondItem="GE0-A1-1aD" secondAttribute="centerX" id="jMN-HE-I0i"/>
                             <constraint firstItem="yTD-1O-f8L" firstAttribute="leading" secondItem="o3J-O1-PFd" secondAttribute="leading" id="lWV-Wq-fLW"/>
+                            <constraint firstItem="fda-dW-yqp" firstAttribute="top" secondItem="yTD-1O-f8L" secondAttribute="bottom" constant="3" id="lqz-DV-Yux"/>
                             <constraint firstAttribute="centerX" secondItem="2Vx-3H-v9A" secondAttribute="centerX" id="s8L-CB-ShG"/>
                             <constraint firstItem="lyP-ze-xSt" firstAttribute="leading" secondItem="GE0-A1-1aD" secondAttribute="leading" id="sCG-eR-fge"/>
                             <constraint firstAttribute="centerX" secondItem="9AJ-uh-z6B" secondAttribute="centerX" id="v90-lx-vKW"/>
@@ -113,6 +119,7 @@
                         <outlet property="balanceUSDLabel" destination="fe5-Bx-S4H" id="0Os-tF-QCs"/>
                         <outlet property="editWalletAddressButton" destination="CoR-i8-XRa" id="5kA-3k-32u"/>
                         <outlet property="lastWalletUpdateLabel" destination="9AJ-uh-z6B" id="v5O-wP-izV"/>
+                        <outlet property="walletAddressCopiedFlashView" destination="fda-dW-yqp" id="oOr-c9-OuH"/>
                         <outlet property="walletAddressTextfield" destination="o3J-O1-PFd" id="LwU-T9-3qq"/>
                         <outlet property="walletAddressTitleLabel" destination="yTD-1O-f8L" id="3gz-oA-cTs"/>
                         <outlet property="walletUpdateFailedLabel" destination="2Vx-3H-v9A" id="sAD-OA-ngK"/>

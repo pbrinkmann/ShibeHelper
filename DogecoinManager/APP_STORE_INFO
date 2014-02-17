@@ -16,7 +16,7 @@ Displayed mining pool info includes:
 
 *Please note* only MPOS-based pools that have the API enabled are supported at this time.
 
-Unfortunately, the following popular pools have disabled the API and WILL NOT WORK with this app at this time:
+Unfortunately, the following popular pools have disabled the API and WILL NOT WORK with the app at this time:
 
     - dogehouse.org 
     - fast-pool.com

@@ -66,15 +66,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fda-dW-yqp" customClass="DCMFlashDisplayView">
-                                <rect key="frame" x="80" y="459" width="160" height="40"/>
+                                <rect key="frame" x="60" y="464" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fda-dW-yqp" firstAttribute="leading" secondItem="o3J-O1-PFd" secondAttribute="trailing" constant="-220" id="142-ae-3gI"/>
+                            <constraint firstItem="fda-dW-yqp" firstAttribute="leading" secondItem="o3J-O1-PFd" secondAttribute="trailing" constant="-240" id="142-ae-3gI"/>
                             <constraint firstItem="o3J-O1-PFd" firstAttribute="top" secondItem="yTD-1O-f8L" secondAttribute="bottom" constant="8" symbolic="YES" id="1Yh-9Z-XG2"/>
                             <constraint firstItem="2Vx-3H-v9A" firstAttribute="top" secondItem="9AJ-uh-z6B" secondAttribute="bottom" constant="21" id="1iU-9B-p3X"/>
+                            <constraint firstItem="2Vx-3H-v9A" firstAttribute="width" secondItem="o3J-O1-PFd" secondAttribute="width" id="7co-bM-Z6A"/>
                             <constraint firstItem="O71-MT-qh9" firstAttribute="centerX" secondItem="fe5-Bx-S4H" secondAttribute="centerX" id="EqL-mh-TBP"/>
                             <constraint firstItem="O71-MT-qh9" firstAttribute="top" secondItem="fe5-Bx-S4H" secondAttribute="bottom" constant="8" symbolic="YES" id="J6a-Yf-cNy"/>
                             <constraint firstItem="9AJ-uh-z6B" firstAttribute="top" secondItem="O71-MT-qh9" secondAttribute="bottom" constant="43" id="ONA-Io-KBi"/>
@@ -87,7 +88,7 @@
                             <constraint firstItem="GE0-A1-1aD" firstAttribute="top" secondItem="3eu-KB-KCl" secondAttribute="bottom" constant="45" id="bz5-Ka-sx5"/>
                             <constraint firstAttribute="centerX" secondItem="GE0-A1-1aD" secondAttribute="centerX" id="jMN-HE-I0i"/>
                             <constraint firstItem="yTD-1O-f8L" firstAttribute="leading" secondItem="o3J-O1-PFd" secondAttribute="leading" id="lWV-Wq-fLW"/>
-                            <constraint firstItem="fda-dW-yqp" firstAttribute="top" secondItem="yTD-1O-f8L" secondAttribute="bottom" constant="3" id="lqz-DV-Yux"/>
+                            <constraint firstItem="fda-dW-yqp" firstAttribute="top" secondItem="yTD-1O-f8L" secondAttribute="bottom" constant="8" id="lqz-DV-Yux"/>
                             <constraint firstAttribute="centerX" secondItem="2Vx-3H-v9A" secondAttribute="centerX" id="s8L-CB-ShG"/>
                             <constraint firstAttribute="centerX" secondItem="9AJ-uh-z6B" secondAttribute="centerX" id="v90-lx-vKW"/>
                             <constraint firstItem="fe5-Bx-S4H" firstAttribute="top" secondItem="3eu-KB-KCl" secondAttribute="bottom" constant="69" id="xhQ-oq-scH"/>
@@ -101,7 +102,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="CoR-i8-XRa">
                             <connections>
-                                <segue destination="Ul0-n0-rhD" kind="modal" id="r7M-Hh-Nuv"/>
+                                <segue destination="Ul0-n0-rhD" kind="modal" identifier="segueToWalletEdit" id="r7M-Hh-Nuv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -228,7 +229,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="miningPoolWebsiteURLChanged:" destination="ynS-fH-gD4" eventType="editingChanged" id="J2D-sw-eO1"/>
-                                    <action selector="validateURLAfterEditDone:" destination="ynS-fH-gD4" eventType="editingDidEndOnExit" id="vI7-Sm-LtQ"/>
+                                    <action selector="validateURLAfterEditDone:" destination="ynS-fH-gD4" eventType="editingDidEndOnExit" id="3DG-TZ-nGK"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="please enter your API key here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wJB-xw-o9p">
@@ -310,7 +311,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="Zx8-Ox-ER4">
                             <connections>
-                                <segue destination="kN8-y3-XcE" kind="unwind" unwindAction="unwindToMiningPool:" id="UkD-I9-qB9"/>
+                                <segue destination="kN8-y3-XcE" kind="unwind" identifier="unwindToMiningPool" unwindAction="unwindToMiningPool:" id="UkD-I9-qB9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -682,7 +683,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Cxb-OT-vIx">
                             <connections>
-                                <segue destination="ja0-Eg-ZEj" kind="modal" id="VLc-GQ-mmF"/>
+                                <segue destination="ja0-Eg-ZEj" kind="modal" identifier="segueToMiningPoolEdit" id="VLc-GQ-mmF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -8,8 +8,6 @@ Bugs
 
 New Features/Enhancements
 =========================
-[ ] Try and get rid of all compiler warnings - hmmm... it doesn't like my storyboard constraints, BUT, if I change them, shit gets fucked up.
-
 
 Release Steps
 =============
@@ -80,7 +78,16 @@ DONE!
         * anything else - invalid website?
 [X] bugfix: Mining pool layout gets screwed up after returning from edit screen
 [X] Replace NSLogs with something that doesn't spam in production
+[X] in the wallet address copy popup, the bottom of the P in coPied is cut off
+[X] When keyboard is open in mining pool url edit, clicking done button does validation and segues back if validation passes
+[X] If no wallet address or mining pool url/key have been set, automatically segue to the edit screen
 
+
+
+Rejected
+========
+[-] swipe right/left to transition between wallet and mining pool screens (animated).  It looks like this would be more trouble than it's worth :(
+[-] Try and get rid of all compiler warnings - hmmm... it doesn't like my storyboard constraints, BUT, if I change them, shit gets fucked up.
 
 
 

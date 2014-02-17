@@ -13,6 +13,7 @@
 #import "HTProgressHUD.h"
 #import "HTProgressHUDFadeZoomAnimation.h"
 #import "HTProgressHUDPieIndicatorView.h"
+#import "KeyboardStateListener.h"
 
 @interface DCMEditMiningPoolViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *miningPoolWebsiteURLTextField;
@@ -59,10 +60,19 @@
     // dismiss keyboard when tap outside of text field
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
+                                   action:@selector(tapHandler)];
     
     [self.view addGestureRecognizer:tap];
     
+}
+
+// If top-level view touched, close keyboard and validate URL
+-(void)tapHandler
+{
+    if( [KeyboardStateListener sharedInstance].isVisible ) {
+        [self dismissKeyboard];
+        [self validateURL];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -116,10 +126,28 @@
     self.miningPoolAPIKeyTextField.text = [resultItems objectAtIndex:2];
     
 }
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    // only validate when done button pressed
+    if( sender != self.doneButton ) return TRUE;
+    
+    //  Close the keyboard and validate URL if the keyboard is visible
+    if( [KeyboardStateListener sharedInstance].isVisible ) {
+        [self dismissKeyboard];
+        DLog(@"ecalling validate now")
+
+        [self validateURLAndSegueBack:TRUE];
+        DLog(@"exiting shoudl perform segue")
+        return FALSE;
+    }
+    else {
+        return TRUE;
+    }
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if(sender != self.doneButton ) {
+    if(sender == self.cancelButton ) {
         self.miningPoolWebsiteURL = nil;
         self.miningPoolAPIKey = nil;
         
@@ -166,14 +194,22 @@
 {
     [self.miningPoolWebsiteURLTextField resignFirstResponder];
     [self.miningPoolAPIKeyTextField resignFirstResponder];
-    
-    [self validateURLAfterEditDone:nil];
 }
 
 -(IBAction)validateURLAfterEditDone:(id)sender
 {
+    [self validateURL];
+}
+
+-(void)validateURL
+{
+    [self validateURLAndSegueBack:FALSE];
+}
+
+-(void)validateURLAndSegueBack:(BOOL)doSegue
+{
     if( self.lastCheckedMiningPoolWebsiteURL != nil && [self.lastCheckedMiningPoolWebsiteURL isEqualToString:self.miningPoolWebsiteURLTextField.text] ) {
-        // no validation needed if URL hasn't changed
+        DLog("no validation needed since URL hasn't changed");
         return;
     }
     
@@ -213,6 +249,10 @@
                                                       cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
                 [alert show];
+            }
+            else if(doSegue) {
+                DLog(@"rewind!");
+                [self performSegueWithIdentifier:@"unwindToMiningPool" sender:self];
             }
         });
     });

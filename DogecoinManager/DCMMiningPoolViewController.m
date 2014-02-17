@@ -73,11 +73,8 @@
     [self makeLabelHeaderLabel:self.lastBlockLabel];
     
     self.miningPool = [[DCMMiningPool alloc] init];
-    [self refreshViewLabels];
 
-    
-    
-    [self updateMiningPoolInfo];
+    [self refreshViewLabels];
     
     lastUpdatedTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                         target:self
@@ -90,6 +87,14 @@
                                      initialDelay:2.0
                                          duration:5.0
      ];
+    
+    
+    if (self.miningPool.websiteURL == nil || self.miningPool.apiKey == nil ) {
+        [self performSegueWithIdentifier:@"segueToMiningPoolEdit" sender:self];
+    }
+    else {
+        [self updateMiningPoolInfo];
+    }
 
 }
 
@@ -150,7 +155,7 @@
 
 -(void)updateMiningPoolInfo
 {
-    if (self.miningPool.websiteURL == nil ) {
+    if (self.miningPool.websiteURL == nil || self.miningPool.apiKey == nil ) {
         DLog(@"skipping update mining pool, no website URL");
         return;
     }

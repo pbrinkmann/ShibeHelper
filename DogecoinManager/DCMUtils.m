@@ -80,8 +80,9 @@
                             withFont:(UIFont *)font
                               inRect:(CGRect)contextRect
                            withColor:(UIColor *)color {
+    
 
-    CGFloat fontHeight  = font.pointSize;
+    CGFloat fontHeight  = font.lineHeight;
     CGFloat yOffset     = (contextRect.size.height - fontHeight) / 2.0;
 
     CGRect textRect                     = CGRectMake(0, yOffset, contextRect.size.width, fontHeight);
@@ -89,6 +90,9 @@
     textStyle.lineBreakMode             = NSLineBreakByWordWrapping;
     textStyle.alignment                 = NSTextAlignmentCenter;
 
+    DLog(@"Drawing text %@ in rect %@ with text rect: %@", s, NSStringFromCGRect(contextRect), NSStringFromCGRect(textRect));
+
+    
     [s drawInRect:textRect
         withAttributes:@{
                            NSFontAttributeName : font,

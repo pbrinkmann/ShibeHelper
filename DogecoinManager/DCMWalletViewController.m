@@ -58,13 +58,19 @@
         [self setupWalletAddressCopyOnTouch];
     }
     
-    [self updateWalletBalance];
-    
     lastUpdatedTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                         target:self
                                                       selector:@selector(lastUpdatedTimerFired:)
                                                       userInfo:nil
                                                       repeats:YES];
+
+    if( self.wallet.address == nil ) {
+        [self performSegueWithIdentifier:@"segueToWalletEdit" sender:self];
+    }
+    else {
+        [self updateWalletBalance];
+    }
+
 }
 
 -(void)setupWalletAddressCopyOnTouch

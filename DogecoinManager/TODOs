@@ -11,6 +11,7 @@ New Features/Enhancements
 
 Release Steps
 =============
+[ ] shibehelper.com - configure it
 [ ] Test on actual iPhone 4/4S screen
 [ ] Do whatever steps are necessary to produce production bundle
 [ ] Screenshots for App Store
@@ -160,7 +161,11 @@ New Features/Enhancements
 [ ] Alerts when pool workers hashrate drops
 [ ] Support multiple currencies as default display (not just $USD)
 
-
+======================================================================
+For version 2.0:
+======================================================================
+[ ] iPad support
+[ ] iCloud suport
 
 
 

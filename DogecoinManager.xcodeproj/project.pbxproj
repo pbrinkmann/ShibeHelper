@@ -11,6 +11,7 @@
 		040525B4188F933300BE3172 /* DCMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 040525B3188F933300BE3172 /* DCMUtils.m */; };
 		0410462F18B00BC1009BEE3F /* DCMFlashDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410462E18B00BC1009BEE3F /* DCMFlashDisplayView.m */; };
 		0410463418B18B24009BEE3F /* KeyboardStateListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410463318B18B24009BEE3F /* KeyboardStateListener.m */; };
+		0410463618B1A528009BEE3F /* APP_STORE_INFO in Resources */ = {isa = PBXBuildFile; fileRef = 0410463518B1A528009BEE3F /* APP_STORE_INFO */; };
 		041470F2187FBB8200007425 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041470F1187FBB8200007425 /* Foundation.framework */; };
 		041470F4187FBB8200007425 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041470F3187FBB8200007425 /* CoreGraphics.framework */; };
 		041470F6187FBB8200007425 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041470F5187FBB8200007425 /* UIKit.framework */; };
@@ -64,6 +65,7 @@
 		0410462E18B00BC1009BEE3F /* DCMFlashDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMFlashDisplayView.m; sourceTree = "<group>"; };
 		0410463218B18B24009BEE3F /* KeyboardStateListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardStateListener.h; sourceTree = "<group>"; };
 		0410463318B18B24009BEE3F /* KeyboardStateListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardStateListener.m; sourceTree = "<group>"; };
+		0410463518B1A528009BEE3F /* APP_STORE_INFO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = APP_STORE_INFO; sourceTree = "<group>"; };
 		041470EE187FBB8200007425 /* DogecoinManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogecoinManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		041470F1187FBB8200007425 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		041470F3187FBB8200007425 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -193,6 +195,7 @@
 		041470F7187FBB8200007425 /* DogecoinManager */ = {
 			isa = PBXGroup;
 			children = (
+				0410463518B1A528009BEE3F /* APP_STORE_INFO */,
 				040525AD188F903100BE3172 /* TODOs */,
 				04147103187FBB8200007425 /* Main.storyboard */,
 				04D7B9BF188CCD5700113831 /* thirdparty */,
@@ -399,6 +402,7 @@
 				04EC0EBE189E6782000BE0A1 /* miningD@2x.png in Resources */,
 				040525AE188F903100BE3172 /* TODOs in Resources */,
 				0469BF2418AA272500D8989A /* LICENSES in Resources */,
+				0410463618B1A528009BEE3F /* APP_STORE_INFO in Resources */,
 				04147105187FBB8200007425 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

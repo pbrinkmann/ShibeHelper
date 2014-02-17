@@ -1,0 +1,46 @@
+Description
+===========
+
+Shibe Helper is a utility to help you track a Dogecoin wallet and your mining progress at your favorite mining pool.
+
+You can track your Dogecoin wallet balance and the value in USD.
+
+Displayed mining pool info includes:
+
+    + Your balance
+    + Your hashrate
+    + Pool progress on the next block
+    + Your estimated payout when the block is found
+    + Some stats on the previous block
+    + ... and more!
+
+*Please note* only MPOS-based pools that have the API enabled are supported at this time.
+
+Unfortunately, the following popular pools have disabled the API and WILL NOT WORK with this app at this time:
+
+    - dogehouse.org 
+    - fast-pool.com
+    - doge.netcodepool.org
+    - www.shibepool.com
+
+
+
+Keywords
+========
+dogecoin doge mining pool wallet
+
+
+Reviewer Instructions
+=====================
+Sample Wallet Address
+==============
+DSLHYoykX3NvkGLPLrTQezwFhupcz5773D
+You can generate a QR code at: http://dogechain.info/address/DSLHYoykX3NvkGLPLrTQezwFhupcz5773D
+The balance should be 1 dogecoin
+
+Sample Mining Pool URL And Key
+====================
+Mining pool website: https://www.suchcoins.com
+API Key: b084accdca3fb473cfb39557e15979bfd4441b1a0839088e86cea0f6da0684fd
+QR code: http://www.paulb.org/shared/shuchcoins_qr_code.png
+

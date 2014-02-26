@@ -11,6 +11,8 @@
 
 #import "DCMWallet.h"
 
+#import "DCMDogeInfoRemote.h"
+
 @implementation DCMWallet
 
 -(id)init
@@ -61,75 +63,39 @@
         DLog(@"No address found, wallet skipping update");
         return FALSE;
     }
+    
+    DCMDogeInfoRemote* fetcher = [DCMDogeInfoRemote sharedInstance];
+
     //
     // Fetch the wallet balance
     //
-    NSString* serverAddress = [NSString stringWithFormat: @"http://dogechain.info/chain/Dogecoin/q/addressbalance/%@", self.address];
-    
-    NSError *error;
-    NSString *str = [NSString stringWithContentsOfURL:[NSURL URLWithString:serverAddress] encoding:NSUTF8StringEncoding error:&error];
-    
-    if (str == nil) {
-        DLog(@"Failed to fetch wallet balance: %@", [error localizedDescription]);
-        return FALSE;
-    }
-    
-    float balance;
-    NSScanner* scanner = [NSScanner scannerWithString:str];
-    
-    if( ![scanner scanFloat:&balance] ) {
-        if( [str hasPrefix:@"ERROR"] ) {
-            DLog(@"Unable to retrieve balance for wallet: %@", str);
-        }
-        else {
-            DLog(@"Unknown error when parsing string for float: %@", str);
-        }
-        return FALSE;
-    }
-    
-
-    DLog(@"feteched wallet balance of %@", str);
-    
+    float balance = [fetcher getBalanceForWallet: self.address];
   
+    if(balance < 0) {
+        balance = 0;
+        DLog(@"DCMWallet balance update failed");
+        return FALSE;
+    }
     
     //
     // Fetch the DOGE => USD conversion rate
     //
-    str = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"https://www.dogeapi.com/wow/?a=get_current_price"] encoding:NSUTF8StringEncoding error:&error];
+    float doge_to_usd = [fetcher getDogeToUSDRate];
+    float usd_balance;
     
-    float doge_to_usd;
-    
-    if( str == nil) {
-        DLog(@"Failed to fetch USD conversion rate: %@", [error localizedDescription] );
-        doge_to_usd = -1;
+    if(doge_to_usd < 0) {
+        usd_balance = -1;
+        DLog(@"DCMWallet conversion rate failed")
     }
     else {
-        // strip quotes, which suddenly appeared one day
-        str = [str stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-        
-        scanner = [NSScanner scannerWithString:str];
-        
-        if( ![scanner scanFloat:&doge_to_usd] ) {
-
-            DLog(@"Unknown error when parsing string for float: %@", str);
-
-            doge_to_usd = -1;
-        }
-        
-        if( doge_to_usd == 0 ) {
-            DLog(@"Doge to USD is 0, dogeapi is probably having issues");
-            doge_to_usd = -1;
-        }
+        usd_balance = balance * doge_to_usd;
     }
-
-    
-    DLog(@"feteched usd conversion rate of %@", str);
     
     //
     // Update our fields with the fetched data
     //
     self.balance    = [NSNumber numberWithFloat: balance];
-    self.balanceUSD = [NSNumber numberWithFloat: balance * doge_to_usd];
+    self.balanceUSD = [NSNumber numberWithFloat: usd_balance];
 
     self.lastUpdate = [NSDate date];
     

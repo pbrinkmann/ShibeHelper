@@ -8,6 +8,7 @@
 
 #import "DCMUtils.h"
 
+
 @implementation DCMUtils
 
 +(NSString*) lastUpdatedForInterval:(NSTimeInterval) interval
@@ -101,6 +102,21 @@
                        }];
 }
 
++ (void)makeLabelHeaderLabel:(UILabel*)headerLabel
+{
+    CALayer *yourAccountLayer = [headerLabel layer];
+    CALayer *bottomBorder = [CALayer layer];
+    bottomBorder.borderColor =  CreateDeviceRGBColor(.6,.6,.6,1);
+    bottomBorder.borderWidth = 1;
+    bottomBorder.frame =
+    CGRectMake(-1, yourAccountLayer.frame.size.height - 1, yourAccountLayer.frame.size.width, 1);
+    //[bottomBorder setBorderColor:[UIColor blackColor].CGColor];
+    [yourAccountLayer addSublayer:bottomBorder];
+    
+    yourAccountLayer.backgroundColor = CreateDeviceRGBColor(.9,.9,.9,1);
+}
+
+
 //
 // colors from:
 // https://developer.apple.com/library/ios/documentation/userexperience/conceptual/mobilehig/ColorImagesText.html#//apple_ref/doc/uid/TP40006556-CH58-SW1
@@ -138,5 +154,18 @@
 {
     return [UIColor colorWithRed:142.f/255 green:142.f/255 blue:147.f/255 alpha:1];
 }
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+
+CGColorRef CreateDeviceRGBColor(CGFloat r, CGFloat g, CGFloat b, CGFloat a)
+{
+    CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
+    CGFloat comps[] = {r, g, b, a};
+    CGColorRef color = CGColorCreate(rgb, comps);
+    CGColorSpaceRelease(rgb);
+    return color;
+}
+
 
 @end

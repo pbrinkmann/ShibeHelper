@@ -68,9 +68,9 @@
     self.lastUpdateFailed = FALSE;
     
    
-    [self makeLabelHeaderLabel:self.yourAccountLabel];
-    [self makeLabelHeaderLabel:self.currentRoundLabel];
-    [self makeLabelHeaderLabel:self.lastBlockLabel];
+    [DCMUtils makeLabelHeaderLabel:self.yourAccountLabel];
+    [DCMUtils makeLabelHeaderLabel:self.currentRoundLabel];
+    [DCMUtils makeLabelHeaderLabel:self.lastBlockLabel];
     
     self.miningPool = [[DCMMiningPool alloc] init];
 
@@ -103,21 +103,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (void)makeLabelHeaderLabel:(UILabel*)headerLabel
-{
-    CALayer *yourAccountLayer = [headerLabel layer];
-    CALayer *bottomBorder = [CALayer layer];
-    bottomBorder.borderColor =  CreateDeviceRGBColor(.6,.6,.6,1);
-    bottomBorder.borderWidth = 1;
-    bottomBorder.frame =
-    CGRectMake(-1, yourAccountLayer.frame.size.height - 1, yourAccountLayer.frame.size.width, 1);
-    //[bottomBorder setBorderColor:[UIColor blackColor].CGColor];
-    [yourAccountLayer addSublayer:bottomBorder];
-    
-    yourAccountLayer.backgroundColor = CreateDeviceRGBColor(.9,.9,.9,1);
-}
-
 
 -(IBAction)refreshMiningPoolFromTouch:(id)sender
 {
@@ -355,15 +340,6 @@
     }
 }
 
-
-CGColorRef CreateDeviceRGBColor(CGFloat r, CGFloat g, CGFloat b, CGFloat a)
-{
-    CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
-    CGFloat comps[] = {r, g, b, a};
-    CGColorRef color = CGColorCreate(rgb, comps);
-    CGColorSpaceRelease(rgb);
-    return color;
-}
 
 
 -(IBAction)flashme:(id)sender{

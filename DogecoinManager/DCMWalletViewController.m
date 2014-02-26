@@ -194,7 +194,7 @@
     NSString *balance = [numberFormatter stringFromNumber:self.wallet.balance];
     self.balance.text = balance;
     
-    // we set the conversion rate to -1 if there was an error, so negative balance means something went wrong
+    // we set the balanceUSD to -1 if there was an error.
     // In this case, just hide the USD balance display
     if( [self.wallet.balanceUSD floatValue] < 0) {
         self.balanceUSDLabel.hidden = YES;

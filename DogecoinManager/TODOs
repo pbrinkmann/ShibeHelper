@@ -5,12 +5,21 @@ For version 1.0 release to the wild:
 
 Bugs
 ====
+[ ] mining pool edit API done keyboard key does not close keyboard
+[ ] new block! text doesn't seem centered in green roundrect - take screenshot and measure
 
 New Features/Enhancements
 =========================
+[ ] Align "last updated" strings to be at the bottom of the screen,
+    and exactly the same place on both wallet and mining pool screens
+[ ] Dynamify mining calc values
+[ ] Save/load previous mining calc values
+[ ] Option to pull in hashrate from mining pool [an icon, with a dialog confirm?]
+[ ] Keyboard close on mining calc screen
 
 Release Steps
 =============
+[ ] Find beta testers!
 [ ] shibehelper.com - configure it
 [ ] Test on actual iPhone 4/4S screen
 
@@ -83,6 +92,8 @@ DONE!
         * fast-pool.com
         * doge.netcodepool.org
         * www.shibepool.com
+[X] with a 0 DOGE balance address, USD can show up as (($0.00))
+[X] Fuck me, we're doing a mining calculator :(  Get initial version working
 
 
 Rejected
@@ -106,6 +117,7 @@ New Features/Enhancements
 [ ] Support multiple mining pools
     [ ] Display mining pool summary
 [ ] Display DOGE => BTC
+[ ] Add reject rate and pool fees to mining calculator
 
 
 ======================================================================
@@ -115,8 +127,7 @@ For version 1.1:
 New Features/Enhancements
 =========================
 [ ] Refactor code - http://bendyworks.com/geekville/articles/2014/2/single-responsibility-principle-ios
-[ ] Profit calculator (ask for power usage, SEE BELOW for cost of power, 
-    use current pool hashrate BY DEFAULT, but let user change it)
+[ ] Add option to find power cost for mining calc from table at bottom of this page
 [ ] display delta amount when updating balances.  Fade in/out a green [+3500] or red [-1221] to show difference to last update
 [ ] Display "dashboard" - with current balance, current hashrate, current mining pool balance
 [ ] Support multipool.us as a mining pool type

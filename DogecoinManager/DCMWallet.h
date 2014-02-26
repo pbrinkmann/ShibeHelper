@@ -12,6 +12,8 @@
 
 @property NSString* address;
 @property NSNumber* balance;
+
+// This will be -1 if the conversion rate lookup failed
 @property NSNumber* balanceUSD;
 
 @property NSDate* lastUpdate;

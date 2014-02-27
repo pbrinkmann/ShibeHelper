@@ -10,6 +10,8 @@
 
 #import "DCMMiningCalculator.h"
 #import "DCMUtils.h"
+#import "KeyboardStateListener.h"
+
 
 @interface DCMMiningCalculatorViewController ()
 
@@ -43,6 +45,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *power30Label;
 @property (weak, nonatomic) IBOutlet UILabel *profit30Label;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 
 @end
 
@@ -67,7 +70,22 @@
     [DCMUtils makeLabelHeaderLabel:self.yourRigLabel];
     [DCMUtils makeLabelHeaderLabel:self.currentRatesLabel];
     [DCMUtils makeLabelHeaderLabel:self.profitabilityLabel];
+    
+    // dismiss keyboard when tap outside of text field
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(tapHandler)];
+    
+    [self.view addGestureRecognizer:tap];
 
+}
+
+// If top-level view touched, close keyboard and validate URL
+-(void)tapHandler
+{
+    if( [KeyboardStateListener sharedInstance].isVisible ) {
+        [self dismissKeyboard];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -155,7 +173,7 @@
     shapeLayer.lineWidth = .5;
     shapeLayer.fillColor = [[UIColor clearColor] CGColor];
     
-    [self.view.layer addSublayer:shapeLayer];
+    [self.mainScrollView.layer addSublayer:shapeLayer];
 }
 
 @end

@@ -118,7 +118,10 @@ New Features/Enhancements
     [ ] Display mining pool summary
 [ ] Display DOGE => BTC
 [ ] Add reject rate and pool fees to mining calculator
-
+[ ] Factor in halving for mining calc
+[ ] Factor in block jumper effect (where people only mine >50% profitable blocks) 
+    - what's the ACTUAL avg block reward normal people experience?
+[ ] See if I can factor in PPLNS shares into estimated block payout
 
 ======================================================================
 For version 1.1:

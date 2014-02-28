@@ -196,6 +196,11 @@
     [self.miningPoolAPIKeyTextField resignFirstResponder];
 }
 
+-(IBAction)editEndedOnAPIKey:(id)sender
+{
+    // No-op, but this allows the keyboard to close when the user clicks the Done button
+}
+
 -(IBAction)validateURLAfterEditDone:(id)sender
 {
     [self validateURL];

@@ -49,6 +49,9 @@
 
 @end
 
+#define LEFT 0
+#define RIGHT 1
+
 @implementation DCMMiningCalculatorViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -77,7 +80,41 @@
                                    action:@selector(tapHandler)];
     
     [self.view addGestureRecognizer:tap];
+    
 
+    //
+    // Configure units for the text views
+    //
+    [self addUnitsToTextView:self.hashrateTextField     withUnitString:@"kh/s"   toSide:RIGHT];
+    [self addUnitsToTextView:self.hardwareCostTextField withUnitString:@"$"      toSide:LEFT];
+    [self addUnitsToTextView:self.powerUsageTextField   withUnitString:@"watts"  toSide:RIGHT];
+    [self addUnitsToTextView:self.powerCostTextField    withUnitString:@"$/kWh"  toSide:RIGHT];
+    [self addUnitsToTextView:self.dogeToUSDRateTextField withUnitString:@"Ð/USD" toSide:RIGHT];
+
+}
+
+-(void)addUnitsToTextView:(UITextField*)textView withUnitString:(NSString*)str toSide:(int)side
+{
+    int padding = 5;
+    
+    UIFont *textFont = [UIFont systemFontOfSize:14];
+    CGSize s = [str sizeWithAttributes:@{ NSFontAttributeName : textFont }];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, s.width + padding, 30)];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = textFont;
+    label.text = str;
+    label.textColor = [UIColor lightGrayColor];
+    label.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0];
+    
+    if(side == RIGHT) {
+        textView.rightViewMode = UITextFieldViewModeAlways;
+        textView.rightView = label;
+    }
+    else {
+        textView.leftViewMode = UITextFieldViewModeAlways;
+        textView.leftView = label;
+    }
 }
 
 // If top-level view touched, close keyboard and validate URL
@@ -93,9 +130,24 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)recalculate:(id)sender {
-    [self dismissKeyboard];
-    
+
+- (IBAction)anyValueChanged:(id)sender {
+    // If all fields have a value, recalc
+
+    if (![self.hashrateTextField.text isEqualToString:@""] &&
+        ![self.powerUsageTextField.text isEqualToString:@""] &&
+        ![self.hardwareCostTextField.text isEqualToString:@""] &&
+        ![self.powerCostTextField.text isEqualToString:@""] &&
+        ![self.dogeToUSDRateTextField.text isEqualToString:@""] &&
+        ![self.difficultyTextField.text isEqualToString:@""] &&
+        ![self.avgBlockRewardTextField.text isEqualToString:@""])
+    {
+        [self recalculate];
+    }
+}
+
+- (void)recalculate {
+   
     DCMMiningCalculator *calc = [DCMMiningCalculator
         miningCalculatorWithHashRate:[self.hashrateTextField.text intValue]
                            powerCost:[self.powerCostTextField.text floatValue]

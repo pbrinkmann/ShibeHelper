@@ -5,7 +5,6 @@ For version 1.0 release to the wild:
 
 Bugs
 ====
-[ ] mining pool edit API done keyboard key does not close keyboard
 [ ] new block! text doesn't seem centered in green roundrect - take screenshot and measure
 
 New Features/Enhancements
@@ -15,7 +14,6 @@ New Features/Enhancements
 [ ] Dynamify mining calc values
 [ ] Save/load previous mining calc values
 [ ] Option to pull in hashrate from mining pool [an icon, with a dialog confirm?]
-[ ] Keyboard close on mining calc screen
 
 Release Steps
 =============
@@ -94,14 +92,19 @@ DONE!
         * www.shibepool.com
 [X] with a 0 DOGE balance address, USD can show up as (($0.00))
 [X] Fuck me, we're doing a mining calculator :(  Get initial version working
+[X] Keyboard close on mining calc screen
+[X] wallet address edit done keyboard key does not close keyboard
+[X] mining pool edit API done keyboard key does not close keyboard
+[X] Recalc mining calc automatically once all values filled in
+
+
+
 
 
 Rejected
 ========
 [-] swipe right/left to transition between wallet and mining pool screens (animated).  It looks like this would be more trouble than it's worth :(
 [-] Try and get rid of all compiler warnings - hmmm... it doesn't like my storyboard constraints, BUT, if I change them, shit gets fucked up.
-
-
 
 
 

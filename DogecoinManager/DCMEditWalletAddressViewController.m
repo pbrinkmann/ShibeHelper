@@ -128,6 +128,11 @@
     }
 }
 
+-(IBAction)editEndedOnWalletAddress:(id)sender
+{
+    // No-op, but this allows the keyboard to close when the user clicks the Done button
+}
+
 -(IBAction)startScan:(id)sender
 {
     [CDZQRScanningViewController scanIntoTextField:self.walletAddressTextField fromViewController:self withValidationCallback:^{[self doWalletAddressValidation];} ];

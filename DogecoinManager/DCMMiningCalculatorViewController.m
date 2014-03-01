@@ -194,28 +194,41 @@
     // add graph view layer
     UIBezierPath *path = [UIBezierPath bezierPath];
     
+    int leftUnderlineX  = 10;
+    int underlineWidth  = 70;
+    
+    int leftBorderX     = leftUnderlineX + underlineWidth;
+
+    int rightBorderX    = leftUnderlineX + 295;
+
+    int topBorderY      = 370;
+    int bottomBorderY   = topBorderY + 100;
+    
+    int rowHeight       = 25;
+    int firstUnderlineY = topBorderY + rowHeight;
+    
     // top bar
-    [path moveToPoint:CGPointMake(80.0, 390.0)];
-    [path addLineToPoint:CGPointMake(305.0, 390.0)];
+    [path moveToPoint:CGPointMake(leftBorderX, topBorderY)];
+    [path addLineToPoint:CGPointMake(rightBorderX, topBorderY)];
     
     // underlines
     for(int i = 0; i < 4; i++) {
-        [path moveToPoint:CGPointMake(10.0, 415.0 + i * 25)];
-        [path addLineToPoint:CGPointMake(305.0, 415.0 + i * 25)];
+        [path moveToPoint:CGPointMake(leftUnderlineX,  firstUnderlineY + i * rowHeight)];
+        [path addLineToPoint:CGPointMake(rightBorderX, firstUnderlineY + i * rowHeight)];
     }
 
     // vertical lines
-    [path moveToPoint:CGPointMake(80.0, 390.0)];
-    [path addLineToPoint:CGPointMake(80, 490.0)];
+    [path moveToPoint:CGPointMake(   leftBorderX, topBorderY)];
+    [path addLineToPoint:CGPointMake(leftBorderX, bottomBorderY)];
     
-    [path moveToPoint:CGPointMake(145.0, 390.0)];
-    [path addLineToPoint:CGPointMake(145.0, 490.0)];
+    [path moveToPoint:CGPointMake(   leftBorderX + 65, topBorderY)];
+    [path addLineToPoint:CGPointMake(leftBorderX + 65, bottomBorderY)];
     
-    [path moveToPoint:CGPointMake(220, 390.0)];
-    [path addLineToPoint:CGPointMake(220, 490.0)];
+    [path moveToPoint:CGPointMake(   leftBorderX + 140, topBorderY)];
+    [path addLineToPoint:CGPointMake(leftBorderX + 140, bottomBorderY)];
     
-    [path moveToPoint:CGPointMake(305, 390.0)];
-    [path addLineToPoint:CGPointMake(305, 490.0)];
+    [path moveToPoint:CGPointMake(   rightBorderX, topBorderY)];
+    [path addLineToPoint:CGPointMake(rightBorderX, bottomBorderY)];
     
     
     

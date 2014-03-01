@@ -10,6 +10,7 @@
 
 @implementation DCMMiningCalculator
 
+
 +(id)miningCalculatorWithHashRate:(int)hashrate
                         powerCost:(float)powerCost
                        powerUsage:(int)powerUsage

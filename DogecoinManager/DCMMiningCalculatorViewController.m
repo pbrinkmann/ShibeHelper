@@ -45,6 +45,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *power30Label;
 @property (weak, nonatomic) IBOutlet UILabel *profit30Label;
 
+@property (weak, nonatomic) IBOutlet UILabel *timeToBreakEvenLabel;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 
 @end
@@ -176,6 +178,13 @@
     self.revenue30Label.text = [NSString stringWithFormat:@"$%.2f", calc.revenuePerDay * 30];
     self.power30Label.text   = [NSString stringWithFormat:@"$%.2f", calc.powerCostPerDay * 30];
     self.profit30Label.text  = [NSString stringWithFormat:@"$%.2f", calc.profitPerDay * 30];
+    
+    if( calc.profitPerDay <= 0 ) {
+        self.timeToBreakEvenLabel.text = @"time to break even: never";
+    }
+    else {
+        self.timeToBreakEvenLabel.text = [NSString stringWithFormat:@"time to break even: %d days", (int) (calc.hardwareCost / calc.profitPerDay)];
+    }
 }
 
 -(void)dismissKeyboard

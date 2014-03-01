@@ -96,8 +96,10 @@ DONE!
 [X] wallet address edit done keyboard key does not close keyboard
 [X] mining pool edit API done keyboard key does not close keyboard
 [X] Recalc mining calc automatically once all values filled in
+----- version 0.1
+[X] Time to break even for mining calc
 
-
+----- version 0.11
 
 
 

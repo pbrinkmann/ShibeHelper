@@ -1032,7 +1032,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time to break even: 323 days" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Yg-VM-56K">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time to break even: 0 days" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Yg-VM-56K">
                                         <rect key="frame" x="30" y="473" width="260" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1202,6 +1202,7 @@
                         <outlet property="revenue30Label" destination="CKo-Xc-HH0" id="wmh-gf-MNr"/>
                         <outlet property="revenueDailyLabel" destination="ATV-nt-tea" id="f5q-fK-4xO"/>
                         <outlet property="revenueWeeklyLabel" destination="omE-jF-1La" id="puk-ga-2iX"/>
+                        <outlet property="timeToBreakEvenLabel" destination="2Yg-VM-56K" id="Fn7-Fe-lFZ"/>
                         <outlet property="yourRigLabel" destination="Mda-Vj-QQp" id="vDQ-NH-jMk"/>
                     </connections>
                 </viewController>

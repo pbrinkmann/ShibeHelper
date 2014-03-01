@@ -10,28 +10,49 @@
 
 @implementation DCMMiningCalculator
 
-
-+(id)miningCalculatorWithHashRate:(int)hashrate
-                        powerCost:(float)powerCost
-                       powerUsage:(int)powerUsage
-                     hardwareCost:(int)hardwareCost
-                    dogeToUSDRate:(float)dogeToUSDRate
-                       difficulty:(float)difficulty
-                   avgBlockReward:(int)avgBlockReward;
+-(id)init
 {
-    DCMMiningCalculator* newCalc = [[DCMMiningCalculator alloc] init];
+    self = [super init];
+
+    if(self) {
+        [self loadDataFromUserDefaults];
+    }
     
-    newCalc.hashrate        = hashrate;
-    newCalc.powerCost       = powerCost;
-    newCalc.powerUsage      = powerUsage;
-    newCalc.hardwareCost    = hardwareCost;
-    newCalc.dogeToUSDRate   = dogeToUSDRate;
-    newCalc.difficulty      = difficulty;
-    newCalc.avgBlockReward  = avgBlockReward;
-    
-    return newCalc;
+    return self;
 }
 
+
+- (void)loadDataFromUserDefaults
+{
+    NSUserDefaults* stdDefaults =[NSUserDefaults standardUserDefaults];
+    
+    if ([stdDefaults objectForKey:@"miningcalc.hashrate"])
+    {
+        self.hashrate           = [[stdDefaults objectForKey:@"miningcalc.hashrate"] intValue];
+        self.powerCost          = [[stdDefaults objectForKey:@"miningcalc.powerCost"] floatValue];
+        self.powerUsage         = [[stdDefaults objectForKey:@"miningcalc.powerUsage"] intValue];
+        self.hardwareCost       = [[stdDefaults objectForKey:@"miningcalc.hardwareCost"] intValue];
+        self.dogeToUSDRate      = [[stdDefaults objectForKey:@"miningcalc.dogeToUSDRate"] floatValue];
+        self.difficulty         = [[stdDefaults objectForKey:@"miningcalc.difficulty"] floatValue];
+        self.avgBlockReward     = [[stdDefaults objectForKey:@"miningcalc.avgBlockReward"] intValue];
+        
+        [self calculate];
+    }
+}
+-(void)saveValues
+{
+    NSUserDefaults* stdDefaults =[NSUserDefaults standardUserDefaults];
+
+    [stdDefaults setObject:[NSNumber numberWithInt:     self.hashrate]       forKey:@"miningcalc.hashrate"];
+    [stdDefaults setObject:[NSNumber numberWithFloat:   self.powerCost]      forKey:@"miningcalc.powerCost"];
+    [stdDefaults setObject:[NSNumber numberWithInt:     self.powerUsage]     forKey:@"miningcalc.powerUsage"];
+    [stdDefaults setObject:[NSNumber numberWithInt:     self.hardwareCost]   forKey:@"miningcalc.hardwareCost"];
+    [stdDefaults setObject:[NSNumber numberWithFloat:   self.dogeToUSDRate]  forKey:@"miningcalc.dogeToUSDRate"];
+    [stdDefaults setObject:[NSNumber numberWithFloat:   self.difficulty]     forKey:@"miningcalc.difficulty"];
+    [stdDefaults setObject:[NSNumber numberWithInt:     self.avgBlockReward] forKey:@"miningcalc.avgBlockReward"];
+    
+    [stdDefaults synchronize];
+}
 
 -(void)calculate
 {

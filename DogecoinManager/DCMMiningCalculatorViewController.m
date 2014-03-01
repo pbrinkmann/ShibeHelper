@@ -15,6 +15,8 @@
 
 @interface DCMMiningCalculatorViewController ()
 
+@property DCMMiningCalculator* miningCalc;
+
 @property (weak, nonatomic) IBOutlet UILabel *yourRigLabel;
 @property (weak, nonatomic) IBOutlet UILabel *currentRatesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *profitabilityLabel;
@@ -70,6 +72,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    self.miningCalc = [[DCMMiningCalculator alloc] init];
+    
+    if(self.miningCalc.hashrate > 0) {
+        [self restoreInputTextFields];
+        [self refreshProfitabilityViewLabels];
+    }
+    
     [self addResultsGridLines];
     
     [DCMUtils makeLabelHeaderLabel:self.yourRigLabel];
@@ -91,8 +100,7 @@
     [self addUnitsToTextView:self.hardwareCostTextField withUnitString:@"$"      toSide:LEFT];
     [self addUnitsToTextView:self.powerUsageTextField   withUnitString:@"watts"  toSide:RIGHT];
     [self addUnitsToTextView:self.powerCostTextField    withUnitString:@"$/kWh"  toSide:RIGHT];
-    [self addUnitsToTextView:self.dogeToUSDRateTextField withUnitString:@"Ð/USD" toSide:RIGHT];
-
+    [self addUnitsToTextView:self.dogeToUSDRateTextField withUnitString:@"USD/Ð" toSide:RIGHT];
 }
 
 -(void)addUnitsToTextView:(UITextField*)textView withUnitString:(NSString*)str toSide:(int)side
@@ -136,54 +144,73 @@
 - (IBAction)anyValueChanged:(id)sender {
     // If all fields have a value, recalc
 
-    if (![self.hashrateTextField.text isEqualToString:@""] &&
-        ![self.powerUsageTextField.text isEqualToString:@""] &&
-        ![self.hardwareCostTextField.text isEqualToString:@""] &&
-        ![self.powerCostTextField.text isEqualToString:@""] &&
+    if (![self.hashrateTextField.text isEqualToString:@""]      &&
+        ![self.powerUsageTextField.text isEqualToString:@""]    &&
+        ![self.hardwareCostTextField.text isEqualToString:@""]  &&
+        ![self.powerCostTextField.text isEqualToString:@""]     &&
         ![self.dogeToUSDRateTextField.text isEqualToString:@""] &&
-        ![self.difficultyTextField.text isEqualToString:@""] &&
+        ![self.difficultyTextField.text isEqualToString:@""]    &&
         ![self.avgBlockRewardTextField.text isEqualToString:@""])
     {
+        [self saveValuesToMiningCalc];
         [self recalculate];
     }
 }
 
-- (void)recalculate {
-   
-    DCMMiningCalculator *calc = [DCMMiningCalculator
-        miningCalculatorWithHashRate:[self.hashrateTextField.text intValue]
-                           powerCost:[self.powerCostTextField.text floatValue]
-                          powerUsage:[self.powerUsageTextField.text intValue]
-                        hardwareCost:[self.hardwareCostTextField.text intValue]
-                       dogeToUSDRate:[self.dogeToUSDRateTextField.text floatValue]
-                          difficulty:[self.difficultyTextField.text floatValue]
-                      avgBlockReward:[self.avgBlockRewardTextField.text floatValue]];
+-(void)saveValuesToMiningCalc {
+    self.miningCalc.hashrate        = [self.hashrateTextField.text       intValue];
+    self.miningCalc.powerCost       = [self.powerCostTextField.text      floatValue];
+    self.miningCalc.powerUsage      = [self.powerUsageTextField.text     intValue];
+    self.miningCalc.hardwareCost    = [self.hardwareCostTextField.text   intValue];
+    self.miningCalc.dogeToUSDRate   = [self.dogeToUSDRateTextField.text  floatValue];
+    self.miningCalc.difficulty      = [self.difficultyTextField.text     floatValue];
+    self.miningCalc.avgBlockReward  = [self.avgBlockRewardTextField.text intValue];
+    
+    [self.miningCalc saveValues];
+}
 
-    [calc calculate];
+- (void)recalculate {
+    [self.miningCalc calculate];
+    [self refreshProfitabilityViewLabels];
+}
+
+-(void)restoreInputTextFields {
+    self.hashrateTextField.text         = [NSString stringWithFormat:@"%d", self.miningCalc.hashrate ];
+    self.powerCostTextField.text        = [NSString stringWithFormat:@"%.3f", self.miningCalc.powerCost ];
+    self.powerUsageTextField.text       = [NSString stringWithFormat:@"%d", self.miningCalc.powerUsage];
+    self.hardwareCostTextField.text     = [NSString stringWithFormat:@"%d", self.miningCalc.hardwareCost];
+    self.dogeToUSDRateTextField.text    = [NSString stringWithFormat:@"%.5f", self.miningCalc.dogeToUSDRate];
+    self.difficultyTextField.text       = [NSString stringWithFormat:@"%.1f", self.miningCalc.difficulty];
+    self.avgBlockRewardTextField.text   = [NSString stringWithFormat:@"%d", self.miningCalc.avgBlockReward];
+}
+
+-(void)refreshProfitabilityViewLabels {
 
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
     
-    self.coinsDailyLabel.text   = [numberFormatter stringFromNumber:[NSNumber numberWithInt:calc.coinsPerDay]];
-    self.revenueDailyLabel.text = [NSString stringWithFormat:@"$%.2f", calc.revenuePerDay];
-    self.powerDailyLabel.text   = [NSString stringWithFormat:@"$%.2f", calc.powerCostPerDay];
-    self.profitDailyLabel.text  = [NSString stringWithFormat:@"$%.2f", calc.profitPerDay];
+    self.coinsDailyLabel.text   = [numberFormatter stringFromNumber:[NSNumber numberWithInt:self.miningCalc.coinsPerDay]];
+    self.revenueDailyLabel.text = [NSString stringWithFormat:@"$%.2f", self.miningCalc.revenuePerDay];
+    self.powerDailyLabel.text   = [NSString stringWithFormat:@"$%.2f", self.miningCalc.powerCostPerDay];
+    self.profitDailyLabel.text  = [NSString stringWithFormat:@"$%.2f", self.miningCalc.profitPerDay];
     
-    self.coinsWeeklyLabel.text   = [numberFormatter stringFromNumber:[NSNumber numberWithInt:calc.coinsPerDay * 7]];
-    self.revenueWeeklyLabel.text = [NSString stringWithFormat:@"$%.2f", calc.revenuePerDay * 7];
-    self.powerWeeklyLabel.text   = [NSString stringWithFormat:@"$%.2f", calc.powerCostPerDay * 7];
-    self.profitWeeklyLabel.text  = [NSString stringWithFormat:@"$%.2f", calc.profitPerDay * 7];
+    self.coinsWeeklyLabel.text   = [numberFormatter stringFromNumber:[NSNumber numberWithInt:self.miningCalc.coinsPerDay * 7]];
+    self.revenueWeeklyLabel.text = [NSString stringWithFormat:@"$%.2f", self.miningCalc.revenuePerDay * 7];
+    self.powerWeeklyLabel.text   = [NSString stringWithFormat:@"$%.2f", self.miningCalc.powerCostPerDay * 7];
+    self.profitWeeklyLabel.text  = [NSString stringWithFormat:@"$%.2f", self.miningCalc.profitPerDay * 7];
 
-    self.coins30Label.text   = [numberFormatter stringFromNumber:[NSNumber numberWithInt:calc.coinsPerDay * 30]];
-    self.revenue30Label.text = [NSString stringWithFormat:@"$%.2f", calc.revenuePerDay * 30];
-    self.power30Label.text   = [NSString stringWithFormat:@"$%.2f", calc.powerCostPerDay * 30];
-    self.profit30Label.text  = [NSString stringWithFormat:@"$%.2f", calc.profitPerDay * 30];
+    self.coins30Label.text   = [numberFormatter stringFromNumber:[NSNumber numberWithInt:self.miningCalc.coinsPerDay * 30]];
+    self.revenue30Label.text = [NSString stringWithFormat:@"$%.2f", self.miningCalc.revenuePerDay * 30];
+    self.power30Label.text   = [NSString stringWithFormat:@"$%.2f", self.miningCalc.powerCostPerDay * 30];
+    self.profit30Label.text  = [NSString stringWithFormat:@"$%.2f", self.miningCalc.profitPerDay * 30];
     
-    if( calc.profitPerDay <= 0 ) {
+    if( self.miningCalc.profitPerDay <= 0 ) {
         self.timeToBreakEvenLabel.text = @"time to break even: never";
     }
     else {
-        self.timeToBreakEvenLabel.text = [NSString stringWithFormat:@"time to break even: %d days", (int) (calc.hardwareCost / calc.profitPerDay)];
+        self.timeToBreakEvenLabel.text = [NSString
+                                          stringWithFormat:@"time to break even: %d days",
+                                          (int)(self.miningCalc.hardwareCost / self.miningCalc.profitPerDay)];
     }
 }
 

@@ -5,14 +5,12 @@ For version 1.0 release to the wild:
 
 Bugs
 ====
+[ ] Copy Wallet Address popup is no longer centered on the wallet address
 [ ] new block! text doesn't seem centered in green roundrect - take screenshot and measure
 
 New Features/Enhancements
 =========================
-[ ] Align "last updated" strings to be at the bottom of the screen,
-    and exactly the same place on both wallet and mining pool screens
 [ ] Dynamify mining calc values
-[ ] Save/load previous mining calc values
 [ ] Option to pull in hashrate from mining pool [an icon, with a dialog confirm?]
 
 Release Steps
@@ -96,10 +94,15 @@ DONE!
 [X] wallet address edit done keyboard key does not close keyboard
 [X] mining pool edit API done keyboard key does not close keyboard
 [X] Recalc mining calc automatically once all values filled in
------ version 0.1
-[X] Time to break even for mining calc
+----- version 0.1 released
 
------ version 0.11
+[X] Time to break even for mining calc
+[X] Align "last updated" strings to be at the bottom of the screen,
+    and exactly the same place on both wallet and mining pool screens
+[X] Launch image for iPhone 4/4S
+[X] Save/load previous mining calc values
+
+----- version 0.11 IN PROGRESS
 
 
 
@@ -113,6 +116,8 @@ Rejected
 ======================================================================
 For "Pro" version 1.0:
 ======================================================================
+
+MPOS api - https://github.com/MPOS/php-mpos/wiki/API-Reference
 
 New Features/Enhancements
 =========================

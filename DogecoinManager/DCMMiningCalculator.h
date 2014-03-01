@@ -35,14 +35,8 @@
 
 #pragma mark - Public Methods
 
-+(id)miningCalculatorWithHashRate:(int)hashrate
-                        powerCost:(float)powerCost
-                       powerUsage:(int)powerUsage
-                     hardwareCost:(int)hardwareCost
-                    dogeToUSDRate:(float)dogeToUSDRate
-                       difficulty:(float)difficulty
-                   avgBlockReward:(int)avgBlockReward;
 
+-(void)saveValues;
 -(void)calculate;
 
 @end

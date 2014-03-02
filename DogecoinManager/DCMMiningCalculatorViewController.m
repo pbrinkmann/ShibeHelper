@@ -188,13 +188,22 @@
 // Recalculates profit values if all fields are filled in
 - (void)recalcIfPossible
 {
-    if (![self.hashrateTextField.text isEqualToString:@""]      &&
-        ![self.powerUsageTextField.text isEqualToString:@""]    &&
-        ![self.hardwareCostTextField.text isEqualToString:@""]  &&
-        ![self.powerCostTextField.text isEqualToString:@""]     &&
-        ![self.dogeToUSDRateTextField.text isEqualToString:@""] &&
-        ![self.difficultyTextField.text isEqualToString:@""]    &&
-        ![self.avgBlockRewardTextField.text isEqualToString:@""])
+    if (![self.hashrateTextField.text isEqualToString:@""]       &&
+        ![self.powerUsageTextField.text isEqualToString:@""]     &&
+        ![self.hardwareCostTextField.text isEqualToString:@""]   &&
+        ![self.powerCostTextField.text isEqualToString:@""]      &&
+        ![self.dogeToUSDRateTextField.text isEqualToString:@""]  &&
+        ![self.difficultyTextField.text isEqualToString:@""]     &&
+        ![self.avgBlockRewardTextField.text isEqualToString:@""] &&
+        
+        [self.hashrateTextField.text intValue]          > 0      &&
+ //     [self.powerUsageTextField.text intValue]        > 0      &&  ok, can be 0
+ //     [self.hardwareCostTextField.text intValue]      > 0      &&  ok, can be 0
+ //     [self.powerCostTextField.text floatValue]       > 0      &&  ok, can be 0
+        [self.dogeToUSDRateTextField.text floatValue]   > 0      &&
+        [self.difficultyTextField.text floatValue]      > 0      &&
+        [self.avgBlockRewardTextField.text intValue]    > 0
+        )
     {
         [self saveValuesToMiningCalc];
         [self recalculate];

@@ -1,33 +1,39 @@
 Description
 ===========
 
-Shibe Helper is a utility to help you track a Dogecoin wallet and your mining progress at your favorite mining pool.
+Shibe Helper is a utility to help you on your Dogecoin mining journey (to the moon?).  It comes with three helpful utilities:
 
-You can track your Dogecoin wallet balance and the value in USD.
+* Wallet Viewer - check your Dogecoin wallet balance and the value in USD
+* Mining Pool Viewer - track your mining progress at your favorite mining pool (MPOS pools only)
+* Mining Calculator - calculate Dogecoin profits based on your hashrate, power costs, etc.
 
 Displayed mining pool info includes:
 
-    + Your balance
-    + Your hashrate
-    + Pool progress on the next block
-    + Your estimated payout when the block is found
-    + Some stats on the previous block
-    + ... and more!
++ Your balance
++ Your hashrate
++ Pool progress on the next block
++ Your estimated payout when the block is found
++ Some stats on the previous block
++ ... and more!
 
-*Please note* only MPOS-based pools that have the API enabled are supported at this time.
+*Please note* only MPOS-based pools that have the API enabled are supported for now
 
-Unfortunately, the following popular pools have disabled the API and WILL NOT WORK with the app at this time:
+Unfortunately, the following popular pools have disabled the API and WILL NOT WORK with the app at release time:
 
-    - dogehouse.org 
-    - fast-pool.com
-    - doge.netcodepool.org
-    - www.shibepool.com
+- dogehouse.org
+- fast-pool.com
+- doge.netcodepool.org
+
+++++++
+This app relies on 3rd party data sources, so the availability of all features is not guaranteed
+++++++
+
 
 
 
 Keywords
 ========
-dogecoin doge mining pool wallet
+dogecoin doge mining pool wallet profit calculator shibe
 
 
 Reviewer Instructions
@@ -36,7 +42,7 @@ Sample Wallet Address
 ==============
 DSLHYoykX3NvkGLPLrTQezwFhupcz5773D
 You can generate a QR code at: http://dogechain.info/address/DSLHYoykX3NvkGLPLrTQezwFhupcz5773D
-The balance should be 1 dogecoin
+The balance should be 100 dogecoins
 
 Sample Mining Pool URL And Key
 ====================

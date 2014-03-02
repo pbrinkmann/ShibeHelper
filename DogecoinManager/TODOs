@@ -5,12 +5,10 @@ For version 1.0 release to the wild:
 
 Bugs
 ====
-[ ] Copy Wallet Address popup is no longer centered on the wallet address
-[ ] new block! text doesn't seem centered in green roundrect - take screenshot and measure
 
 New Features/Enhancements
 =========================
-[ ] Option to pull in hashrate from mining pool [an icon, with a dialog confirm?]
+
 
 Release Steps
 =============
@@ -86,14 +84,13 @@ DONE!
         * dogehouse.org 
         * fast-pool.com
         * doge.netcodepool.org
-        * www.shibepool.com
 [X] with a 0 DOGE balance address, USD can show up as (($0.00))
 [X] Fuck me, we're doing a mining calculator :(  Get initial version working
 [X] Keyboard close on mining calc screen
 [X] wallet address edit done keyboard key does not close keyboard
 [X] mining pool edit API done keyboard key does not close keyboard
 [X] Recalc mining calc automatically once all values filled in
------ version 0.1 released
+----- version 0.1 released to testflight
 
 [X] Time to break even for mining calc
 [X] Align "last updated" strings to be at the bottom of the screen,
@@ -101,9 +98,10 @@ DONE!
 [X] Launch image for iPhone 4/4S
 [X] Save/load previous mining calc values
 [X] Dynamify mining calc values
-
------ version 0.11 IN PROGRESS
-
+[X] Copy Wallet Address popup is no longer centered on the wallet address
+[X] new block! text doesn't seem centered in green roundrect - take screenshot and measure
+----- version 1.0 released to testflight
+----- version 1.0 released to app store (!)
 
 
 Rejected
@@ -140,10 +138,14 @@ For version 1.1:
 New Features/Enhancements
 =========================
 [ ] Refactor code - http://bendyworks.com/geekville/articles/2014/2/single-responsibility-principle-ios
-[ ] Add option to find power cost for mining calc from table at bottom of this page
 [ ] display delta amount when updating balances.  Fade in/out a green [+3500] or red [-1221] to show difference to last update
+    or
+    Add animated floating values to show changes (+10) (-.2) etc
+    Use these on on important values, like wallet balance, mining pool bold values, mining calc profit values
+    to show changes when new values are loaded
 [ ] Display "dashboard" - with current balance, current hashrate, current mining pool balance
 [ ] Support multipool.us as a mining pool type
+[ ] Add option to find power cost for mining calc from table at bottom of this page
 [ ] Add "Welcome" screen or tutorial tooltips that point to the edit buttons for first timers (https://www.cocoacontrols.com/controls/myintroductionview)
 [ ] Smart handling of requests for doing the various MPOS API calls.
     Do parallel requests to multiple pools
@@ -154,7 +156,8 @@ New Features/Enhancements
 [ ] Add special compatibility layer (after verifying these are still issues) -
         * for pool.chunky.ms, add the /doge component - https://pool.chunky.ms/doge/index.php?page=api&action=public
         * for doge.pool.pm, make sure the requests are going to https, NOT http (which is what the QR code says to do)
-        
+[ ] Option to pull in hashrate from mining pool to mining calc [an pickaxe icon, with a dialog confirm?]
+
 
 ======================================================================
 For "Pro" version 1.1:

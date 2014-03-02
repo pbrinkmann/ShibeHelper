@@ -84,14 +84,17 @@
     
 
     CGFloat fontHeight  = font.lineHeight;
+    float yFudgeFactor  = 1.5; // the text feels like it's too high up, unless you nudge it down a little
+
     CGFloat yOffset     = (contextRect.size.height - fontHeight) / 2.0;
+    yOffset += yFudgeFactor;
 
     CGRect textRect                     = CGRectMake(0, yOffset, contextRect.size.width, fontHeight);
     NSMutableParagraphStyle *textStyle  = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
     textStyle.lineBreakMode             = NSLineBreakByWordWrapping;
     textStyle.alignment                 = NSTextAlignmentCenter;
 
-    DLog(@"Drawing text %@ in rect %@ with text rect: %@", s, NSStringFromCGRect(contextRect), NSStringFromCGRect(textRect));
+//    DLog(@"Drawing text %@ in rect %@ with text rect: %@", s, NSStringFromCGRect(contextRect), NSStringFromCGRect(textRect));
 
     
     [s drawInRect:textRect

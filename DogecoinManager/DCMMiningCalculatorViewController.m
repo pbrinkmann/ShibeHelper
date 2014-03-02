@@ -8,8 +8,11 @@
 
 #import "DCMMiningCalculatorViewController.h"
 
+#import "DCMDogeInfoRemote.h"
 #import "DCMMiningCalculator.h"
 #import "DCMUtils.h"
+
+#import "HTProgressHUD.h"
 #import "KeyboardStateListener.h"
 
 
@@ -132,6 +135,7 @@
 {
     if( [KeyboardStateListener sharedInstance].isVisible ) {
         [self dismissKeyboard];
+        [self recalcIfPossible];
     }
 }
 
@@ -141,9 +145,49 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)anyValueChanged:(id)sender {
-    // If all fields have a value, recalc
+- (IBAction)updateRatesFromWeb:(id)sender
+{
+    HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
+    [HUD showInView:self.view];
+    
+    dispatch_queue_t myQueue = dispatch_queue_create("MiningCalc Update Queue",NULL);
+    dispatch_async(myQueue, ^{
+        
+        DCMDogeInfoRemote* fetcher = [DCMDogeInfoRemote sharedInstance];
+        
+        int blockCount   = [fetcher getLastBlock];
+        float dogeToUSD  = [fetcher getDogeToUSDRate];
+        float difficulty = [fetcher getNetworkDifficulty];
 
+        
+        // must do UI updates on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [HUD hide];
+            
+            if(blockCount != -1) {
+                int avgReward = [DCMUtils getAvgBlockRewardForBlock: blockCount];
+                self.avgBlockRewardTextField.text = [NSString stringWithFormat:@"%d", avgReward];
+            }
+            
+            if( dogeToUSD > 0 ) {
+                self.dogeToUSDRateTextField.text = [NSString stringWithFormat:@"%.5f", dogeToUSD];
+            }
+            
+            if( difficulty > 0 ) {
+                self.difficultyTextField.text = [NSString stringWithFormat:@"%.1f", difficulty];
+            }
+            
+            [self saveValuesToMiningCalc];
+            [self recalculate];
+        });
+    });
+    
+}
+
+// Recalculates profit values if all fields are filled in
+- (void)recalcIfPossible
+{
     if (![self.hashrateTextField.text isEqualToString:@""]      &&
         ![self.powerUsageTextField.text isEqualToString:@""]    &&
         ![self.hardwareCostTextField.text isEqualToString:@""]  &&
@@ -169,7 +213,8 @@
     [self.miningCalc saveValues];
 }
 
-- (void)recalculate {
+- (void)recalculate
+{
     [self.miningCalc calculate];
     [self refreshProfitabilityViewLabels];
 }

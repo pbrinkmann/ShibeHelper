@@ -22,4 +22,14 @@
 //
 - (float)getDogeToUSDRate;
 
+//
+// Returns the number of blocks in the block chain, or -1 if an error occurs
+//
+-(int) getLastBlock;
+
+//
+// Returns the current network difficulty
+//
+-(float) getNetworkDifficulty;
+
 @end

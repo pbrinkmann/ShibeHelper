@@ -10,7 +10,6 @@ Bugs
 
 New Features/Enhancements
 =========================
-[ ] Dynamify mining calc values
 [ ] Option to pull in hashrate from mining pool [an icon, with a dialog confirm?]
 
 Release Steps
@@ -101,6 +100,7 @@ DONE!
     and exactly the same place on both wallet and mining pool screens
 [X] Launch image for iPhone 4/4S
 [X] Save/load previous mining calc values
+[X] Dynamify mining calc values
 
 ----- version 0.11 IN PROGRESS
 

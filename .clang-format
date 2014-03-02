@@ -34,7 +34,7 @@ Standard:        Cpp03
 IndentWidth:     4
 TabWidth:        4
 UseTab:          Never
-BreakBeforeBraces: Attach
+BreakBeforeBraces: Stroustrup
 IndentFunctionDeclarationAfterType: false
 SpacesInParentheses: false
 SpacesInAngles:  false

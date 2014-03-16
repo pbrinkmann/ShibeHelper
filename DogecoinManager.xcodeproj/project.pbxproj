@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		040525AE188F903100BE3172 /* TODOs in Resources */ = {isa = PBXBuildFile; fileRef = 040525AD188F903100BE3172 /* TODOs */; };
 		040525B4188F933300BE3172 /* DCMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 040525B3188F933300BE3172 /* DCMUtils.m */; };
+		040AD31218CF0C2A002A7D4A /* cgminer_api in Resources */ = {isa = PBXBuildFile; fileRef = 040AD31118CF0C2A002A7D4A /* cgminer_api */; };
+		040AD31518CF9C62002A7D4A /* DCMCGMiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AD31418CF9C62002A7D4A /* DCMCGMiner.m */; };
+		040AD31818D57F81002A7D4A /* DCMCGMinerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AD31718D57F81002A7D4A /* DCMCGMinerViewController.m */; };
 		0410462F18B00BC1009BEE3F /* DCMFlashDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410462E18B00BC1009BEE3F /* DCMFlashDisplayView.m */; };
 		0410463418B18B24009BEE3F /* KeyboardStateListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410463318B18B24009BEE3F /* KeyboardStateListener.m */; };
 		0410463618B1A528009BEE3F /* APP_STORE_INFO in Resources */ = {isa = PBXBuildFile; fileRef = 0410463518B1A528009BEE3F /* APP_STORE_INFO */; };
@@ -66,6 +69,11 @@
 		040525AD188F903100BE3172 /* TODOs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODOs; sourceTree = "<group>"; };
 		040525B2188F933300BE3172 /* DCMUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMUtils.h; sourceTree = "<group>"; };
 		040525B3188F933300BE3172 /* DCMUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMUtils.m; sourceTree = "<group>"; };
+		040AD31118CF0C2A002A7D4A /* cgminer_api */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cgminer_api; sourceTree = "<group>"; };
+		040AD31318CF9C62002A7D4A /* DCMCGMiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMCGMiner.h; sourceTree = "<group>"; };
+		040AD31418CF9C62002A7D4A /* DCMCGMiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMCGMiner.m; sourceTree = "<group>"; };
+		040AD31618D57F81002A7D4A /* DCMCGMinerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMCGMinerViewController.h; sourceTree = "<group>"; };
+		040AD31718D57F81002A7D4A /* DCMCGMinerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMCGMinerViewController.m; sourceTree = "<group>"; };
 		0410462D18B00BC1009BEE3F /* DCMFlashDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMFlashDisplayView.h; sourceTree = "<group>"; };
 		0410462E18B00BC1009BEE3F /* DCMFlashDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMFlashDisplayView.m; sourceTree = "<group>"; };
 		0410463218B18B24009BEE3F /* KeyboardStateListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardStateListener.h; sourceTree = "<group>"; };
@@ -156,6 +164,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040AD31918D57F89002A7D4A /* CGMiner */ = {
+			isa = PBXGroup;
+			children = (
+				040AD31618D57F81002A7D4A /* DCMCGMinerViewController.h */,
+				040AD31718D57F81002A7D4A /* DCMCGMinerViewController.m */,
+			);
+			name = CGMiner;
+			sourceTree = "<group>";
+		};
 		0410463018B035B2009BEE3F /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +227,7 @@
 			children = (
 				0410463518B1A528009BEE3F /* APP_STORE_INFO */,
 				040525AD188F903100BE3172 /* TODOs */,
+				040AD31118CF0C2A002A7D4A /* cgminer_api */,
 				04147103187FBB8200007425 /* Main.storyboard */,
 				04D7B9BF188CCD5700113831 /* thirdparty */,
 				0410463018B035B2009BEE3F /* Custom Views */,
@@ -267,6 +285,7 @@
 		0414713D188B655200007425 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				040AD31918D57F89002A7D4A /* CGMiner */,
 				04A4433718BDDA5400CED466 /* Mining Calculator */,
 				04AE4B7718A4DECC00F2E0AA /* Mining Pool */,
 				04AE4B7618A4DEBE00F2E0AA /* Wallet */,
@@ -283,6 +302,8 @@
 				0414712D1888DEDD00007425 /* DCMWallet.m */,
 				04CFAD7018B3104D00DA030D /* DCMMiningCalculator.h */,
 				04CFAD7118B3104D00DA030D /* DCMMiningCalculator.m */,
+				040AD31318CF9C62002A7D4A /* DCMCGMiner.h */,
+				040AD31418CF9C62002A7D4A /* DCMCGMiner.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -437,6 +458,7 @@
 				04EC0EBC189DE1A4000BE0A1 /* walletD@2x.png in Resources */,
 				041470FC187FBB8200007425 /* InfoPlist.strings in Resources */,
 				041471301889337200007425 /* doge.png in Resources */,
+				040AD31218CF0C2A002A7D4A /* cgminer_api in Resources */,
 				04A4433118B334D600CED466 /* calculator tab bar icon@2x.png in Resources */,
 				04EC0EBE189E6782000BE0A1 /* miningD@2x.png in Resources */,
 				040525AE188F903100BE3172 /* TODOs in Resources */,
@@ -476,11 +498,13 @@
 				0410462F18B00BC1009BEE3F /* DCMFlashDisplayView.m in Sources */,
 				04147143188BDA8B00007425 /* DCMEditMiningPoolViewController.m in Sources */,
 				04147102187FBB8200007425 /* DCMAppDelegate.m in Sources */,
+				040AD31518CF9C62002A7D4A /* DCMCGMiner.m in Sources */,
 				04A4433A18BDE95A00CED466 /* DCMDogeInfoRemote.m in Sources */,
 				0414712B18889AF900007425 /* DCMEditWalletAddressViewController.m in Sources */,
 				04147108187FBB8200007425 /* DCMWalletViewController.m in Sources */,
 				04EC0ED1189F215E000BE0A1 /* HTProgressHUDFadeZoomAnimation.m in Sources */,
 				04EC0ECF189F215E000BE0A1 /* HTProgressHUDAnimation.m in Sources */,
+				040AD31818D57F81002A7D4A /* DCMCGMinerViewController.m in Sources */,
 				0414710B187FBB8200007425 /* DCMMiningPoolViewController.m in Sources */,
 				04D7B9BE188CCD5300113831 /* CDZQRScanningViewController.m in Sources */,
 			);

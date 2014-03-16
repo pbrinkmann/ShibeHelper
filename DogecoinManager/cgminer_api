@@ -1,0 +1,367 @@
+
+To enable, add the following to your .conf file:
+
+"api-listen" : true,
+"api-network" : true
+
+but NOT if this is on a public network!
+
+perhaps support for the mcast option would be awesome?
+
+    If you start cgminer also with the "--api-mcast" option, it will listen for
+    a multicast message and reply to it with a message containing it's API port
+    number, but only if the IP address of the sender is allowed API access
+
+To send commands:
+
+{"command":"CMD","parameter":"PARAM"}
+
+where parameter is sometimes optional
+
+
+config
+======
+
+{
+   "STATUS":[
+      {
+         "STATUS":"S",
+         "When":1394529403,
+         "Code":33,
+         "Msg":"sgminer config",
+         "Description":"sgminer 4.0.0"
+      }
+   ],
+   "CONFIG":[
+      {
+         "GPU Count":1,
+         "Pool Count":4,
+         "ADL":"Y",
+         "ADL in use":"Y",
+         "Strategy":"Failover",
+         "Log Interval":5,
+         "Device Code":"GPU ",
+         "OS":"Linux",
+         "Failover-Only":false,
+         "ScanTime":60,
+         "Queue":1,
+         "Expiry":120
+      }
+   ],
+   "id":1
+}
+
+
+summary
+=======
+{
+   "STATUS":[
+      {
+         "STATUS":"S",
+         "When":1394529548,
+         "Code":11,
+         "Msg":"Summary",
+         "Description":"sgminer 4.0.0"
+      }
+   ],
+   "SUMMARY":[
+      {
+         "Elapsed":1051,
+         "MHS av":0.2401,
+         "MHS 5s":0.2437,
+         "Found Blocks":0,
+         "Getworks":31,
+         "Accepted":98,
+         "Rejected":0,
+         "Hardware Errors":1,
+         "Utility":5.5929,
+         "Discarded":52,
+         "Stale":0,
+         "Get Failures":0,
+         "Local Work":95,
+         "Remote Failures":0,
+         "Network Blocks":14,
+         "Total MH":252.4447,
+         "Work Utility":232.1048,
+         "Difficulty Accepted":4384.00000000,
+         "Difficulty Rejected":0.00000000,
+         "Difficulty Stale":0.00000000,
+         "Best Share":5441,
+         "Device Hardware%":0.0246,
+         "Device Rejected%":0.0000,
+         "Pool Rejected%":0.0000,
+         "Pool Stale%":0.0000
+      }
+   ],
+   "id":1
+}
+
+pools
+=====
+{
+   "STATUS":[
+      {
+         "STATUS":"S",
+         "When":1394529594,
+         "Code":7,
+         "Msg":"2 Pool(s)",
+         "Description":"sgminer 4.0.0"
+      }
+   ],
+   "POOLS":[
+      {
+         "POOL":0,
+         "URL":"stratum+tcp://pool.teamdoge.com:3333",
+         "Status":"Alive",
+         "Priority":0,
+         "Quota":1,
+         "Long Poll":"N",
+         "Getworks":29,
+         "Accepted":101,
+         "Rejected":0,
+         "Works":31,
+         "Discarded":56,
+         "Stale":0,
+         "Get Failures":0,
+         "Remote Failures":0,
+         "User":"paulb.paulhomepc2",
+         "Last Share Time":1394529588,
+         "Diff1 Shares":4341,
+         "Proxy Type":"",
+         "Proxy":"",
+         "Difficulty Accepted":4576.00000000,
+         "Difficulty Rejected":0.00000000,
+         "Difficulty Stale":0.00000000,
+         "Last Share Difficulty":64.00000000,
+         "Has Stratum":true,
+         "Stratum Active":true,
+         "Stratum URL":"pool.teamdoge.com",
+         "Has GBT":false,
+         "Best Share":5441,
+         "Pool Rejected%":0.0000,
+         "Pool Stale%":0.0000
+      },
+      {
+         "POOL":1,
+         "URL":"stratum+tcp://us-west.multipool.us:7777",
+         "Status":"Alive",
+         "Priority":1,
+         "Quota":1,
+         "Long Poll":"N",
+         "Getworks":2,
+         "Accepted":0,
+         "Rejected":0,
+         "Works":0,
+         "Discarded":0,
+         "Stale":0,
+         "Get Failures":0,
+         "Remote Failures":0,
+         "User":"paulb.2",
+         "Last Share Time":0,
+         "Diff1 Shares":0,
+         "Proxy Type":"",
+         "Proxy":"",
+         "Difficulty Accepted":0.00000000,
+         "Difficulty Rejected":0.00000000,
+         "Difficulty Stale":0.00000000,
+         "Last Share Difficulty":0.00000000,
+         "Has Stratum":true,
+         "Stratum Active":false,
+         "Stratum URL":"",
+         "Has GBT":false,
+         "Best Share":0,
+         "Pool Rejected%":0.0000,
+         "Pool Stale%":0.0000
+      }
+   ],
+   "id":1
+}
+
+
+devs
+====
+{
+   "STATUS":[
+      {
+         "STATUS":"S",
+         "When":1394529695,
+         "Code":9,
+         "Msg":"1 GPU(s)",
+         "Description":"sgminer 4.0.0"
+      }
+   ],
+   "DEVS":[
+      {
+         "GPU":0,
+         "Enabled":"Y",
+         "Status":"Alive",
+         "Temperature":62.00,
+         "Fan Speed":1391,
+         "Fan Percent":34,
+         "GPU Clock":821,
+         "Memory Clock":1500,
+         "GPU Voltage":0.000,
+         "GPU Activity":100,
+         "Powertune":10,
+         "MHS av":0.2398,
+         "MHS 5s":0.2425,
+         "Accepted":106,
+         "Rejected":0,
+         "Hardware Errors":2,
+         "Utility":5.2929,
+         "Intensity":"17",
+         "Last Share Pool":0,
+         "Last Share Time":1394529665,
+         "Total MH":288.0963,
+         "Diff1 Work":4605,
+         "Difficulty Accepted":4896.00000000,
+         "Difficulty Rejected":0.00000000,
+         "Last Share Difficulty":64.00000000,
+         "Last Valid Work":1394529687,
+         "Device Hardware%":0.0434,
+         "Device Rejected%":0.0000,
+         "Device Elapsed":1202
+      }
+   ],
+   "id":1
+}
+
+devdetails
+==========
+{
+   "STATUS":[
+      {
+         "STATUS":"S",
+         "When":1394529931,
+         "Code":69,
+         "Msg":"Device Details",
+         "Description":"sgminer 4.0.0"
+      }
+   ],
+   "DEVDETAILS":[
+      {
+         "DEVDETAILS":0,
+         "Name":"GPU",
+         "ID":0,
+         "Driver":"opencl",
+         "Kernel":"ckolivas",
+         "Model":"AMD Radeon HD 7700 Series",
+         "Device Path":""
+      }
+   ],
+   "id":1
+}
+
+
+stats
+=====
+{
+   "STATUS":[
+      {
+         "STATUS":"S",
+         "When":1394530014,
+         "Code":70,
+         "Msg":"sgminer stats",
+         "Description":"sgminer 4.0.0"
+      }
+   ],
+   "STATS":[
+      {
+         "STATS":0,
+         "ID":"GPU0",
+         "Elapsed":1519,
+         "Calls":2769,
+         "Wait":1.032199,
+         "Max":0.981159,
+         "Min":0.000004
+      },
+      {
+         "STATS":1,
+         "ID":"POOL0",
+         "Elapsed":1519,
+         "Calls":2769,
+         "Wait":1.032199,
+         "Max":0.981159,
+         "Min":0.000004,
+         "Pool Calls":0,
+         "Pool Attempts":0,
+         "Pool Wait":0.000000,
+         "Pool Max":0.000000,
+         "Pool Min":99999999.000000,
+         "Pool Av":0.000000,
+         "Work Had Roll Time":false,
+         "Work Can Roll":false,
+         "Work Had Expire":false,
+         "Work Roll Time":0,
+         "Work Diff":64.00000000,
+         "Min Diff":16.00000000,
+         "Max Diff":64.00000000,
+         "Min Diff Count":15,
+         "Max Diff Count":122,
+         "Times Sent":126,
+         "Bytes Sent":14387,
+         "Times Recv":172,
+         "Bytes Recv":32265,
+         "Net Bytes Sent":14387,
+         "Net Bytes Recv":32265
+      },
+      {
+         "STATS":2,
+         "ID":"POOL1",
+         "Elapsed":1519,
+         "Calls":0,
+         "Wait":0.000000,
+         "Max":0.000000,
+         "Min":99999999.000000,
+         "Pool Calls":0,
+         "Pool Attempts":0,
+         "Pool Wait":0.000000,
+         "Pool Max":0.000000,
+         "Pool Min":99999999.000000,
+         "Pool Av":0.000000,
+         "Work Had Roll Time":false,
+         "Work Can Roll":false,
+         "Work Had Expire":false,
+         "Work Roll Time":0,
+         "Work Diff":0.00000000,
+         "Min Diff":0.00000000,
+         "Max Diff":0.00000000,
+         "Min Diff Count":0,
+         "Max Diff Count":0,
+         "Times Sent":2,
+         "Bytes Sent":137,
+         "Times Recv":6,
+         "Bytes Recv":1504,
+         "Net Bytes Sent":137,
+         "Net Bytes Recv":1504
+      }
+   ],
+   "id":1
+}
+
+
+coin
+====
+{
+   "STATUS":[
+      {
+         "STATUS":"S",
+         "When":1394530118,
+         "Code":78,
+         "Msg":"sgminer coin",
+         "Description":"sgminer 4.0.0"
+      }
+   ],
+   "COIN":[
+      {
+         "Hash Method":"scrypt",
+         "Current Block Time":1394529985.024283,
+         "Current Block Hash":"799ac1f45c4c2bce50dd6b52393ba1fff0efab4ff8fcce6938db616b72ea5c45",
+         "LP":true,
+         "Network Difficulty":82639368.09323606
+      }
+   ],
+   "id":1
+}
+
+

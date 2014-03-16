@@ -85,6 +85,7 @@
 
     return lastBlock;
 }
+
 -(float)getNetworkDifficulty
 {
     NSString *errorString = nil;

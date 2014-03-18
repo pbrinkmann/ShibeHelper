@@ -13,6 +13,8 @@
 @property (atomic) BOOL updateInProgress;
 @property (atomic, copy) void (^updateCompleteCallback)() ;
 
+@property (atomic, assign) int numUpdateStepsLeft;
+
 @end
 
 
@@ -29,7 +31,7 @@
     return self;
 }
 
--(void)fetchyDoShit:(void(^)())updateCompleteCallback
+-(void)updateStats:(void(^)())updateCompleteCallback
 {
     if(self.updateInProgress) {
         DLog(@"CGMiner Update already in progress");
@@ -37,13 +39,25 @@
     }
  
     self.updateCompleteCallback = updateCompleteCallback;
+    self.updateInProgress = TRUE;
+
+    self.numUpdateStepsLeft = 2;
     
+    [self sendCommand:@"summary"];
+    [self sendCommand:@"config"];
+}
+
+-(void)sendCommand:(NSString*)command
+{
+
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;
     
     // Connect to the IP address/port
     CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)(self.ipAddress), self.port, &readStream, &writeStream);
     
+    NSInputStream *_reader;
+    NSOutputStream *_writer;
     _reader  = (__bridge NSInputStream*)readStream;
     _writer  = (__bridge NSOutputStream*)writeStream;
     
@@ -58,8 +72,8 @@
     
     // Send request
     
-    NSLog(@"writing command");
-    NSString *cmdString  = @"{\"command\":\"summary\"}\n";
+    NSLog(@"writing command: %@", command);
+    NSString *cmdString  = [NSString stringWithFormat:@"{\"command\":\"%@\"}\n", command ];
     NSData *data = [[NSData alloc] initWithData:[cmdString dataUsingEncoding:NSASCIIStringEncoding]];
     NSInteger r = [_writer write:[data bytes] maxLength:[data length]];
     
@@ -72,9 +86,6 @@
     
     [_writer close];
     [_writer removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    
-    self.updateInProgress = TRUE;
-    
 }
 
 - (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)streamEvent {
@@ -89,38 +100,40 @@
     uint8_t buffer[1024];
     NSInteger len;
     
+    
     switch (streamEvent) {
             
         case NSStreamEventOpenCompleted:
            // NSLog(@"Stream opened now");
             break;
         case NSStreamEventHasBytesAvailable:
-            //NSLog(@"has bytes");
-            if (theStream == _reader) {
-                NSMutableString *output = [NSMutableString stringWithString:@""];
-                while ([_reader hasBytesAvailable]) {
-                    len = [_reader read:buffer maxLength:sizeof(buffer)];
-                    //DLog(@"read %lu bytes", len);
-                    if (len > 0) {
-                        
-                        // If last byte is null byte, strip it
-                        if ( buffer[len - 1] == '\0' ) {
-                            len--;
-                        }
-                        
-                        NSString *nsbuffer = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
-                       // DLog(@"server added: >>>>> %@ <<<<<", nsbuffer);
-                        [output appendString:nsbuffer];
-                    }
-                }
-                if( ! [output isEqualToString:@""] ) {
-                    //DLog(@"server said: >>>>> %@ <<<<<", output);
-                    [self handleCGMinerResponseWithString:output];
-                }
+            // NSLog(@"has bytes");
+        { // variable assignment needs to happen inside a block
+            
+            NSInputStream *_reader = (NSInputStream*)theStream;
 
-            } else {
-                ALog(@"it is NOT theStream == inputStream");
+            NSMutableString *output = [NSMutableString stringWithString:@""];
+            while ([_reader hasBytesAvailable]) {
+                len = [_reader read:buffer maxLength:sizeof(buffer)];
+                //DLog(@"read %lu bytes", len);
+                if (len > 0) {
+                    
+                    // If last byte is null byte, strip it
+                    if ( buffer[len - 1] == '\0' ) {
+                        len--;
+                    }
+                    
+                    NSString *nsbuffer = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
+                    // DLog(@"server added: >>>>> %@ <<<<<", nsbuffer);
+                    [output appendString:nsbuffer];
+                }
             }
+            if( ! [output isEqualToString:@""] ) {
+                DLog(@"server said: >>>>> %@ <<<<<", output);
+                [self handleCGMinerResponseWithString:output];
+            }
+                
+        }
             break;
             
         case NSStreamEventHasSpaceAvailable:
@@ -162,19 +175,59 @@
         return;
     }
     
-    // "STATUS" => [0] => "Description"
+    // "STATUS" => [0] => "Msg"
     NSArray *a1 = [dict objectForKey:@"STATUS"];
     NSDictionary *d1 = a1[0];
-    self.cgminerVersion = [d1 objectForKey:@"Description"];
+    int messageCode = [[d1 objectForKey:@"Code"] intValue];
     
+    switch (messageCode) {
+        case CGMINER_MSG_SUMM:
+            // "STATUS" => [0] => "Description"
+            a1 = [dict objectForKey:@"STATUS"];
+            d1 = a1[0];
+            self.cgminerVersion = [d1 objectForKey:@"Description"];
+            
+            
+            // "SUMMARY" => [0] => "MHS 5s"
+            a1 = [dict objectForKey:@"SUMMARY"];
+            d1 = a1[0];
+            self.cgminerHashrate = [[d1 objectForKey:@"MHS 5s"] floatValue] * 1000;
+            
+            break;
+        case CGMINER_MSG_MINECONFIG:
+            // "CONFIG" => [0] => "GPU Count"
+            a1 = [dict objectForKey:@"CONFIG"];
+            d1 = a1[0];
+            self.gpuCount = [[d1 objectForKey:@"GPU Count"] intValue];
+            
+            
+            // "CONFIG" => [0] => "Pool Count"
+            a1 = [dict objectForKey:@"CONFIG"];
+            d1 = a1[0];
+            self.poolCount = [[d1 objectForKey:@"Pool Count"] intValue];
+            
+            // "CONFIG" => [0] => "Strategy"
+            a1 = [dict objectForKey:@"CONFIG"];
+            d1 = a1[0];
+            self.poolStrategy = [d1 objectForKey:@"Strategy"];
+            
+            // "CONFIG" => [0] => "OS"
+            a1 = [dict objectForKey:@"CONFIG"];
+            d1 = a1[0];
+            self.os = [d1 objectForKey:@"OS"];
+
+            break;
+        default:
+            DLog(@"unknown message code: %d", messageCode);
+    }
     
-    // "SUMMARY" => [0] => "MHS 5s"
-    a1 = [dict objectForKey:@"SUMMARY"];
-    d1 = a1[0];
-    self.cgminerHashrate = [[d1 objectForKey:@"MHS 5s"] floatValue] * 1000;
+    self.numUpdateStepsLeft--;
     
-    DLog(@"updated with cgminer version %@ and 5s hashrate %lu", self.cgminerVersion, self.cgminerHashrate);
-    self.updateCompleteCallback();
+    // last update completed
+    if( self.numUpdateStepsLeft == 0 ) {
+        DLog(@"updated with cgminer version %@ and 5s hashrate %lu", self.cgminerVersion, self.cgminerHashrate);
+        self.updateCompleteCallback();
+    }
 }
 
 

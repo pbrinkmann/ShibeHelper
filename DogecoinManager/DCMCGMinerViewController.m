@@ -16,6 +16,10 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *cgminerversionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cgminerHashrateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cgminerGPUCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cgminerPoolCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cgminerPoolStrategyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cgminerOSLabel;
 
 @property DCMCGMiner* cgminer;
 
@@ -47,9 +51,14 @@
 - (IBAction)lookupMinerStats:(id)sender
 {
     self.cgminer =[[DCMCGMiner alloc] init];
-    [self.cgminer fetchyDoShit:^{
-        self.cgminerversionLabel.text = self.cgminer.cgminerVersion;
-        self.cgminerHashrateLabel.text = [NSString stringWithFormat:@"%ld KH/s", (long)self.cgminer.cgminerHashrate];
+    [self.cgminer updateStats:^{
+        DCMCGMiner* cgminer = self.cgminer;
+        self.cgminerversionLabel.text = cgminer.cgminerVersion;
+        self.cgminerHashrateLabel.text = [NSString stringWithFormat:@"%ld KH/s", (long)cgminer.cgminerHashrate];
+        self.cgminerGPUCountLabel.text = [NSString stringWithFormat:@"%ld", cgminer.gpuCount];
+        self.cgminerPoolCountLabel.text = [NSString stringWithFormat:@"%ld", cgminer.poolCount];
+        self.cgminerPoolStrategyLabel.text = cgminer.poolStrategy;
+        self.cgminerOSLabel.text = cgminer.os;
     }];
     
 }

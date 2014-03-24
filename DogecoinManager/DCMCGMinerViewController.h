@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DCMCGMinerViewController : UIViewController
+@interface DCMCGMinerViewController : UIViewController <UITableViewDataSource>
 
 @end

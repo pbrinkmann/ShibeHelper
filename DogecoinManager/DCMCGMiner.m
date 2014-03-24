@@ -8,6 +8,8 @@
 
 #import "DCMCGMiner.h"
 
+#import "DCMCGMinerGPU.h"
+
 @interface DCMCGMiner()
 
 @property (atomic) BOOL updateInProgress;
@@ -41,10 +43,13 @@
     self.updateCompleteCallback = updateCompleteCallback;
     self.updateInProgress = TRUE;
 
-    self.numUpdateStepsLeft = 2;
+    NSArray *commands = @[@"summary", @"config", @"devs"];
     
-    [self sendCommand:@"summary"];
-    [self sendCommand:@"config"];
+    self.numUpdateStepsLeft = (int)[commands count];
+    
+    for ( NSString* cmd in commands ) {
+        [self sendCommand:cmd];
+    }
 }
 
 -(void)sendCommand:(NSString*)command
@@ -187,7 +192,6 @@
             d1 = a1[0];
             self.cgminerVersion = [d1 objectForKey:@"Description"];
             
-            
             // "SUMMARY" => [0] => "MHS 5s"
             a1 = [dict objectForKey:@"SUMMARY"];
             d1 = a1[0];
@@ -199,7 +203,6 @@
             a1 = [dict objectForKey:@"CONFIG"];
             d1 = a1[0];
             self.gpuCount = [[d1 objectForKey:@"GPU Count"] intValue];
-            
             
             // "CONFIG" => [0] => "Pool Count"
             a1 = [dict objectForKey:@"CONFIG"];
@@ -216,6 +219,20 @@
             d1 = a1[0];
             self.os = [d1 objectForKey:@"OS"];
 
+            break;
+        case CGMINER_MSG_DEVS:
+        {
+            a1 = [dict objectForKey:@"DEVS"];
+            NSMutableArray *tmpArray = [NSMutableArray arrayWithArray:@[]];
+            
+            for( NSDictionary* dict in a1) {
+                DCMCGMinerGPU* gpu = [[DCMCGMinerGPU alloc] initWithDictionary: dict];
+                [tmpArray addObject: gpu];
+            }
+            
+            self.gpus = tmpArray;
+        }
+            
             break;
         default:
             DLog(@"unknown message code: %d", messageCode);

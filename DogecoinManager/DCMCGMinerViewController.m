@@ -7,6 +7,8 @@
 //
 
 #import "DCMCGMinerViewController.h"
+#import "DCMCGMinerGPUTableViewCell.h"
+#import "DCMCGMinerGPU.h"
 
 #import "DCMCGMiner.h"
 
@@ -20,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *cgminerPoolCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cgminerPoolStrategyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cgminerOSLabel;
+
+@property (weak, nonatomic) IBOutlet UITableView *cgminerGPUTableView;
 
 @property DCMCGMiner* cgminer;
 
@@ -59,8 +63,41 @@
         self.cgminerPoolCountLabel.text = [NSString stringWithFormat:@"%ld", cgminer.poolCount];
         self.cgminerPoolStrategyLabel.text = cgminer.poolStrategy;
         self.cgminerOSLabel.text = cgminer.os;
+
+        [self.cgminerGPUTableView reloadData];
     }];
     
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if( self.cgminer && self.cgminer.gpus ) {
+        return [self.cgminer.gpus count];
+    }
+    else {
+        return 0;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DCMCGMinerGPUTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DCMCGMinerGPUTableViewCell"];
+    
+    if( cell == nil ) {
+        assert(0 && "Cell is nil");
+    }
+    DLog(@"inpexpath: %@", indexPath);
+    DCMCGMinerGPU *gpu = self.cgminer.gpus[ [indexPath indexAtPosition:1] ] ;
+    
+    cell.gpuName.text       = [NSString stringWithFormat:@"GPU %d", gpu.gpuNumber];
+    cell.hashrate.text      = [NSString stringWithFormat:@"%d KH/s", gpu.hashrate];
+    cell.temperature.text   = [NSString stringWithFormat:@"%.1f C", gpu.temperature];
+    cell.gpuClock.text      = [NSString stringWithFormat:@"%d mhz", gpu.gpuClock];
+    cell.memoryClock.text   = [NSString stringWithFormat:@"%d mhz", gpu.memoryClock];
+    cell.intensity.text     = [NSString stringWithFormat:@"I: %d", gpu.intensity];
+
+    
+    return cell;
 }
 
 /*

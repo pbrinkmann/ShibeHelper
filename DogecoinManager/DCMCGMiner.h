@@ -21,8 +21,7 @@
 @property NSInteger poolCount;
 @property NSString* poolStrategy;
 @property NSString* os;
-
-
+@property NSArray* gpus;
 
 -(void)updateStats:(void(^)())updateCompleteCallback;
 

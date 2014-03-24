@@ -184,10 +184,10 @@ devs
    "STATUS":[
       {
          "STATUS":"S",
-         "When":1394529695,
+         "When":1395130258,
          "Code":9,
-         "Msg":"1 GPU(s)",
-         "Description":"sgminer 4.0.0"
+         "Msg":"2 GPU(s) - ",
+         "Description":"cgminer 3.7.2"
       }
    ],
    "DEVS":[
@@ -195,32 +195,63 @@ devs
          "GPU":0,
          "Enabled":"Y",
          "Status":"Alive",
-         "Temperature":62.00,
-         "Fan Speed":1391,
-         "Fan Percent":34,
-         "GPU Clock":821,
-         "Memory Clock":1500,
-         "GPU Voltage":0.000,
-         "GPU Activity":100,
-         "Powertune":10,
-         "MHS av":0.2398,
-         "MHS 5s":0.2425,
-         "Accepted":106,
+         "Temperature":77.00,
+         "Fan Speed":2974,
+         "Fan Percent":66,
+         "GPU Clock":835,
+         "Memory Clock":1250,
+         "GPU Voltage":1.090,
+         "GPU Activity":99,
+         "Powertune":0,
+         "MHS av":0.50,
+         "MHS 5s":0.50,
+         "Accepted":64,
          "Rejected":0,
-         "Hardware Errors":2,
-         "Utility":5.2929,
-         "Intensity":"17",
+         "Hardware Errors":0,
+         "Utility":0.79,
+         "Intensity":"18",
          "Last Share Pool":0,
-         "Last Share Time":1394529665,
-         "Total MH":288.0963,
-         "Diff1 Work":4605,
-         "Difficulty Accepted":4896.00000000,
+         "Last Share Time":1395130248,
+         "Total MH":2436.1042,
+         "Diff1 Work":33829,
+         "Difficulty Accepted":32768.00000000,
          "Difficulty Rejected":0.00000000,
-         "Last Share Difficulty":64.00000000,
-         "Last Valid Work":1394529687,
-         "Device Hardware%":0.0434,
+         "Last Share Difficulty":512.00000000,
+         "Last Valid Work":1395130248,
+         "Device Hardware%":0.0000,
          "Device Rejected%":0.0000,
-         "Device Elapsed":1202
+         "Device Elapsed":4848
+      },
+      {
+         "GPU":1,
+         "Enabled":"Y",
+         "Status":"Alive",
+         "Temperature":66.00,
+         "Fan Speed":3287,
+         "Fan Percent":84,
+         "GPU Clock":1015,
+         "Memory Clock":1450,
+         "GPU Voltage":1.250,
+         "GPU Activity":99,
+         "Powertune":10,
+         "MHS av":0.62,
+         "MHS 5s":0.62,
+         "Accepted":90,
+         "Rejected":0,
+         "Hardware Errors":0,
+         "Utility":1.11,
+         "Intensity":"18",
+         "Last Share Pool":0,
+         "Last Share Time":1395130240,
+         "Total MH":2995.7816,
+         "Diff1 Work":45214,
+         "Difficulty Accepted":46080.00000000,
+         "Difficulty Rejected":0.00000000,
+         "Last Share Difficulty":512.00000000,
+         "Last Valid Work":1395130240,
+         "Device Hardware%":0.0000,
+         "Device Rejected%":0.0000,
+         "Device Elapsed":4848
       }
    ],
    "id":1
@@ -232,10 +263,10 @@ devdetails
    "STATUS":[
       {
          "STATUS":"S",
-         "When":1394529931,
+         "When":1395130357,
          "Code":69,
          "Msg":"Device Details",
-         "Description":"sgminer 4.0.0"
+         "Description":"cgminer 3.7.2"
       }
    ],
    "DEVDETAILS":[
@@ -244,8 +275,17 @@ devdetails
          "Name":"GPU",
          "ID":0,
          "Driver":"opencl",
-         "Kernel":"ckolivas",
-         "Model":"AMD Radeon HD 7700 Series",
+         "Kernel":"scrypt",
+         "Model":"AMD Radeon HD 7900 Series ",
+         "Device Path":""
+      },
+      {
+         "DEVDETAILS":1,
+         "Name":"GPU",
+         "ID":1,
+         "Driver":"opencl",
+         "Kernel":"scrypt",
+         "Model":"AMD Radeon HD 7900 Series ",
          "Device Path":""
       }
    ],

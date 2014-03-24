@@ -39,6 +39,8 @@
 		04147143188BDA8B00007425 /* DCMEditMiningPoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04147142188BDA8B00007425 /* DCMEditMiningPoolViewController.m */; };
 		0469BF2418AA272500D8989A /* LICENSES in Resources */ = {isa = PBXBuildFile; fileRef = 0469BF2318AA272500D8989A /* LICENSES */; };
 		0492B38118D8173800302954 /* gpu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0492B38018D8173800302954 /* gpu@2x.png */; };
+		0492B38418DF953800302954 /* DCMCGMinerGPU.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B38318DF953800302954 /* DCMCGMinerGPU.m */; };
+		0492B38718DFC4A300302954 /* DCMCGMinerGPUTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B38618DFC4A300302954 /* DCMCGMinerGPUTableViewCell.m */; };
 		04A02BB318C2831B00BB24B6 /* doge 640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A02BB218C2831B00BB24B6 /* doge 640x960.png */; };
 		04A4433118B334D600CED466 /* calculator tab bar icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A4433018B334D600CED466 /* calculator tab bar icon@2x.png */; };
 		04A4433618BDDA4F00CED466 /* DCMMiningCalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A4433518BDDA4F00CED466 /* DCMMiningCalculatorViewController.m */; };
@@ -114,6 +116,10 @@
 		04147142188BDA8B00007425 /* DCMEditMiningPoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMEditMiningPoolViewController.m; sourceTree = "<group>"; };
 		0469BF2318AA272500D8989A /* LICENSES */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSES; sourceTree = "<group>"; };
 		0492B38018D8173800302954 /* gpu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gpu@2x.png"; path = "icons/gpu@2x.png"; sourceTree = "<group>"; };
+		0492B38218DF953800302954 /* DCMCGMinerGPU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMCGMinerGPU.h; sourceTree = "<group>"; };
+		0492B38318DF953800302954 /* DCMCGMinerGPU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMCGMinerGPU.m; sourceTree = "<group>"; };
+		0492B38518DFC4A300302954 /* DCMCGMinerGPUTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMCGMinerGPUTableViewCell.h; sourceTree = "<group>"; };
+		0492B38618DFC4A300302954 /* DCMCGMinerGPUTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMCGMinerGPUTableViewCell.m; sourceTree = "<group>"; };
 		04A02BB218C2831B00BB24B6 /* doge 640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "doge 640x960.png"; sourceTree = "<group>"; };
 		04A4433018B334D600CED466 /* calculator tab bar icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "calculator tab bar icon@2x.png"; path = "icons/calculator tab bar icon@2x.png"; sourceTree = "<group>"; };
 		04A4433418BDDA4F00CED466 /* DCMMiningCalculatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMMiningCalculatorViewController.h; sourceTree = "<group>"; };
@@ -171,6 +177,8 @@
 			children = (
 				040AD31618D57F81002A7D4A /* DCMCGMinerViewController.h */,
 				040AD31718D57F81002A7D4A /* DCMCGMinerViewController.m */,
+				0492B38518DFC4A300302954 /* DCMCGMinerGPUTableViewCell.h */,
+				0492B38618DFC4A300302954 /* DCMCGMinerGPUTableViewCell.m */,
 			);
 			name = CGMiner;
 			sourceTree = "<group>";
@@ -315,6 +323,8 @@
 				04CFAD7118B3104D00DA030D /* DCMMiningCalculator.m */,
 				040AD31318CF9C62002A7D4A /* DCMCGMiner.h */,
 				040AD31418CF9C62002A7D4A /* DCMCGMiner.m */,
+				0492B38218DF953800302954 /* DCMCGMinerGPU.h */,
+				0492B38318DF953800302954 /* DCMCGMinerGPU.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -427,7 +437,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DCM;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Paul Brinkmann";
 				TargetAttributes = {
 					041470ED187FBB8200007425 = {
@@ -500,6 +510,7 @@
 				04EC0ED3189F215E000BE0A1 /* HTProgressHUDPieIndicatorView.m in Sources */,
 				0410463418B18B24009BEE3F /* KeyboardStateListener.m in Sources */,
 				04A4433618BDDA4F00CED466 /* DCMMiningCalculatorViewController.m in Sources */,
+				0492B38418DF953800302954 /* DCMCGMinerGPU.m in Sources */,
 				04CFAD7218B3104D00DA030D /* DCMMiningCalculator.m in Sources */,
 				041470FE187FBB8200007425 /* main.m in Sources */,
 				04147140188B9F3D00007425 /* DCMMiningPool.m in Sources */,
@@ -515,6 +526,7 @@
 				0414712B18889AF900007425 /* DCMEditWalletAddressViewController.m in Sources */,
 				04147108187FBB8200007425 /* DCMWalletViewController.m in Sources */,
 				04EC0ED1189F215E000BE0A1 /* HTProgressHUDFadeZoomAnimation.m in Sources */,
+				0492B38718DFC4A300302954 /* DCMCGMinerGPUTableViewCell.m in Sources */,
 				04EC0ECF189F215E000BE0A1 /* HTProgressHUDAnimation.m in Sources */,
 				040AD31818D57F81002A7D4A /* DCMCGMinerViewController.m in Sources */,
 				0414710B187FBB8200007425 /* DCMMiningPoolViewController.m in Sources */,
@@ -572,7 +584,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -612,7 +623,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -681,7 +691,6 @@
 		04147127187FBB8200007425 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DogecoinManager.app/DogecoinManager";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -704,7 +713,6 @@
 		04147128187FBB8200007425 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DogecoinManager.app/DogecoinManager";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

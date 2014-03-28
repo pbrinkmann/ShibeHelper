@@ -41,6 +41,8 @@
 		0492B38118D8173800302954 /* gpu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0492B38018D8173800302954 /* gpu@2x.png */; };
 		0492B38418DF953800302954 /* DCMCGMinerGPU.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B38318DF953800302954 /* DCMCGMinerGPU.m */; };
 		0492B38718DFC4A300302954 /* DCMCGMinerGPUTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B38618DFC4A300302954 /* DCMCGMinerGPUTableViewCell.m */; };
+		0492B38A18E56D9F00302954 /* DCMCGMinerPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B38918E56D9F00302954 /* DCMCGMinerPool.m */; };
+		0492B38D18E5754700302954 /* DCMCGMinerPoolTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B38C18E5754700302954 /* DCMCGMinerPoolTableViewCell.m */; };
 		04A02BB318C2831B00BB24B6 /* doge 640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A02BB218C2831B00BB24B6 /* doge 640x960.png */; };
 		04A4433118B334D600CED466 /* calculator tab bar icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A4433018B334D600CED466 /* calculator tab bar icon@2x.png */; };
 		04A4433618BDDA4F00CED466 /* DCMMiningCalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A4433518BDDA4F00CED466 /* DCMMiningCalculatorViewController.m */; };
@@ -120,6 +122,10 @@
 		0492B38318DF953800302954 /* DCMCGMinerGPU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMCGMinerGPU.m; sourceTree = "<group>"; };
 		0492B38518DFC4A300302954 /* DCMCGMinerGPUTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMCGMinerGPUTableViewCell.h; sourceTree = "<group>"; };
 		0492B38618DFC4A300302954 /* DCMCGMinerGPUTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMCGMinerGPUTableViewCell.m; sourceTree = "<group>"; };
+		0492B38818E56D9F00302954 /* DCMCGMinerPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMCGMinerPool.h; sourceTree = "<group>"; };
+		0492B38918E56D9F00302954 /* DCMCGMinerPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMCGMinerPool.m; sourceTree = "<group>"; };
+		0492B38B18E5754700302954 /* DCMCGMinerPoolTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMCGMinerPoolTableViewCell.h; sourceTree = "<group>"; };
+		0492B38C18E5754700302954 /* DCMCGMinerPoolTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMCGMinerPoolTableViewCell.m; sourceTree = "<group>"; };
 		04A02BB218C2831B00BB24B6 /* doge 640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "doge 640x960.png"; sourceTree = "<group>"; };
 		04A4433018B334D600CED466 /* calculator tab bar icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "calculator tab bar icon@2x.png"; path = "icons/calculator tab bar icon@2x.png"; sourceTree = "<group>"; };
 		04A4433418BDDA4F00CED466 /* DCMMiningCalculatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMMiningCalculatorViewController.h; sourceTree = "<group>"; };
@@ -179,6 +185,8 @@
 				040AD31718D57F81002A7D4A /* DCMCGMinerViewController.m */,
 				0492B38518DFC4A300302954 /* DCMCGMinerGPUTableViewCell.h */,
 				0492B38618DFC4A300302954 /* DCMCGMinerGPUTableViewCell.m */,
+				0492B38B18E5754700302954 /* DCMCGMinerPoolTableViewCell.h */,
+				0492B38C18E5754700302954 /* DCMCGMinerPoolTableViewCell.m */,
 			);
 			name = CGMiner;
 			sourceTree = "<group>";
@@ -325,6 +333,8 @@
 				040AD31418CF9C62002A7D4A /* DCMCGMiner.m */,
 				0492B38218DF953800302954 /* DCMCGMinerGPU.h */,
 				0492B38318DF953800302954 /* DCMCGMinerGPU.m */,
+				0492B38818E56D9F00302954 /* DCMCGMinerPool.h */,
+				0492B38918E56D9F00302954 /* DCMCGMinerPool.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -516,8 +526,10 @@
 				04147140188B9F3D00007425 /* DCMMiningPool.m in Sources */,
 				04EC0ED4189F215E000BE0A1 /* HTProgressHUDRingIndicatorView.m in Sources */,
 				04EC0ED2189F215E000BE0A1 /* HTProgressHUDIndicatorView.m in Sources */,
+				0492B38A18E56D9F00302954 /* DCMCGMinerPool.m in Sources */,
 				04EC0ECE189F215E000BE0A1 /* HTProgressHUD.m in Sources */,
 				0414712E1888DEDD00007425 /* DCMWallet.m in Sources */,
+				0492B38D18E5754700302954 /* DCMCGMinerPoolTableViewCell.m in Sources */,
 				0410462F18B00BC1009BEE3F /* DCMFlashDisplayView.m in Sources */,
 				04147143188BDA8B00007425 /* DCMEditMiningPoolViewController.m in Sources */,
 				04147102187FBB8200007425 /* DCMAppDelegate.m in Sources */,

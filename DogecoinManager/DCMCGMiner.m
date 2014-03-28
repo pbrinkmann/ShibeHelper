@@ -9,6 +9,7 @@
 #import "DCMCGMiner.h"
 
 #import "DCMCGMinerGPU.h"
+#import "DCMCGMinerPool.h"
 
 @interface DCMCGMiner()
 
@@ -43,7 +44,7 @@
     self.updateCompleteCallback = updateCompleteCallback;
     self.updateInProgress = TRUE;
 
-    NSArray *commands = @[@"summary", @"config", @"devs"];
+    NSArray *commands = @[@"summary", @"config", @"devs", @"pools"];
     
     self.numUpdateStepsLeft = (int)[commands count];
     
@@ -129,12 +130,12 @@
                     }
                     
                     NSString *nsbuffer = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
-                    // DLog(@"server added: >>>>> %@ <<<<<", nsbuffer);
+                    //DLog(@"server added: >>>>> %@ <<<<<", nsbuffer);
                     [output appendString:nsbuffer];
                 }
             }
             if( ! [output isEqualToString:@""] ) {
-                DLog(@"server said: >>>>> %@ <<<<<", output);
+               // DLog(@"server said: >>>>> %@ <<<<<", output);
                 [self handleCGMinerResponseWithString:output];
             }
                 
@@ -148,8 +149,6 @@
             
         case NSStreamEventErrorOccurred:
             ALog(@"Can not connect to the host!");
-            self.updateInProgress = FALSE;
-
             break;
             
             
@@ -158,7 +157,6 @@
             [theStream close];
             [theStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
             
-            self.updateInProgress = FALSE;
             break;
             
         default:
@@ -184,7 +182,7 @@
     NSArray *a1 = [dict objectForKey:@"STATUS"];
     NSDictionary *d1 = a1[0];
     int messageCode = [[d1 objectForKey:@"Code"] intValue];
-    
+      
     switch (messageCode) {
         case CGMINER_MSG_SUMM:
             // "STATUS" => [0] => "Description"
@@ -232,7 +230,19 @@
             
             self.gpus = tmpArray;
         }
+            break;
+        case CGMINER_MSG_POOL:
+        {
+            a1 = [dict objectForKey:@"POOLS"];
+            NSMutableArray *tmpArray = [NSMutableArray arrayWithArray:@[]];
             
+            for( NSDictionary* dict in a1) {
+                DCMCGMinerPool* pool = [[DCMCGMinerPool alloc] initWithDictionary: dict];
+                [tmpArray addObject: pool];
+            }
+            DLog(@"we have %lu pools", (unsigned long)[tmpArray count]);
+            self.pools = tmpArray;
+        }
             break;
         default:
             DLog(@"unknown message code: %d", messageCode);
@@ -244,6 +254,8 @@
     if( self.numUpdateStepsLeft == 0 ) {
         DLog(@"updated with cgminer version %@ and 5s hashrate %lu", self.cgminerVersion, self.cgminerHashrate);
         self.updateCompleteCallback();
+        self.updateInProgress = FALSE;
+
     }
 }
 

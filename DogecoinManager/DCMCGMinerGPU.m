@@ -31,6 +31,7 @@
         self.sharesAccepted = [[dict objectForKey:@"Accepted"] intValue];
         self.sharedRejected = [[dict objectForKey:@"Rejected"] intValue];
         self.hardwareErrors = [[dict objectForKey:@"Hardware Errors"] intValue];
+        self.lastPoolSubmittedTo = [[dict objectForKey:@"Last Share Pool"] intValue];
     }
     
     return self;

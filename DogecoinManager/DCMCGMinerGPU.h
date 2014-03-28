@@ -25,7 +25,7 @@
 @property int sharesAccepted;
 @property int sharedRejected;
 @property int hardwareErrors;
-
+@property int lastPoolSubmittedTo;  // index of last pool shares were submitted to, or -1 if none
 
 -(instancetype)initWithDictionary:(NSDictionary*)dict;
 

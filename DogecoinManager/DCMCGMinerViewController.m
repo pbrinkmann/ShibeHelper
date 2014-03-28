@@ -10,6 +10,9 @@
 #import "DCMCGMinerGPUTableViewCell.h"
 #import "DCMCGMinerGPU.h"
 
+#import "DCMCGMinerPoolTableViewCell.h"
+#import "DCMCGMinerPool.h"
+
 #import "DCMCGMiner.h"
 
 @interface DCMCGMinerViewController ()
@@ -24,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *cgminerOSLabel;
 
 @property (weak, nonatomic) IBOutlet UITableView *cgminerGPUTableView;
+@property (weak, nonatomic) IBOutlet UITableView *cgminerPoolTableView;
+
+
 
 @property DCMCGMiner* cgminer;
 
@@ -65,39 +71,76 @@
         self.cgminerOSLabel.text = cgminer.os;
 
         [self.cgminerGPUTableView reloadData];
+        [self.cgminerPoolTableView reloadData];
     }];
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if( self.cgminer && self.cgminer.gpus ) {
-        return [self.cgminer.gpus count];
+    if( tableView == self.cgminerGPUTableView ) {
+        if( self.cgminer && self.cgminer.gpus ) {
+            return [self.cgminer.gpus count];
+        }
+    }
+    else if(tableView == self.cgminerPoolTableView) {
+        if( self.cgminer && self.cgminer.pools ) {
+            return [self.cgminer.pools count];
+        }
     }
     else {
-        return 0;
+        DLog(@"wtf is this table view: %@", tableView);
+        assert( 0 && "invalid table view given");
     }
+    
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DCMCGMinerGPUTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DCMCGMinerGPUTableViewCell"];
-    
-    if( cell == nil ) {
-        assert(0 && "Cell is nil");
-    }
-    DLog(@"inpexpath: %@", indexPath);
-    DCMCGMinerGPU *gpu = self.cgminer.gpus[ [indexPath indexAtPosition:1] ] ;
-    
-    cell.gpuName.text       = [NSString stringWithFormat:@"GPU %d", gpu.gpuNumber];
-    cell.hashrate.text      = [NSString stringWithFormat:@"%d KH/s", gpu.hashrate];
-    cell.temperature.text   = [NSString stringWithFormat:@"%.1f C", gpu.temperature];
-    cell.gpuClock.text      = [NSString stringWithFormat:@"%d mhz", gpu.gpuClock];
-    cell.memoryClock.text   = [NSString stringWithFormat:@"%d mhz", gpu.memoryClock];
-    cell.intensity.text     = [NSString stringWithFormat:@"I: %d", gpu.intensity];
+    if( tableView == self.cgminerGPUTableView ) {
+        DCMCGMinerGPUTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DCMCGMinerGPUTableViewCell"];
+        
+        if( cell == nil ) {
+            assert(0 && "Cell is nil");
+        }
+        DLog(@"inpexpath: %@", indexPath);
+        DCMCGMinerGPU *gpu = self.cgminer.gpus[ [indexPath indexAtPosition:1] ] ;
+        
+        cell.gpuName.text       = [NSString stringWithFormat:@"GPU %d", gpu.gpuNumber];
+        cell.hashrate.text      = [NSString stringWithFormat:@"%d KH/s", gpu.hashrate];
+        cell.temperature.text   = [NSString stringWithFormat:@"%.1f C", gpu.temperature];
+        cell.gpuClock.text      = [NSString stringWithFormat:@"%d mhz", gpu.gpuClock];
+        cell.memoryClock.text   = [NSString stringWithFormat:@"%d mhz", gpu.memoryClock];
+        cell.intensity.text     = [NSString stringWithFormat:@"I: %d", gpu.intensity];
+        
+        return cell;
 
-    
-    return cell;
+    }
+    else if( tableView == self.cgminerPoolTableView ) {
+        DCMCGMinerPoolTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DCMCGMinerPoolTableViewCell"];
+        
+        if( cell == nil ) {
+            assert(0 && "Cell is nil");
+        }
+        DLog(@"inpexpath: %@", indexPath);
+        DCMCGMinerPool *pool = self.cgminer.pools[ [indexPath indexAtPosition:1] ] ;
+        
+        cell.number.text       =  [NSString stringWithFormat:@"%d", pool.poolNumber];
+        cell.url.text           = pool.poolURL;
+        cell.status.text   = pool.status;
+        cell.worker.text      =  pool.workerName;
+        
+        return cell;
+
+
+    }
+    else {
+        DLog(@"wtf is this table view: %@", tableView);
+        assert( 0 && "invalid table view given");
+    }
+        
+    return nil;
 }
 
 /*

@@ -16,5 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *gpuClock;
 @property (weak, nonatomic) IBOutlet UILabel *memoryClock;
 @property (weak, nonatomic) IBOutlet UILabel *intensity;
+@property (weak, nonatomic) IBOutlet UILabel *fanSpeed;
+@property (weak, nonatomic) IBOutlet UILabel *fanPercent;
 
 @end

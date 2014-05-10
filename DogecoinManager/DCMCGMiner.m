@@ -78,7 +78,7 @@
     
     // Send request
     
-    NSLog(@"writing command: %@", command);
+    NSLog(@"writing command: %@ to %@ %d", command, self.ipAddress, self.port);
     NSString *cmdString  = [NSString stringWithFormat:@"{\"command\":\"%@\"}\n", command ];
     NSData *data = [[NSData alloc] initWithData:[cmdString dataUsingEncoding:NSASCIIStringEncoding]];
     NSInteger r = [_writer write:[data bytes] maxLength:[data length]];
@@ -121,7 +121,7 @@
             NSMutableString *output = [NSMutableString stringWithString:@""];
             while ([_reader hasBytesAvailable]) {
                 len = [_reader read:buffer maxLength:sizeof(buffer)];
-                //DLog(@"read %lu bytes", len);
+                DLog(@"read %lu bytes", len);
                 if (len > 0) {
                     
                     // If last byte is null byte, strip it
@@ -130,7 +130,7 @@
                     }
                     
                     NSString *nsbuffer = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
-                    //DLog(@"server added: >>>>> %@ <<<<<", nsbuffer);
+                    DLog(@"server added: >>>>> %@ <<<<<", nsbuffer);
                     [output appendString:nsbuffer];
                 }
             }

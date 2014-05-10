@@ -69,6 +69,7 @@
         self.cgminerPoolCountLabel.text = [NSString stringWithFormat:@"%ld", cgminer.poolCount];
         self.cgminerPoolStrategyLabel.text = cgminer.poolStrategy;
         self.cgminerOSLabel.text = cgminer.os;
+        
 
         [self.cgminerGPUTableView reloadData];
         [self.cgminerPoolTableView reloadData];
@@ -113,6 +114,8 @@
         cell.gpuClock.text      = [NSString stringWithFormat:@"%d mhz", gpu.gpuClock];
         cell.memoryClock.text   = [NSString stringWithFormat:@"%d mhz", gpu.memoryClock];
         cell.intensity.text     = [NSString stringWithFormat:@"I: %d", gpu.intensity];
+        cell.fanSpeed.text      = [NSString stringWithFormat:@"%d RPM", gpu.fanSpeed];
+        cell.fanPercent.text    = [NSString stringWithFormat:@"%d%%", gpu.fanPercent];
         
         return cell;
 

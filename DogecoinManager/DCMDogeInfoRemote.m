@@ -50,21 +50,31 @@
 }
 
 - (float)getDogeToUSDRate {
-    
-    NSString *errorString = nil;
-    float doge_to_usd = [self
-                     getFloatValueFromURL:
-                     @"https://www.dogeapi.com/wow/?a=get_current_price"
-                     what:@"doge to USD rate"
-                     setOnError:&errorString];
 
-    if(errorString != nil) {
-        DLog(@"%@", errorString);
+    NSDictionary* dict = [self getJSONFromURL:@"https://www.dogeapi.com/wow/v2/?a=get_current_price"];
+
+    if(dict == nil) {
+        DLog(@"Unable to fetch doge to USD rate");
+        return -1;
+    }
+    NSDictionary* data = [dict objectForKey: @"data"];
+    
+    if( data == nil ) {
+        DLog(@"No data found in getDogeToUSDRate");
         return -1;
     }
     
-    if (doge_to_usd == 0) {
-        DLog(@"Doge to USD is 0, dogeapi is probably having issues");
+    NSString* amount = (NSString*)[data objectForKey:@"amount"];
+    
+    if( amount == nil ) {
+        DLog(@"No amount found in getDogeToUSDRate");
+        return -1;
+    }
+    
+    float doge_to_usd = [amount floatValue];
+    
+    if (doge_to_usd <= 0) {
+        DLog(@"Doge to USD is 0 or less, dogeapi is probably having issues");
         return -1;
     }
    
@@ -162,6 +172,35 @@
     }
     
     return floatVal;
+}
+
+//
+// Returns a dict or nil if an error occurred
+//
+-(NSDictionary*)getJSONFromURL:(NSString*)url
+{
+    NSURL *url_ = [NSURL URLWithString:url];
+    
+    
+    NSData *rawdata = [NSData dataWithContentsOfURL:url_];
+    
+    if( rawdata == nil) {
+        DLog(@"could not fetch data from from url %@", url);
+        return nil;
+    }
+    
+    NSError *error;
+    NSMutableDictionary  * dict = [NSJSONSerialization JSONObjectWithData:rawdata options: NSJSONReadingMutableContainers error: &error];
+    
+    if(error != nil) {
+        DLog(@"error parsing JSON: %@", error);
+        return nil;
+    }
+    
+    // DLog(@"dict: %@",dict);
+    
+    return dict;
+
 }
 
 @end

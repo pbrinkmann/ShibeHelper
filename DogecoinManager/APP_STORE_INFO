@@ -30,6 +30,13 @@ This app relies on 3rd party data sources, so the availability of all features i
 
 
 
+v1.01
+5/10/2014
+=========
+Fixed issue where USD wallet value was no longer being displayed
+
+
+
 
 Keywords
 ========

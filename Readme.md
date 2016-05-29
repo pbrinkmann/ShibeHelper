@@ -11,7 +11,7 @@ So, what can Shibe Helper do for you? Here's a quick breakdown:
 * Shows value in USD
 * Quickly add a wallet by scanning a QR code
 
-![wallet](http://shibehelper.com/wp-content/uploads/2014/03/wallet_4-cropped-175x300.png)
+![wallet](http://shibehelper.com/wp-content/uploads/2014/03/wallet_4-cropped.png)
 
 
 ## Mining Pool View
@@ -26,7 +26,7 @@ View numerous pool stats, including:
 
 You can quickly add a pool by scanning your account's QR code.
 
-![mining pool](http://shibehelper.com/wp-content/uploads/2014/03/mining_pool_4-cropped-175x300.png)
+![mining pool](http://shibehelper.com/wp-content/uploads/2014/03/mining_pool_4-cropped.png)
 
 
 ## Mining Calculator
@@ -35,4 +35,4 @@ You can quickly add a pool by scanning your account's QR code.
 * Lookup latest conversion rate and network stats
 * Get daily, weekly, monthly profit and time to break even
 
-![mining calc](http://shibehelper.com/wp-content/uploads/2014/03/mining_calc_4-cropped-175x300.png)
+![mining calc](http://shibehelper.com/wp-content/uploads/2014/03/mining_calc_4-cropped.png)
